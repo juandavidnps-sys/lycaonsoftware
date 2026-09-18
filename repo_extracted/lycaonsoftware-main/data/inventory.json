@@ -1,0 +1,62 @@
+[
+  {
+    "id": "P1",
+    "name": "Taser Pulse+ con Conexión Policial",
+    "category": "Choque",
+    "stock": 15,
+    "price": 450.0,
+    "status": "active",
+    "image_url": "https://images.unsplash.com/photo-1595590424283-b8f1784cb2c8?w=800&q=80",
+    "created_at": "2026-08-11T20:04:52"
+  },
+  {
+    "id": "P2",
+    "name": "Aerosol de Pimienta Sabre Red Gel",
+    "category": "Quimico",
+    "stock": 120,
+    "price": 25.0,
+    "status": "active",
+    "image_url": "https://images.unsplash.com/photo-1584036561566-baf8f5f1b144?w=800&q=80",
+    "created_at": "2026-08-11T20:04:52"
+  },
+  {
+    "id": "P3",
+    "name": "Cámara Oculta 4K WiFi",
+    "category": "Monitoreo",
+    "stock": 8,
+    "price": 120.96,
+    "status": "low-stock",
+    "image_url": "https://images.unsplash.com/photo-1557804506-669a67965ba0?w=800&q=80",
+    "created_at": "2026-08-11T20:04:52"
+  },
+  {
+    "id": "P4",
+    "name": "Arma de Choque Paralizante 50M Volts",
+    "category": "Choque",
+    "stock": 45,
+    "price": 35.0,
+    "status": "active",
+    "image_url": "https://images.unsplash.com/photo-1616719875467-f3cbf8bc69e3?w=800&q=80",
+    "created_at": "2026-08-11T20:04:52"
+  },
+  {
+    "id": "P5",
+    "name": "Bastón Retráctil de Acero Templado",
+    "category": "Tactico",
+    "stock": 30,
+    "price": 55.0,
+    "status": "active",
+    "image_url": "https://images.unsplash.com/photo-1584852955513-3331b2c45155?w=800&q=80",
+    "created_at": "2026-08-11T20:04:52"
+  },
+  {
+    "id": "P6",
+    "name": "Alarma Personal Ultrasónica 130dB",
+    "category": "Tactico",
+    "stock": 50,
+    "price": 15.0,
+    "status": "active",
+    "image_url": "https://images.unsplash.com/photo-1588600878108-578307a3cc9d?w=800&q=80",
+    "created_at": "2026-08-11T20:04:52"
+  }
+]

@@ -1,0 +1,97 @@
+{% extends "base.html" %}
+{% block title %}Catálogo de Ciberseguridad{% endblock %}
+
+{% block body %}
+<!-- ══════════════════════════════════════════════
+     TIENDA PÚBLICA — Sin login
+     ══════════════════════════════════════════════ -->
+
+<div style="background:var(--bg-primary); min-height:100vh; position:relative; padding-top: 5rem;">
+
+  <!-- Navbar simple para la vista pública -->
+  <nav class="navbar" style="position:fixed; top:0; left:0; right:0; z-index:50;">
+    <a href="/" class="navbar-brand">
+      <div class="navbar-logo"><span>L</span></div>
+      <span class="navbar-name">Lycaon Security <span style="color:var(--text-muted);font-size:.875rem;">Hardware</span></span>
+    </a>
+    <div class="navbar-links">
+      {% if usuario %}
+        <a href="/dashboard" class="btn-ghost">Dashboard Central</a>
+      {% else %}
+        <a href="/login" class="btn-primary">Acceso Clientes</a>
+      {% endif %}
+    </div>
+  </nav>
+
+  <div class="hero-content" style="max-width:1100px; margin: 0 auto; padding-top:2rem;">
+    <!-- Header -->
+    <div class="panel" style="position:relative; margin-bottom:1.5rem;">
+      <div class="panel-body">
+        <h2 style="font-size:1.5rem; font-weight:700; display:flex; align-items:center; gap:.5rem; margin-bottom:.5rem;">
+          Catálogo de Equipamiento Táctico y Autodefensa
+        </h2>
+        <p style="color:var(--text-secondary); font-size:.9rem;">
+          Explora nuestra línea de artículos de protección personal. Para adquirir equipos, debes estar registrado en nuestra red.
+        </p>
+      </div>
+    </div>
+
+    <div class="store-filters" style="display:flex; gap:1rem; flex-wrap:wrap;">
+      <button class="filter-btn btn-ghost active" data-categoria="todos" style="border:1px solid var(--border-normal);">Todos</button>
+      <button class="filter-btn btn-ghost" data-categoria="Choque" style="border:1px solid var(--border-normal);">Armas de Choque</button>
+      <button class="filter-btn btn-ghost" data-categoria="Quimico" style="border:1px solid var(--border-normal);">Defensa Química</button>
+      <button class="filter-btn btn-ghost" data-categoria="Monitoreo" style="border:1px solid var(--border-normal);">Monitoreo</button>
+      <button class="filter-btn btn-ghost" data-categoria="Tactico" style="border:1px solid var(--border-normal);">Equipamiento Táctico</button>
+    </div>
+
+    <!-- Grid de Productos -->
+    <div class="products-grid">
+      {% for producto in productos %}
+      <div class="product-card" data-categoria="{{ producto.category }}" id="pub-product-{{ producto.id }}">
+        
+        <div class="product-img">
+          {% if producto.image_url and producto.image_url != '/static/img/placeholder.svg' %}
+            <img src="{{ producto.image_url }}" alt="{{ producto.name }}">
+          {% else %}
+            {% if producto.category == 'Security' %}SEC
+            {% elif producto.category == 'Software' %}SFT
+            {% elif producto.category == 'Hardware' %}HRD
+            {% elif producto.category == 'Network' %}NET
+            {% elif producto.category == 'Service' %}SRV
+            {% else %}GEN{% endif %}
+          {% endif %}
+        </div>
+
+        <div class="product-body">
+          <div class="product-cat">{{ producto.category }}</div>
+          <h3 class="product-name">{{ producto.name }}</h3>
+          <div class="product-price">${{ "%.2f"|format(producto.price) }}</div>
+          
+          <div class="product-stock">
+            Stock: <strong>{{ producto.stock }}</strong> unidades &nbsp;
+            <span class="stock-badge {{ producto.status }}">
+              {% if producto.status == 'active' %}Disponible
+              {% elif producto.status == 'low-stock' %}Poco Stock
+              {% else %}Agotado{% endif %}
+            </span>
+          </div>
+
+          <!-- Si el usuario está logueado, mostrar comprar normal, si no, redirigir a login -->
+          {% if usuario %}
+            <a href="/dashboard/store" class="btn-buy" style="display:inline-block; text-align:center; background:var(--accent-primary); color:white; padding:0.75rem; border-radius:4px; font-weight:bold;">
+              Adquirir Licencia / Equipo
+            </a>
+          {% else %}
+            <a href="/login" class="btn-buy" style="display:inline-block; text-align:center; background:var(--bg-secondary); color:var(--text-primary); border:1px solid var(--border-normal); padding:0.75rem; border-radius:4px; font-weight:bold;">
+              Iniciar sesión para comprar
+            </a>
+          {% endif %}
+        </div>
+
+      </div>
+      {% endfor %}
+    </div>
+    
+  </div>
+</div>
+{% endblock %}

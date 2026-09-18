@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<!--
+  BASE.HTML — Template base de Lycaon Security (Flask/Jinja2)
+  Todos los demás templates extienden de este.
+  Incluye: fuentes, CSS, JS, meta SEO.
+-->
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  {# ── SEO Meta Tags ── #}
+  <title>{% block title %}Lycaon Security{% endblock %} — Control Operativo</title>
+  <meta name="description" content="{% block description %}Lycaon Security: gestión de inventario, equipos y operaciones con gravedad ineludible.{% endblock %}" />
+  <meta name="theme-color" content="#030305" />
+
+  {# ── CSS Principal ── #}
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
+
+  {# ── Chart.js desde CDN (para las gráficas del dashboard) ── #}
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+
+  {# Bloque para CSS adicional por página #}
+  {% block extra_css %}{% endblock %}
+</head>
+<body>
+  {# ── Contenido principal de cada página ── #}
+  {% block body %}{% endblock %}
+
+  {# ── JS Principal (cargado al final para mejor rendimiento) ── #}
+  <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+
+  {# Bloque para JS adicional por página #}
+  {% block extra_js %}{% endblock %}
+</body>
+</html>

@@ -1,0 +1,70 @@
+{% extends "dashboard/layout.html" %}
+{% block dashboard_content %}
+<div style="margin-bottom:2rem;">
+  <h2 style="font-size:2rem; font-weight:800; color:var(--accent-primary);">Centro de Sugerencias</h2>
+  <p style="color:var(--text-secondary);">Envía tus reportes de errores o sugerencias para mejorar Lycaon Security.</p>
+</div>
+
+<div class="panel" style="max-width: 600px;">
+  <form id="suggestion-form">
+    <div class="form-group" style="margin-bottom:1.25rem;">
+      <label style="display:block; margin-bottom:0.5rem; font-weight:bold; color:var(--text-primary);">Tipo</label>
+      <select id="sug-type" class="form-input" required style="width:100%;">
+        <option value="sugerencia">Sugerencia</option>
+        <option value="error">Reporte de Error</option>
+        <option value="reclamo">Reclamo</option>
+      </select>
+    </div>
+    
+    <div class="form-group" style="margin-bottom:1.25rem;">
+      <label style="display:block; margin-bottom:0.5rem; font-weight:bold; color:var(--text-primary);">Mensaje</label>
+      <textarea id="sug-message" class="form-input" required rows="5" placeholder="Describe los detalles aquí..." style="width:100%; resize:vertical;"></textarea>
+    </div>
+    
+    <div id="sug-result" style="margin-bottom:1rem; display:none; padding:1rem; border-radius:4px;"></div>
+    
+    <button type="submit" class="btn-primary" id="sug-btn" style="width:100%;">Enviar Mensaje</button>
+  </form>
+</div>
+
+<script>
+document.getElementById('suggestion-form').addEventListener('submit', async function(e) {
+  e.preventDefault();
+  const type = document.getElementById('sug-type').value;
+  const message = document.getElementById('sug-message').value.trim();
+  const btn = document.getElementById('sug-btn');
+  const res = document.getElementById('sug-result');
+  
+  if (!message) return;
+  
+  btn.disabled = true;
+  btn.textContent = 'Enviando...';
+  
+  try {
+    const response = await fetch('/api/suggestions', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ type, message })
+    });
+    const data = await response.json();
+    if(data.success) {
+      res.style.display = 'block';
+      res.className = 'alert-success';
+      res.textContent = 'Mensaje enviado correctamente. ¡Gracias por tu retroalimentación!';
+      document.getElementById('suggestion-form').reset();
+    } else {
+      res.style.display = 'block';
+      res.className = 'alert-error';
+      res.textContent = data.error || 'Error al enviar.';
+    }
+  } catch (err) {
+    res.style.display = 'block';
+    res.className = 'alert-error';
+    res.textContent = 'Error de conexión.';
+  } finally {
+    btn.disabled = false;
+    btn.textContent = 'Enviar Mensaje';
+  }
+});
+</script>
+{% endblock %}

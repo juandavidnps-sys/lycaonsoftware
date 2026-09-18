@@ -1,0 +1,20 @@
+[
+  {
+    "id": "sh_1",
+    "name": "Servientrega",
+    "cost": 15000,
+    "active": true
+  },
+  {
+    "id": "sh_2",
+    "name": "Env\u00eda",
+    "cost": 12000,
+    "active": true
+  },
+  {
+    "id": "sh_3",
+    "name": "Recogida en Oficina",
+    "cost": 0,
+    "active": true
+  }
+]

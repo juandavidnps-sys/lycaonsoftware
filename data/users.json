@@ -1,0 +1,39 @@
+[
+  {
+    "id": "U1",
+    "name": "Admin Lycaon Software",
+    "email": "admin@lycaonsoftware.com",
+    "password_hash": "scrypt:32768:8:1$8QtUjtzfyAhBgl55$03733a8c3a76d47c5e0b8da704e9b9493157223fc8f3c16c685cc89b9d3169fabef6336dce8d0f82895d0adf08901cb6d659278dca955e37858733f904926a5a",
+    "role": "administrador",
+    "verified": true,
+    "created_at": "2026-08-11T20:00:00"
+  },
+  {
+    "id": "U2",
+    "name": "Juan David Nps",
+    "email": "juandavidnps@gmail.com",
+    "password_hash": "scrypt:32768:8:1$qXHzpUfmwJbx9lcT$2aa94d6584708e0322bae5eaff0c9b5538cb02ca95f333bbc6752fcd6323e1231462c63d02e95d2e331e48a1476f9c88e50905ccd2b40087ef625fc1616c6a10",
+    "role": "cliente",
+    "verified": true,
+    "created_at": "2026-08-11T20:18:00"
+  },
+  {
+    "id": "U3",
+    "name": "Santiago Solano",
+    "email": "santosolano1602@gmail.com",
+    "password_hash": "scrypt:32768:8:1$fi8g2XEScgDh5UMf$1f39918949ec16068a1c53988c2c984b313fe6573581413df976e1e4adf57ee26370a67a6d209db95d4a633297c7ed03120d6e702f0a0f119a5b1de2d3641cc6",
+    "role": "cliente",
+    "verified": true,
+    "created_at": "2026-08-11T20:42:00"
+  },
+  {
+    "id": "U4",
+    "name": "Test User",
+    "email": "test@lycaonsoftware.com",
+    "password_hash": "scrypt:32768:8:1$urExnhkPU1TDylqV$696dd36e9b3d80f0e18ffdfc3426b534881ed351399c3609a125a3697805f910f746a24469d1457762b53e6a0940dd137870e97518c5ac3870f0f9099abb3864",
+    "role": "cliente",
+    "verified": true,
+    "avatar": "",
+    "created_at": "2026-09-18T14:19:09.829247"
+  }
+]

@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<style>
+  @page {
+    size: letter portrait;
+    @frame header_frame {
+      -pdf-frame-content: header_content;
+      left: 50pt; width: 512pt; top: 50pt; height: 40pt;
+    }
+    @frame content_frame {
+      left: 50pt; width: 512pt; top: 100pt; height: 632pt;
+    }
+    @frame footer_frame {
+      -pdf-frame-content: footer_content;
+      left: 50pt; width: 512pt; top: 742pt; height: 50pt;
+    }
+  }
+
+  body {
+    font-family: Helvetica, Arial, sans-serif;
+    font-size: 11pt;
+    color: #333333;
+  }
+  
+  h1 { font-size: 24pt; color: #1e3a8a; margin-bottom: 0; }
+  h2 { font-size: 14pt; color: #3b82f6; margin-top: 5pt; }
+  
+  .table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20pt;
+  }
+  .table th {
+    background-color: #f3f4f6;
+    border-bottom: 1pt solid #d1d5db;
+    padding: 8pt;
+    text-align: left;
+    font-weight: bold;
+  }
+  .table td {
+    padding: 8pt;
+    border-bottom: 1pt solid #e5e7eb;
+  }
+  .text-right { text-align: right; }
+  .text-bold { font-weight: bold; }
+  
+  .total-row td {
+    font-size: 14pt;
+    font-weight: bold;
+    border-top: 2pt solid #1e3a8a;
+  }
+
+  .status-badge {
+    background-color: #dcfce7;
+    color: #166534;
+    padding: 4pt 8pt;
+    border-radius: 4pt;
+    font-weight: bold;
+  }
+</style>
+</head>
+<body>
+
+  <div id="header_content">
+    <h1>Lycaon Security</h1>
+    <h2>Factura Comercial</h2>
+  </div>
+
+  <div id="footer_content">
+    <hr style="border: 0.5pt solid #d1d5db;">
+    <p style="text-align: center; color: #6b7280; font-size: 9pt;">
+      Lycaon Security - Control Operativo Avanzado<br>
+      Generado automáticamente el {{ now.strftime('%Y-%m-%d %H:%M:%S') }}
+    </p>
+  </div>
+
+  <div style="margin-bottom: 20pt;">
+    <table style="width: 100%;">
+      <tr>
+        <td style="width: 50%;">
+          <strong>Datos del Cliente:</strong><br>
+          Usuario: {{ user.name }}<br>
+          Email: {{ user.email }}<br>
+          Rol: {{ user.role|capitalize }}
+        </td>
+        <td style="width: 50%; text-align: right;">
+          <strong>Datos de la Factura:</strong><br>
+          Nº Pedido: {{ pedido.id }}<br>
+          Nº Factura: {{ invoice_id }}<br>
+          Fecha: {{ pedido.created_at[:10] }}<br>
+          Estado: <span class="status-badge">{{ pedido.status|upper }}</span>
+        </td>
+      </tr>
+    </table>
+  </div>
+
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Producto</th>
+        <th class="text-right">Precio Unitario</th>
+        <th class="text-right">Cantidad</th>
+        <th class="text-right">Total</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>{{ pedido.product_name }}</td>
+        <td class="text-right">${{ "%.2f"|format(pedido.subtotal / pedido.cantidad) }}</td>
+        <td class="text-right">{{ pedido.cantidad }}</td>
+        <td class="text-right">${{ "%.2f"|format(pedido.subtotal) }}</td>
+      </tr>
+      
+      {% if pedido.discount_amount > 0 %}
+      <tr>
+        <td colspan="3" class="text-right text-bold">Subtotal:</td>
+        <td class="text-right">${{ "%.2f"|format(pedido.subtotal) }}</td>
+      </tr>
+      <tr>
+        <td colspan="3" class="text-right text-bold" style="color: #166534;">Descuento Aplicado:</td>
+        <td class="text-right" style="color: #166534;">-${{ "%.2f"|format(pedido.discount_amount) }}</td>
+      </tr>
+      {% endif %}
+      
+      <tr class="total-row">
+        <td colspan="3" class="text-right">Total a Pagar:</td>
+        <td class="text-right">${{ "%.2f"|format(pedido.total) }}</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div style="margin-top: 40pt;">
+    <p><strong>Términos y Condiciones:</strong></p>
+    <p style="font-size: 9pt; color: #4b5563;">
+      Esta factura es un comprobante de compra válido dentro del ecosistema Lycaon Security.<br>
+      Para consultas sobre garantía o devoluciones, por favor contacte a su administrador de sistema.<br>
+      El hardware adquirido será desplegado según los SLA establecidos en su nivel de cliente.
+    </p>
+  </div>
+
+</body>
+</html>

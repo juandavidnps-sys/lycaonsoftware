@@ -1,0 +1,121 @@
+{% extends "dashboard/layout.html" %}
+{% block title %}Administración de Tienda{% endblock %}
+
+{% block dashboard_content %}
+<!-- ════════════════════════════════════════
+     ADMIN TIENDA — Creación de Productos
+     ════════════════════════════════════════ -->
+
+<div class="panel neon-line-top" style="position:relative; margin-bottom:1.5rem;">
+  <div class="panel-body">
+    <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:1rem;">
+      <div>
+        <h2 style="font-size:1.5rem; font-weight:700; display:flex; align-items:center; gap:.5rem; margin-bottom:.5rem;">
+          Gestión de Inventario
+        </h2>
+        <p style="color:rgba(255,255,255,.5); font-size:.9rem;">
+          Administra los productos de la tienda y agrega nuevo stock.
+        </p>
+      </div>
+      <div>
+        <a href="/api/export/inventory" class="btn-ghost" style="color:#a78bfa; border-color:rgba(167,139,250,.3);">
+          Exportar Inventario (CSV)
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Layout 2 columnas: Formulario y Catálogo -->
+<div style="display:grid; grid-template-columns:1fr 2fr; gap:1.5rem;">
+
+  <!-- Formulario para crear producto -->
+  <div class="panel">
+    <div class="panel-body">
+      <h3 class="panel-title">Nuevo Producto</h3>
+      
+      <div id="product-result" style="margin-bottom:1rem;"></div>
+      
+      <form id="create-product-form">
+        <div class="form-group">
+          <label style="font-size:.8125rem; color:rgba(255,255,255,.4); display:block; margin-bottom:.5rem; font-weight:700;">Nombre del Equipo</label>
+          <input type="text" id="prod-name" class="form-input" required>
+        </div>
+        
+        <div class="form-group">
+          <label style="font-size:.8125rem; color:var(--text-secondary); display:block; margin-bottom:.5rem; font-weight:700;">Categoría</label>
+          <select id="prod-category" class="form-input" required>
+            <option value="Security">Seguridad (Firewalls, IDS)</option>
+            <option value="Software">Software (Licencias, Encriptación)</option>
+            <option value="Hardware">Hardware (Tokens, Llaves)</option>
+            <option value="Network">Redes (Gateways, Routers)</option>
+            <option value="Service">Servicios (Auditorías)</option>
+          </select>
+        </div>
+        
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:1rem;">
+          <div class="form-group">
+            <label style="font-size:.8125rem; color:var(--text-secondary); display:block; margin-bottom:.5rem; font-weight:700;">Precio (USD)</label>
+            <input type="number" step="0.01" id="prod-price" class="form-input" required>
+          </div>
+          <div class="form-group">
+            <label style="font-size:.8125rem; color:var(--text-secondary); display:block; margin-bottom:.5rem; font-weight:700;">Stock</label>
+            <input type="number" id="prod-stock" class="form-input" value="10" required>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label style="font-size:.8125rem; color:var(--text-secondary); display:block; margin-bottom:.5rem; font-weight:700;">Imagen del Producto (Opcional)</label>
+          <input type="file" id="prod-image" accept=".jpg,.jpeg,.png,.webp" class="form-input">
+        </div>
+
+        <button type="submit" class="btn-login" id="btn-create-product">
+          Crear Producto
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Tabla de productos actuales -->
+  <div class="panel">
+    <div class="panel-body">
+      <h3 class="panel-title">Catálogo Actual</h3>
+      
+      <div style="overflow-x:auto;">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Nombre</th>
+              <th>Categoría</th>
+              <th>Precio</th>
+              <th>Stock</th>
+              <th>Acción</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for p in productos %}
+            <tr id="admin-prod-{{ p.id }}">
+              <td><span style="font-family:monospace; font-size:.75rem; color:rgba(255,255,255,.4);">{{ p.id }}</span></td>
+              <td style="font-weight:500;">{{ p.name }}</td>
+              <td>{{ p.category }}</td>
+              <td>${{ "%.2f"|format(p.price) }}</td>
+              <td>
+                <span class="stock-badge {{ p.status }}">{{ p.stock }}</span>
+              </td>
+              <td>
+                <button onclick="eliminarProducto('{{ p.id }}', '{{ p.name }}')" style="font-size:.75rem; padding:.3rem .5rem; border-radius:6px; background:rgba(248,113,113,.08); color:#f87171; border:1px solid rgba(248,113,113,.15); cursor:pointer;">
+                  Del
+                </button>
+              </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+{% endblock %}

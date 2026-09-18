@@ -1,0 +1,178 @@
+{% extends "base.html" %}
+{% block title %}Manual de Usuario | Lycaon Security{% endblock %}
+
+{% block body %}
+<div style="background:var(--bg-primary); min-height:100vh; position:relative; padding-top: 6rem; padding-bottom: 6rem;">
+
+  <!-- Navbar simple -->
+  <nav class="navbar glass-nav" style="position:fixed; top:0; left:0; right:0; z-index:50;">
+    <a href="/" class="navbar-brand">
+      <div class="navbar-logo"><span>L</span></div>
+      <span class="navbar-name">Lycaon Security <span style="color:var(--text-muted);font-size:.875rem;">Docs</span></span>
+    </a>
+    <div class="navbar-links">
+      <a href="/tienda" class="btn-ghost">Tienda Pública</a>
+      {% if usuario %}
+        <a href="/dashboard" class="btn-primary">Ir al Dashboard</a>
+      {% else %}
+        <a href="/login" class="btn-primary">Iniciar Sesión</a>
+      {% endif %}
+    </div>
+  </nav>
+
+  <div class="hero-content" style="max-width:1200px; margin: 0 auto; display:grid; grid-template-columns: 260px 1fr; gap: 3rem; align-items: start;">
+    
+    <!-- Índice Lateral -->
+    <aside class="panel" style="position: sticky; top: 7rem;">
+      <div class="panel-body">
+        <h3 style="font-size: 1.1rem; font-weight: 600; margin-bottom: 1.5rem; color: var(--text-primary); border-bottom: 1px solid var(--border-normal); padding-bottom: 0.5rem;">Índice</h3>
+        <ul style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 0.75rem;">
+          <li><a href="#sec-inicio" class="manual-nav-link">Inicio de Sesión</a></li>
+          <li><a href="#sec-tienda-pub" class="manual-nav-link">Tienda Pública</a></li>
+          <li><a href="#sec-dashboard" class="manual-nav-link">Panel de Administración</a></li>
+          <li><a href="#sec-productos" class="manual-nav-link">Creación de Productos</a></li>
+          <li><a href="#sec-usuarios" class="manual-nav-link">Gestión de Usuarios</a></li>
+          <li><a href="#sec-perfil" class="manual-nav-link">Actualización de Perfil</a></li>
+        </ul>
+      </div>
+    </aside>
+
+    <!-- Contenido Principal -->
+    <main class="manual-content">
+      
+      <!-- Título de la página -->
+      <header style="margin-bottom: 4rem; border-bottom: 1px solid var(--border-normal); padding-bottom: 2rem;">
+        <h1 style="font-size: 2.5rem; font-weight: 700; margin-bottom: 1rem; color: var(--text-primary);">Manual de Usuario</h1>
+        <p style="color: var(--text-secondary); font-size: 1.1rem; line-height: 1.6;">
+          Documentación técnica y operativa para la plataforma Lycaon Security. Este manual proporciona las directrices necesarias para operar los distintos módulos del sistema operativo.
+        </p>
+      </header>
+
+      <!-- 1. Inicio de Sesión -->
+      <section id="sec-inicio" class="manual-section">
+        <h2 class="manual-section-title">1. Inicio de Sesión</h2>
+        <p class="manual-text">
+          El módulo de autenticación garantiza el acceso seguro a la plataforma. Para acceder, diríjase a la ruta <code>/login</code> e ingrese sus credenciales asignadas (correo electrónico y contraseña).
+        </p>
+        <p class="manual-text">
+          En caso de ser un nuevo cliente, puede utilizar la pestaña de registro para crear una cuenta. Esta cuenta tendrá permisos de "Cliente" por defecto hasta que un Administrador asigne un nivel superior.
+        </p>
+      </section>
+
+      <!-- 2. Tienda Pública -->
+      <section id="sec-tienda-pub" class="manual-section">
+        <h2 class="manual-section-title">2. Tienda Pública</h2>
+        <p class="manual-text">
+          La Tienda Pública, accesible a través de <code>/tienda</code>, funciona como la vitrina de los productos actualmente disponibles en el inventario. Los visitantes pueden consultar el catálogo y el estado del stock (Disponible, Poco Stock, Agotado).
+        </p>
+        <p class="manual-text">
+          Para realizar una compra o gestión de pedidos, es requisito indispensable iniciar sesión en el sistema.
+        </p>
+      </section>
+
+      <!-- 3. Panel de Administración (Dashboard) -->
+      <section id="sec-dashboard" class="manual-section">
+        <h2 class="manual-section-title">3. Panel de Administración (Dashboard)</h2>
+        <p class="manual-text">
+          Una vez autenticado, el usuario es redirigido al Centro de Control. Desde aquí se monitorean las métricas clave de la infraestructura, incluyendo:
+        </p>
+        <ul class="manual-list">
+          <li><strong>Métricas de alto nivel:</strong> Número de clientes activos, tamaño del catálogo, valoración del inventario y tareas pendientes.</li>
+          <li><strong>Salud del Inventario:</strong> Distribución del catálogo por categorías de hardware y estado del stock.</li>
+          <li><strong>Análisis de Ingresos:</strong> Gráfica interactiva del flujo de capital.</li>
+        </ul>
+      </section>
+
+      <!-- 4. Creación de Productos -->
+      <section id="sec-productos" class="manual-section">
+        <h2 class="manual-section-title">4. Creación de Productos (Admin)</h2>
+        <p class="manual-text">
+          Los usuarios con rol de Administrador tienen acceso a la sección de Gestión de Inventario. Aquí se administra el catálogo visible en la tienda pública.
+        </p>
+        <p class="manual-text">
+          A través del formulario integrado, se pueden registrar nuevos componentes en el sistema proporcionando el nombre del equipo, categoría, precio y cantidad de stock inicial. También es posible retirar productos del sistema utilizando la acción de eliminación en la tabla del catálogo actual.
+        </p>
+      </section>
+
+      <!-- 5. Gestión de Usuarios -->
+      <section id="sec-usuarios" class="manual-section">
+        <h2 class="manual-section-title">5. Gestión de Usuarios y Permisos</h2>
+        <p class="manual-text">
+          El módulo de Control de Usuarios permite a la administración operar sobre los perfiles del sistema.
+        </p>
+        <ul class="manual-list">
+          <li><strong>Nuevo Usuario:</strong> Formulario para registrar clientes directamente en la base de datos asignando un rol inicial (Cliente o Administrador).</li>
+          <li><strong>Modificación de Nivel:</strong> Utilizando el selector en la tabla, se puede ascender o degradar el rango de cualquier usuario instantáneamente.</li>
+          <li><strong>Baja de Cliente:</strong> Eliminación de cuentas para revocar el acceso a la infraestructura.</li>
+        </ul>
+      </section>
+
+      <!-- 6. Actualización de Perfil -->
+      <section id="sec-perfil" class="manual-section">
+        <h2 class="manual-section-title">6. Actualización de Perfil Institucional</h2>
+        <p class="manual-text">
+          Cada cliente puede acceder a la configuración de su cuenta para actualizar sus credenciales visuales.
+        </p>
+        <p class="manual-text">
+          Mediante el botón "Cambiar Foto", el sistema permite la carga segura de archivos gráficos (JPG, PNG, WebP) que sustituirán el avatar por defecto. Estas actualizaciones se aplican en todo el entorno operativo en tiempo real.
+        </p>
+      </section>
+
+    </main>
+  </div>
+</div>
+{% endblock %}
+
+{% block extra_css %}
+<style>
+  /* Estilos específicos del manual adaptados al nuevo diseño minimalista */
+  .manual-nav-link {
+    color: var(--text-secondary);
+    text-decoration: none;
+    font-size: 0.95rem;
+    transition: all 0.2s ease;
+    display: block;
+    padding: 0.4rem 0;
+  }
+  .manual-nav-link:hover {
+    color: var(--text-primary);
+    transform: translateX(4px);
+  }
+  
+  .manual-section {
+    margin-bottom: 5rem;
+    padding-top: 5rem; /* Para que al hacer anclaje no lo tape el navbar */
+    margin-top: -5rem;
+  }
+  
+  .manual-section-title {
+    font-size: 1.75rem;
+    font-weight: 700;
+    margin-bottom: 1.25rem;
+    color: var(--text-primary);
+    display: flex;
+    align-items: center;
+  }
+  
+  .manual-text {
+    font-size: 1.05rem;
+    line-height: 1.7;
+    color: var(--text-secondary);
+    margin-bottom: 1.25rem;
+  }
+  
+  .manual-list {
+    margin-bottom: 2rem;
+    padding-left: 1.5rem;
+    color: var(--text-secondary);
+    font-size: 1.05rem;
+    line-height: 1.7;
+  }
+  .manual-list li {
+    margin-bottom: 0.5rem;
+  }
+  .manual-list li strong {
+    color: var(--text-primary);
+  }
+</style>
+{% endblock %}

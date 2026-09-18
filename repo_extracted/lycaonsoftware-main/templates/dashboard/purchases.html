@@ -1,0 +1,220 @@
+{% extends "dashboard/layout.html" %}
+{% block title %}Adquisiciones y Licencias{% endblock %}
+
+{% block dashboard_content %}
+<!-- ════════════════════════════════════════
+     MIS COMPRAS — Historial de pedidos
+     ════════════════════════════════════════ -->
+
+<style>
+/* Estilos específicos minimalistas para Purchases */
+.order-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-normal);
+  border-radius: var(--radius-md);
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.order-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  border-bottom: 1px solid var(--border-subtle);
+  padding-bottom: 1rem;
+}
+.order-id {
+  font-weight: 700;
+  font-size: 1rem;
+  color: var(--text-primary);
+  margin-bottom: 0.25rem;
+}
+.order-date {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+.order-total {
+  text-align: right;
+  font-weight: 800;
+  font-size: 1.25rem;
+  color: var(--accent-primary);
+}
+.order-saved {
+  font-size: 0.75rem;
+  color: var(--emerald);
+  font-weight: 600;
+  margin-top: 0.25rem;
+}
+.order-product {
+  font-size: 1rem;
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+.order-product strong {
+  color: var(--text-primary);
+}
+
+/* Timeline Minimalista */
+.status-timeline {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--border-subtle);
+}
+.timeline-step {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.timeline-dot {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: var(--border-strong);
+}
+.timeline-dot.done {
+  background: var(--accent-primary);
+}
+.timeline-label {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+.timeline-label.done {
+  color: var(--text-primary);
+}
+.timeline-line {
+  flex: 1;
+  height: 1px;
+  background: var(--border-normal);
+  margin: 0 0.5rem;
+}
+.timeline-line.done {
+  background: var(--accent-primary);
+}
+
+.empty-state {
+  text-align: center;
+  padding: 4rem 2rem;
+  background: var(--bg-card);
+  border: 1px dashed var(--border-strong);
+  border-radius: var(--radius-md);
+  color: var(--text-secondary);
+}
+</style>
+
+<div style="display:flex; flex-direction:column; gap:1.5rem; max-width:900px; margin:0 auto;">
+
+  <!-- ── Header de la página ── -->
+  <div class="panel" style="position:relative;">
+    <div class="panel-body">
+      <h2 style="font-size:1.5rem; font-weight:700; display:flex; align-items:center; gap:.5rem; margin-bottom:.5rem;">
+        Adquisiciones y Licencias
+      </h2>
+      <p style="color:var(--text-secondary); font-size:.9rem;">
+        Historial corporativo de compras, auditorías y licencias de ciberseguridad adquiridas.
+      </p>
+    </div>
+  </div>
+
+  <!-- ── Lista de pedidos ── -->
+  {% if pedidos %}
+    {% for pedido in pedidos %}
+    <div class="order-card">
+
+      <!-- Encabezado del pedido: ID, fecha, total -->
+      <div class="order-header">
+        <div>
+          <div class="order-id">Orden #{{ pedido.id }}</div>
+          <div class="order-date">Generada: {{ pedido.created_at[:10] }}</div>
+        </div>
+        <div class="order-total">
+          ${{ "%.2f"|format(pedido.total) }} USD
+          {% if pedido.discount_amount > 0 %}
+            <div class="order-saved">
+              Ahorro de contrato: ${{ "%.2f"|format(pedido.discount_amount) }}
+            </div>
+          {% endif %}
+        </div>
+      </div>
+
+      <!-- Nombre del producto -->
+      <div class="order-product">
+        <strong>{{ pedido.product_name }}</strong> &nbsp;×&nbsp; {{ pedido.cantidad }} Nodos/Unidades
+      </div>
+
+      <!-- ── Timeline de estado del pedido y Botones ── -->
+      <div style="display:flex; justify-content:space-between; align-items:flex-end; flex-wrap:wrap; gap:1.5rem;">
+
+        {% if pedido.status in ['cancelled', 'refunded'] %}
+          <!-- Estado cancelado/reembolsado -->
+          <div style="color:var(--red); font-weight:700; font-size:.875rem;">
+            ✗ Transacción {{ pedido.status | capitalize }}
+          </div>
+        {% else %}
+          <!-- Timeline de 4 pasos -->
+          {% set pasos = [
+            ('paid',       'Procesando'),
+            ('processing', 'Validado'),
+            ('shipped',    'Desplegado'),
+            ('delivered',  'Operativo'),
+          ] %}
+          {% set orden = ['paid', 'processing', 'shipped', 'delivered'] %}
+          {% set idx_actual = orden.index(pedido.status) if pedido.status in orden else -1 %}
+
+          <div class="status-timeline" style="flex:1; min-width: 300px; border:none; margin:0; padding:0;">
+            {% for key, label in pasos %}
+            {% set idx = loop.index0 %}
+            {% set done = idx <= idx_actual %}
+
+            <div class="timeline-step">
+              <div class="timeline-dot {% if done %}done{% endif %}"></div>
+              <div class="timeline-label {% if done %}done{% endif %}">{{ label }}</div>
+            </div>
+
+            {# Línea conectora entre pasos #}
+            {% if not loop.last %}
+            <div class="timeline-line {% if idx < idx_actual %}done{% endif %}"></div>
+            {% endif %}
+
+            {% endfor %}
+          </div>
+        {% endif %}
+
+        <!-- Botón descargar factura y enviar correo -->
+        <div style="display:flex; gap:0.5rem;">
+          <a href="/api/invoices/{{ pedido.invoice_id }}/download"
+             class="btn-ghost"
+             style="border: 1px solid var(--border-normal);"
+             title="Descargar factura en PDF">
+            ⬇ PDF Certificado
+          </a>
+          <button onclick="enviarCorreoFactura('{{ pedido.invoice_id }}')" class="btn-ghost" style="border: 1px solid var(--border-normal);">
+            @ Enviar a NOC
+          </button>
+        </div>
+
+      </div><!-- /footer del pedido -->
+
+    </div><!-- /order-card -->
+    {% endfor %}
+
+  {% else %}
+    <!-- Sin pedidos -->
+    <div class="empty-state">
+      <div style="font-weight:800; font-size:2rem; color:var(--border-strong); margin-bottom:1rem;">N/A</div>
+      <div style="font-size:1rem; font-weight:500;">No se encontraron adquisiciones asociadas a esta cuenta.</div><br>
+      <a href="/dashboard/store"
+         style="color:var(--accent-primary); display:inline-block; font-weight:700;">
+        Explorar Catálogo de Hardware →
+      </a>
+    </div>
+  {% endif %}
+
+</div>
+{% endblock %}

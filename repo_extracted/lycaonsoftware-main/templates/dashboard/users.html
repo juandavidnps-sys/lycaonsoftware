@@ -1,0 +1,216 @@
+{% extends "dashboard/layout.html" %}
+{% block title %}Gestión de Usuarios{% endblock %}
+
+{% block dashboard_content %}
+<!-- ════════════════════════════════════
+     USUARIOS — Tabla de administración
+     Solo visible para administradores
+     ════════════════════════════════════ -->
+
+<!-- Header -->
+<div class="panel" style="position:relative; margin-bottom:1.5rem;">
+  <div class="panel-body" style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:1rem;">
+    <div>
+      <h2 style="font-size:1.5rem; font-weight:700; display:flex; align-items:center; gap:.5rem; margin-bottom:.5rem;">
+        Control de Acceso y Clientes
+      </h2>
+      <p style="color:var(--text-secondary); font-size:.9rem;">
+        Administre los privilegios de los clientes y personal del sistema Lycaon Security.
+      </p>
+    </div>
+    <div style="display:flex; gap:1rem;">
+      <a href="/api/export/users" class="btn-ghost" style="border: 1px solid var(--border-normal);">
+        Exportar Log de Usuarios (CSV)
+      </a>
+      <button class="btn-primary" onclick="abrirModal('new-user-modal')">
+        + Registrar Personal
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- Tabla de usuarios -->
+<div class="panel">
+  <div class="panel-body">
+    {% if usuarios %}
+    <div style="overflow-x:auto;">
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Nombre</th>
+            <th>Email</th>
+            <th>Privilegio</th>
+            <th>Ingreso</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for u in usuarios %}
+          <tr id="user-row-{{ u.id }}">
+            <td>
+              <span style="font-family:monospace; font-size:.75rem; color:var(--text-muted);">
+                {{ u.id }}
+              </span>
+            </td>
+            <td>
+              <div style="display:flex; align-items:center; gap:.75rem;">
+                <div class="user-avatar" style="width:28px;height:28px; flex-shrink:0;">
+                  {% if u.avatar %}
+                    <img src="{{ url_for('static', filename=u.avatar) }}" alt="Avatar" style="width:100%;height:100%;object-fit:cover;border-radius:inherit;">
+                  {% else %}
+                    <span>{{ u.name[:2].upper() }}</span>
+                  {% endif %}
+                </div>
+                <span style="font-weight:600; color:var(--text-primary);">{{ u.name }}</span>
+              </div>
+            </td>
+            <td style="color:var(--text-secondary);">{{ u.email }}</td>
+            <td>
+              <span style="
+                font-size:10px; font-weight:700; text-transform:uppercase;
+                letter-spacing:.12em; padding:.25rem .75rem; border-radius:9999px;
+                {% if u.role == 'administrador' %}
+                  background:var(--accent-light); color:var(--accent-primary); border:1px solid var(--accent-primary);
+                {% else %}
+                  background:var(--bg-secondary); color:var(--text-secondary); border:1px solid var(--border-normal);
+                {% endif %}
+              ">
+                {{ u.role }}
+              </span>
+            </td>
+            <td style="color:var(--text-muted); font-size:.8125rem;">
+              {{ u.created_at[:10] if u.created_at else '—' }}
+            </td>
+            <td>
+              {% if u.id != usuario.id %}
+              <div style="display:flex; gap:.5rem; flex-wrap:wrap;">
+                <button
+                  onclick="abrirModalEditarUsuario('{{ u.id }}', '{{ u.name }}', '{{ u.email }}', '{{ u.role }}')"
+                  style="
+                    font-size:.75rem; padding:.3rem .75rem; border-radius:var(--radius-sm);
+                    background:var(--bg-secondary); color:var(--text-primary);
+                    border:1px solid var(--border-normal); cursor:pointer;
+                    font-weight:600;
+                  "
+                  title="Editar Usuario"
+                >
+                  Editar
+                </button>
+                <button
+                  onclick="eliminarUsuario('{{ u.id }}', '{{ u.name }}')"
+                  style="
+                    font-size:.75rem; padding:.3rem .75rem; border-radius:var(--radius-sm);
+                    background:var(--bg-secondary); color:var(--red);
+                    border:1px solid var(--border-normal); cursor:pointer;
+                    font-weight:600;
+                  "
+                  title="Revocar acceso"
+                >
+                  Revocar
+                </button>
+              </div>
+              {% else %}
+                <span style="font-size:.75rem; color:var(--text-muted); font-weight:600;">(Cuenta Actual)</span>
+              {% endif %}
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+    {% else %}
+    <div style="padding:4rem 2rem; text-align:center; color:var(--text-secondary); background:var(--bg-secondary); border-radius:var(--radius-md); border:1px dashed var(--border-strong);">
+      <div style="font-size:2rem; font-weight:800; margin-bottom:1rem; color:var(--border-strong);">N/A</div>
+      <div style="font-size:1.1rem; font-weight:600; color:var(--text-primary);">
+        No hay registros de personal.
+      </div>
+    </div>
+    {% endif %}
+  </div>
+</div>
+
+<!-- ══════════════════════════════════
+     MODAL NUEVO USUARIO
+     ══════════════════════════════════ -->
+<div class="modal-overlay" id="new-user-modal">
+  <div class="modal-box">
+    <button class="modal-close" onclick="cerrarModal('new-user-modal')" title="Cerrar">✕</button>
+    <h3 class="modal-title" style="font-size:1.25rem; font-weight:800; margin-bottom:1.5rem;">Registro de Personal</h3>
+    
+    <div id="create-user-result" style="margin-bottom:1rem;"></div>
+    
+    <form id="create-user-form">
+      <div class="form-group">
+        <label style="font-size:.8125rem; color:var(--text-secondary); display:block; margin-bottom:.5rem; font-weight:700;">Nombre Completo</label>
+        <input type="text" id="new-user-name" class="form-input" required>
+      </div>
+      
+      <div class="form-group">
+        <label style="font-size:.8125rem; color:var(--text-secondary); display:block; margin-bottom:.5rem; font-weight:700;">Identidad Corporativa (Email)</label>
+        <input type="email" id="new-user-email" class="form-input" required>
+      </div>
+      
+      <div class="form-group">
+        <label style="font-size:.8125rem; color:var(--text-secondary); display:block; margin-bottom:.5rem; font-weight:700;">Clave de Acceso (Min. 6 char)</label>
+        <input type="password" id="new-user-password" class="form-input" required minlength="6">
+      </div>
+      
+      <div class="form-group">
+        <label style="font-size:.8125rem; color:var(--text-secondary); display:block; margin-bottom:.5rem; font-weight:700;">Nivel de Privilegio</label>
+        <select id="new-user-role" class="form-input" required>
+          <option value="cliente">Cliente (Cliente/Estándar)</option>
+          <option value="administrador">Administrador (NOC)</option>
+        </select>
+      </div>
+
+      <button type="submit" class="btn-primary" id="btn-create-user" style="width:100%;">
+        Generar Identidad
+      </button>
+    </form>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════
+     MODAL EDITAR USUARIO
+     ══════════════════════════════════ -->
+<div class="modal-overlay" id="edit-user-modal">
+  <div class="modal-box">
+    <button class="modal-close" onclick="cerrarModal('edit-user-modal')" title="Cerrar">✕</button>
+    <h3 class="modal-title" style="font-size:1.25rem; font-weight:800; margin-bottom:1.5rem;">Editar Personal</h3>
+    
+    <div id="edit-user-result" style="margin-bottom:1rem;"></div>
+    
+    <form id="edit-user-form">
+      <input type="hidden" id="edit-user-id">
+      <div class="form-group">
+        <label style="font-size:.8125rem; color:var(--text-secondary); display:block; margin-bottom:.5rem; font-weight:700;">Nombre Completo</label>
+        <input type="text" id="edit-user-name" class="form-input" required>
+      </div>
+      
+      <div class="form-group">
+        <label style="font-size:.8125rem; color:var(--text-secondary); display:block; margin-bottom:.5rem; font-weight:700;">Identidad Corporativa (Email)</label>
+        <input type="email" id="edit-user-email" class="form-input" required>
+      </div>
+      
+      <div class="form-group">
+        <label style="font-size:.8125rem; color:var(--text-secondary); display:block; margin-bottom:.5rem; font-weight:700;">Nueva Clave de Acceso (Dejar en blanco para no cambiar)</label>
+        <input type="password" id="edit-user-password" class="form-input" minlength="6">
+      </div>
+      
+      <div class="form-group">
+        <label style="font-size:.8125rem; color:var(--text-secondary); display:block; margin-bottom:.5rem; font-weight:700;">Nivel de Privilegio</label>
+        <select id="edit-user-role" class="form-input" required>
+          <option value="cliente">Cliente (Cliente/Estándar)</option>
+          <option value="administrador">Administrador (NOC)</option>
+        </select>
+      </div>
+
+      <button type="submit" class="btn-primary" id="btn-edit-user" style="width:100%;">
+        Guardar Cambios
+      </button>
+    </form>
+  </div>
+</div>
+
+{% endblock %}

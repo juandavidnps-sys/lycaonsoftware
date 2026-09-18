@@ -1,0 +1,9 @@
+# Dependencias de Lycaon Software — Flask Edition
+# Instalar con: pip install -r requirements.txt
+
+gunicorn>=21.0.0     # Servidor WSGI obligatorio para producción en la nube
+flask>=3.0.0        # Framework web de Python
+werkzeug>=3.0.0     # Seguridad de contraseñas (viene con Flask)
+xhtml2pdf>=0.2.11   # Generación de PDFs reales desde HTML
+pandas>=2.0.0       # Manejo de datos y exportación a CSV/Excel
+python-dotenv>=1.0.0 # Carga de variables de entorno (.env) para credenciales de email

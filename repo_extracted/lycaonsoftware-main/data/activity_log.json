@@ -1,0 +1,242 @@
+[
+  {
+    "id": "LOG-3FF4D8B2",
+    "user_email": "admin@lycaonsoftware.com",
+    "action": "logout",
+    "entity_type": "user",
+    "entity_id": "admin@lycaonsoftware.com",
+    "ip_address": "127.0.0.1",
+    "details": null,
+    "created_at": "2026-09-17T16:43:13.270397"
+  },
+  {
+    "id": "LOG-90BB4158",
+    "user_email": "admin@lycaonsoftware.com",
+    "action": "login",
+    "entity_type": "user",
+    "entity_id": "U1",
+    "ip_address": "127.0.0.1",
+    "details": "{\"result\": \"success\"}",
+    "created_at": "2026-09-17T15:15:57.826913"
+  },
+  {
+    "id": "LOG-A030B903",
+    "user_email": "admin@lycaonsoftware.com",
+    "action": "login",
+    "entity_type": "user",
+    "entity_id": "U1",
+    "ip_address": "127.0.0.1",
+    "details": "{\"result\": \"success\"}",
+    "created_at": "2026-09-15T16:31:59.033898"
+  },
+  {
+    "id": "LOG-192A426E",
+    "user_email": "admin@lycaonsoftware.com",
+    "action": "login",
+    "entity_type": "user",
+    "entity_id": "U1",
+    "ip_address": "127.0.0.1",
+    "details": "{\"result\": \"success\"}",
+    "created_at": "2026-09-15T16:04:16.217584"
+  },
+  {
+    "id": "LOG-C3C8A364",
+    "user_email": "admin@lycaonsoftware.com",
+    "action": "logout",
+    "entity_type": "user",
+    "entity_id": "admin@lycaonsoftware.com",
+    "ip_address": "127.0.0.1",
+    "details": null,
+    "created_at": "2026-09-15T16:01:38.298457"
+  },
+  {
+    "id": "LOG-C15E806C",
+    "user_email": "admin@lycaonsoftware.com",
+    "action": "login",
+    "entity_type": "user",
+    "entity_id": "U1",
+    "ip_address": "127.0.0.1",
+    "details": "{\"result\": \"success\"}",
+    "created_at": "2026-09-15T15:44:56.572251"
+  },
+  {
+    "id": "LOG-A84DA92E",
+    "user_email": "admin@lycaonsoftware.com",
+    "action": "logout",
+    "entity_type": "user",
+    "entity_id": "admin@lycaonsoftware.com",
+    "ip_address": "127.0.0.1",
+    "details": null,
+    "created_at": "2026-09-15T15:33:24.624469"
+  },
+  {
+    "id": "LOG-EA0FA73F",
+    "user_email": "admin@lycaonsoftware.com",
+    "action": "login",
+    "entity_type": "user",
+    "entity_id": "U1",
+    "ip_address": "127.0.0.1",
+    "details": "{\"result\": \"success\"}",
+    "created_at": "2026-09-15T15:30:26.025618"
+  },
+  {
+    "id": "LOG-1AD4B6F1",
+    "user_email": "admin@lycaonsoftware.com",
+    "action": "logout",
+    "entity_type": "user",
+    "entity_id": "admin@lycaonsoftware.com",
+    "ip_address": "127.0.0.1",
+    "details": null,
+    "created_at": "2026-09-15T15:30:06.147732"
+  },
+  {
+    "id": "LOG-AFEEF2AC",
+    "user_email": "admin@lycaonsoftware.com",
+    "action": "login",
+    "entity_type": "user",
+    "entity_id": "U1",
+    "ip_address": "127.0.0.1",
+    "details": "{\"result\": \"success\"}",
+    "created_at": "2026-09-15T15:18:06.709241"
+  },
+  {
+    "id": "LOG-6746C67F",
+    "user_email": "admin@lycaonsoftware.com",
+    "action": "logout",
+    "entity_type": "user",
+    "entity_id": "admin@lycaonsoftware.com",
+    "ip_address": "127.0.0.1",
+    "details": null,
+    "created_at": "2026-09-15T15:17:49.677039"
+  },
+  {
+    "id": "LOG-441B3F6A",
+    "user_email": "admin@lycaonsoftware.com",
+    "action": "login",
+    "entity_type": "user",
+    "entity_id": "U1",
+    "ip_address": "127.0.0.1",
+    "details": "{\"result\": \"success\"}",
+    "created_at": "2026-09-15T15:12:09.729347"
+  },
+  {
+    "id": "LOG-7A33FA1E",
+    "user_email": "admin@lycaonsoftware.com",
+    "action": "logout",
+    "entity_type": "user",
+    "entity_id": "admin@lycaonsoftware.com",
+    "ip_address": "127.0.0.1",
+    "details": null,
+    "created_at": "2026-09-15T15:10:20.487189"
+  },
+  {
+    "id": "LOG-8035E7AD",
+    "user_email": "admin@lycaonsoftware.com",
+    "action": "order_created",
+    "entity_type": "order",
+    "entity_id": "ORD-407A1F4A",
+    "ip_address": "127.0.0.1",
+    "details": "{\"product\": \"TitanX Compute Node\", \"total\": 4500.0}",
+    "created_at": "2026-09-15T15:10:05.144135"
+  },
+  {
+    "id": "LOG-1115C4B5",
+    "user_email": "admin@lycaonsoftware.com",
+    "action": "login",
+    "entity_type": "user",
+    "entity_id": "U1",
+    "ip_address": "127.0.0.1",
+    "details": "{\"result\": \"success\"}",
+    "created_at": "2026-09-15T15:09:57.909109"
+  },
+  {
+    "id": "LOG-E5E38B74",
+    "user_email": "admin@lycaonsoftware.com",
+    "action": "logout",
+    "entity_type": "user",
+    "entity_id": "admin@lycaonsoftware.com",
+    "ip_address": "127.0.0.1",
+    "details": null,
+    "created_at": "2026-09-15T15:09:51.147103"
+  },
+  {
+    "id": "LOG-07DCD6EF",
+    "user_email": "admin@lycaonsoftware.com",
+    "action": "login",
+    "entity_type": "user",
+    "entity_id": "U1",
+    "ip_address": "127.0.0.1",
+    "details": "{\"result\": \"success\"}",
+    "created_at": "2026-09-15T15:08:58.307751"
+  },
+  {
+    "id": "LOG-EF25F2E2",
+    "user_email": "admin@lycaonsoftware.com",
+    "action": "logout",
+    "entity_type": "user",
+    "entity_id": "admin@lycaonsoftware.com",
+    "ip_address": "127.0.0.1",
+    "details": null,
+    "created_at": "2026-09-15T15:06:19.278512"
+  },
+  {
+    "id": "LOG-15F02ABD",
+    "user_email": "admin@lycaonsoftware.com",
+    "action": "login",
+    "entity_type": "user",
+    "entity_id": "U1",
+    "ip_address": "127.0.0.1",
+    "details": "{\"result\": \"success\"}",
+    "created_at": "2026-09-15T15:01:44.568489"
+  },
+  {
+    "id": "LOG-001",
+    "user_email": "admin@lycaonsoftware.com",
+    "action": "login",
+    "entity_type": "user",
+    "entity_id": "U1",
+    "ip_address": "192.168.1.10",
+    "details": "{\"method\": \"password\", \"result\": \"success\"}",
+    "created_at": "2026-09-15T08:00:00"
+  },
+  {
+    "id": "LOG-002",
+    "user_email": "juandavidnps@gmail.com",
+    "action": "order_created",
+    "entity_type": "order",
+    "entity_id": "ORD-2026-003",
+    "ip_address": "192.168.1.25",
+    "details": "{\"product\": \"AeroBlade MicroServer\", \"total\": 2400.00}",
+    "created_at": "2026-09-01T09:15:00"
+  },
+  {
+    "id": "LOG-003",
+    "user_email": "santosolano1602@gmail.com",
+    "action": "login",
+    "entity_type": "user",
+    "entity_id": "U3",
+    "ip_address": "192.168.1.30",
+    "details": "{\"method\": \"password\", \"result\": \"success\"}",
+    "created_at": "2026-08-13T14:00:00"
+  },
+  {
+    "id": "LOG-004",
+    "user_email": "admin@lycaonsoftware.com",
+    "action": "inventory_update",
+    "entity_type": "product",
+    "entity_id": "P3",
+    "ip_address": "192.168.1.10",
+    "details": "{\"field\": \"stock\", \"old_value\": 8, \"new_value\": 5}",
+    "created_at": "2026-08-13T20:33:00"
+  },
+  {
+    "id": "LOG-005",
+    "user_email": "santosolano1602@gmail.com",
+    "action": "order_created",
+    "entity_type": "order",
+    "entity_id": "ORD-2026-002",
+    "ip_address": "192.168.1.30",
+    "details": "{\"product\": \"CyberWall Gateway\", \"total\": 4140.00, \"discount\": 460.00}",
+    "created_at": "2026-08-13T14:20:00"
+  }
+]

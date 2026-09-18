@@ -1,0 +1,27 @@
+{% extends "dashboard/layout.html" %}
+{% block dashboard_content %}
+<div class="dashboard-header" style="margin-bottom:2rem;">
+  <h2 class="page-title" style="font-size:2rem; font-weight:800; color:var(--accent-primary);">Reportes Profesionales</h2>
+  <p class="page-desc" style="color:var(--text-secondary);">Generación y exportación de informes del sistema.</p>
+</div>
+
+<div class="panel" style="max-width: 600px;">
+  <div style="margin-bottom: 2rem;">
+    <h3 style="margin-bottom: 1rem; color:var(--text-primary);">Reporte de Usuarios</h3>
+    <p style="color:var(--text-secondary); margin-bottom: 1rem;">Exporta el listado completo de usuarios activos, inactivos y administradores.</p>
+    <div style="display:flex; gap:1rem;">
+      <a href="/api/export/users?format=pdf" class="btn-primary" style="background:#ff4d4d; color:white; border:none;" target="_blank">Exportar a PDF</a>
+      <a href="/api/export/users?format=excel" class="btn-primary" style="background:#20c997; color:white; border:none;" target="_blank">Exportar a Excel</a>
+    </div>
+  </div>
+  
+  <div style="border-top: 1px solid var(--border-normal); padding-top: 2rem;">
+    <h3 style="margin-bottom: 1rem; color:var(--text-primary);">Reporte de Inventario</h3>
+    <p style="color:var(--text-secondary); margin-bottom: 1rem;">Exporta el estado actual del inventario, valoraciones y stock disponible.</p>
+    <div style="display:flex; gap:1rem;">
+      <a href="/api/export/inventory?format=pdf" class="btn-primary" style="background:#ff4d4d; color:white; border:none;" target="_blank">Exportar a PDF</a>
+      <a href="/api/export/inventory?format=excel" class="btn-primary" style="background:#20c997; color:white; border:none;" target="_blank">Exportar a Excel</a>
+    </div>
+  </div>
+</div>
+{% endblock %}

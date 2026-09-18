@@ -1,0 +1,17 @@
+[
+  {
+    "id": "pm_1",
+    "name": "Transferencia Bancaria (Bancolombia)",
+    "active": true
+  },
+  {
+    "id": "pm_2",
+    "name": "Nequi",
+    "active": true
+  },
+  {
+    "id": "pm_3",
+    "name": "Tarjeta de Cr\u00e9dito",
+    "active": true
+  }
+]

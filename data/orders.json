@@ -1,0 +1,58 @@
+[
+  {
+    "id": "ORD-2026-001",
+    "user_id": "U2",
+    "user_email": "juandavidnps@gmail.com",
+    "product_id": "P1",
+    "product_name": "Firewall FortiGate 200F",
+    "cantidad": 1,
+    "subtotal": 4500.0,
+    "discount_amount": 0.0,
+    "total": 4500.0,
+    "status": "delivered",
+    "invoice_id": "INV-2026-001",
+    "created_at": "2026-08-12T10:30:00"
+  },
+  {
+    "id": "ORD-2026-002",
+    "user_id": "U3",
+    "user_email": "santosolano1602@gmail.com",
+    "product_id": "P4",
+    "product_name": "Switch Cisco Catalyst 9200L",
+    "cantidad": 2,
+    "subtotal": 4600.0,
+    "discount_amount": 460.0,
+    "total": 4140.0,
+    "status": "shipped",
+    "invoice_id": "INV-2026-002",
+    "created_at": "2026-08-13T14:20:00"
+  },
+  {
+    "id": "ORD-2026-003",
+    "user_id": "U2",
+    "user_email": "juandavidnps@gmail.com",
+    "product_id": "P5",
+    "product_name": "Auditoría de Penetración (Pentest Completo)",
+    "cantidad": 3,
+    "subtotal": 2400.0,
+    "discount_amount": 0.0,
+    "total": 2400.0,
+    "status": "processing",
+    "invoice_id": "INV-2026-003",
+    "created_at": "2026-09-01T09:15:00"
+  },
+  {
+    "id": "ORD-407A1F4A",
+    "user_id": "U1",
+    "user_email": "admin@lycaonsoftware.com",
+    "product_id": "P1",
+    "product_name": "Firewall FortiGate 200F",
+    "cantidad": 1,
+    "subtotal": 4500.0,
+    "discount_amount": 0.0,
+    "total": 4500.0,
+    "status": "paid",
+    "invoice_id": "INV-D7E2EFC8",
+    "created_at": "2026-09-15T15:10:05.141362"
+  }
+]

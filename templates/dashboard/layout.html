@@ -1,0 +1,150 @@
+{% extends "base.html" %}
+
+{% block body %}
+<!-- ════════════════════════════════════════════════
+     DASHBOARD LAYOUT — Shell con Sidebar + Contenido
+     Todas las páginas del dashboard extienden de este.
+     ════════════════════════════════════════════════ -->
+
+<div class="dashboard-wrapper">
+
+  <!-- ════════════════════
+       SIDEBAR
+       ════════════════════ -->
+  <aside class="sidebar" id="sidebar">
+
+    <!-- Header del sidebar: Logo + botón colapsar -->
+    <div class="sidebar-header">
+      <div class="sidebar-brand" id="sidebar-brand-text">
+        <h2>
+          <span class="text-gradient-cyan">Lycaon Security</span>
+          <span style="color:rgba(255,255,255,.8)"> Pro</span>
+        </h2>
+        <p>Control Operativo</p>
+      </div>
+      <button class="sidebar-toggle" id="sidebar-toggle" title="Colapsar menú">‹</button>
+    </div>
+
+    <!-- Etiqueta MAIN MENU -->
+    <div class="sidebar-menu-label">CLIENTE</div>
+
+    <!-- ── Navegación principal ── -->
+    <nav class="sidebar-nav">
+
+      {# Macro para generar cada item del nav de forma limpia #}
+      {# Recibe: href, icono (emoji), etiqueta y si es solo admin #}
+
+      {% set current = request.path %}
+
+      {# ── Items de Cliente ── #}
+      <a href="/dashboard"
+         class="nav-item {% if current == '/dashboard' %}active{% endif %}">
+        <span class="nav-icon {% if current == '/dashboard' %}active{% endif %}"></span>
+        <span class="nav-label">General</span>
+      </a>
+
+      <a href="/dashboard/purchases"
+         class="nav-item {% if current == '/dashboard/purchases' %}active{% endif %}">
+        <span class="nav-icon {% if current == '/dashboard/purchases' %}active{% endif %}"></span>
+        <span class="nav-label">Mis Compras</span>
+      </a>
+
+      <a href="/dashboard/store"
+         class="nav-item {% if current == '/dashboard/store' %}active{% endif %}">
+        <span class="nav-icon {% if current == '/dashboard/store' %}active{% endif %}"></span>
+        <span class="nav-label">Tienda</span>
+      </a>
+
+      <!-- Perfil (disponible para todos) -->
+      <a href="/dashboard/profile"
+         class="nav-item {% if current == '/dashboard/profile' %}active{% endif %}">
+        <span class="nav-icon {% if current == '/dashboard/profile' %}active{% endif %}"></span>
+        <span class="nav-label">Mi Perfil</span>
+      </a>
+
+      <a href="/dashboard/suggestions"
+         class="nav-item {% if current == '/dashboard/suggestions' %}active{% endif %}">
+        <span class="nav-icon {% if current == '/dashboard/suggestions' %}active{% endif %}"></span>
+        <span class="nav-label">Sugerencias</span>
+      </a>
+
+      {# ── Items solo para administradores ── #}
+      {% if usuario.role == 'administrador' %}
+        <div class="sidebar-menu-label">ADMINISTRACIÓN</div>
+
+        <a href="/admin/tienda"
+           class="nav-item {% if current == '/admin/tienda' %}active{% endif %}">
+          <span class="nav-icon {% if current == '/admin/tienda' %}active{% endif %}"></span>
+          <span class="nav-label">Catálogo</span>
+        </a>
+
+        <a href="/dashboard/users"
+           class="nav-item {% if current == '/dashboard/users' %}active{% endif %}">
+          <span class="nav-icon {% if current == '/dashboard/users' %}active{% endif %}"></span>
+          <span class="nav-label">Usuarios</span>
+        </a>
+
+        <a href="/dashboard/activity"
+           class="nav-item {% if current == '/dashboard/activity' %}active{% endif %}">
+          <span class="nav-icon {% if current == '/dashboard/activity' %}active{% endif %}"></span>
+          <span class="nav-label">Actividad</span>
+        </a>
+
+        <a href="/admin/logistics"
+           class="nav-item {% if current == '/admin/logistics' %}active{% endif %}">
+          <span class="nav-icon {% if current == '/admin/logistics' %}active{% endif %}"></span>
+          <span class="nav-label">Logística</span>
+        </a>
+
+        <a href="/admin/promotions"
+           class="nav-item {% if current == '/admin/promotions' %}active{% endif %}">
+          <span class="nav-icon {% if current == '/admin/promotions' %}active{% endif %}"></span>
+          <span class="nav-label">Promociones</span>
+        </a>
+
+        <a href="/admin/reports"
+           class="nav-item {% if current == '/admin/reports' %}active{% endif %}">
+          <span class="nav-icon {% if current == '/admin/reports' %}active{% endif %}"></span>
+          <span class="nav-label">Reportes</span>
+        </a>
+      {% endif %}
+
+    </nav><!-- /sidebar-nav -->
+
+    <!-- ── Footer del sidebar: Usuario + Logout ── -->
+    <div class="sidebar-footer">
+
+      <!-- Info del usuario (oculto cuando sidebar está colapsado) -->
+      <div class="user-info">
+        <div class="user-avatar">
+          {# Iniciales del nombre del usuario #}
+          <span>{{ usuario.name[:2].upper() }}</span>
+        </div>
+        <div class="user-info-text">
+          <div class="user-name">{{ usuario.name }}</div>
+          <div class="user-role {{ usuario.role }}">{{ usuario.role }}</div>
+        </div>
+      </div>
+
+      <!-- Botón cerrar sesión -->
+      <a href="/logout" class="btn-logout">
+        <span class="nav-icon"></span>
+        <span class="logout-label">Cerrar Sesión</span>
+      </a>
+    </div>
+
+  </aside><!-- /sidebar -->
+
+  <!-- ════════════════════
+       ÁREA DE CONTENIDO PRINCIPAL
+       ════════════════════ -->
+  <main class="dashboard-main">
+    <div class="dashboard-content custom-scrollbar">
+      <!-- Botón hamburguesa para móvil -->
+      <button class="hamburger-btn" onclick="document.getElementById('sidebar').classList.toggle('mobile-open')" aria-label="Menú" style="margin-bottom:1rem;">☰ Menú</button>
+      {% block dashboard_content %}{% endblock %}
+    </div>
+  </main>
+
+</div><!-- /dashboard-wrapper -->
+{% endblock %}

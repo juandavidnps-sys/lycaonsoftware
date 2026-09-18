@@ -1,0 +1,51 @@
+{% extends "dashboard/layout.html" %}
+{% block dashboard_content %}
+<div class="dashboard-header" style="margin-bottom:2rem;">
+  <h2 class="page-title" style="font-size:2rem; font-weight:800; color:var(--accent-primary);">Gestión de Logística</h2>
+  <p class="page-desc" style="color:var(--text-secondary);">Administra transportadoras y métodos de pago del sistema Lycaon Security.</p>
+</div>
+
+<div class="panel">
+  <h3 style="margin-bottom: 1rem; color:var(--text-primary);">Métodos de Pago Activos</h3>
+  <table class="data-table">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Nombre</th>
+        <th>Estado</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for pm in payments %}
+      <tr>
+        <td>{{ pm.id }}</td>
+        <td>{{ pm.name }}</td>
+        <td>{% if pm.active %}Activo{% else %}Inactivo{% endif %}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  
+  <hr style="border-color:var(--border-normal); margin:2rem 0;">
+  
+  <h3 style="margin-bottom: 1rem; color:var(--text-primary);">Transportadoras y Envíos</h3>
+  <table class="data-table">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Transportadora</th>
+        <th>Costo</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for sh in shipping %}
+      <tr>
+        <td>{{ sh.id }}</td>
+        <td>{{ sh.name }}</td>
+        <td>${{ sh.cost }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}

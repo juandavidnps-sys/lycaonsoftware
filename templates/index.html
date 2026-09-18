@@ -1,0 +1,153 @@
+{% extends "base.html" %}
+{% block title %}Lycaon Security | Equipamiento Táctico y Autodefensa{% endblock %}
+{% block description %}Soluciones corporativas de seguridad personal, autodefensa, cámaras, armas de choque y equipamiento táctico.{% endblock %}
+
+{% block body %}
+
+<!-- ── Spinner / Pre-loader ── -->
+<div id="page-spinner" style="position:fixed; top:0; left:0; width:100%; height:100%; background:var(--bg-primary); z-index:9999; display:flex; justify-content:center; align-items:center; transition:opacity 0.5s ease;">
+  <div class="loader-spin" style="font-size: 3rem; color: var(--accent-primary);">⟳</div>
+</div>
+
+<div id="main-page" style="background:var(--bg-primary); min-height:100vh; overflow-x:hidden; position:relative;">
+
+  <!-- ── Navbar ── -->
+  <nav class="navbar" id="main-navbar">
+    <a href="/" class="navbar-brand">
+      <div class="navbar-logo"><span>L</span></div>
+      <span class="navbar-name">Lycaon Security</span>
+    </a>
+    <div class="navbar-links">
+      <a href="/tienda" class="btn-ghost">Catálogo Táctico</a>
+      <a href="/ayuda" class="btn-ghost text-bold">Centro de Ayuda</a>
+      <div class="nav-divider"></div>
+      {% if usuario %}
+        <a href="/dashboard" class="btn-ghost">Dashboard Central</a>
+      {% else %}
+        <a href="/login" class="btn-ghost">Acceso Clientes</a>
+      {% endif %}
+    </div>
+    <button class="hamburger-btn" onclick="this.nextElementSibling.classList.toggle('mobile-open');this.classList.toggle('mobile-open')" aria-label="Menú">☰</button>
+  </nav>
+
+  <!-- ════════════════════
+       SECCIÓN HERO (Video YouTube Background)
+       ════════════════════ -->
+  <section class="hero" style="position:relative; overflow: hidden; min-height: 100vh; display: flex; flex-direction: column; justify-content: center;">
+    
+    <!-- Video Fondo Local -->
+    <div class="video-bg" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; overflow: hidden; z-index: 0;">
+      {% if video %}
+        <video autoplay loop muted playsinline style="width: 100vw; height: 56.25vw; min-height: 100vh; min-width: 177.77vh; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); object-fit: cover;">
+          <source src="{{ url_for('static', filename=video) }}" type="video/mp4">
+        </video>
+      {% endif %}
+      <!-- Overlay oscuro para dar legibilidad al texto -->
+      <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(3,3,5,0.75);"></div>
+    </div>
+
+    <!-- ── Hero content ── -->
+    <div class="hero-content" style="position:relative; z-index:10; width:100%;">
+      <h1 class="hero-title anim-fade-up" style="color: #ffffff; text-shadow: 0 2px 4px rgba(0,0,0,0.5);">
+        Equipamiento Táctico y<br>Autodefensa<br>
+        <strong style="color: #38bdf8;">Avanzada.</strong>
+      </h1>
+      <p class="hero-subtitle anim-fade-up delay-1" style="color: rgba(255,255,255,0.85); text-shadow: 0 1px 2px rgba(0,0,0,0.5);">
+        Soluciones integrales de hardware disuasivo, armas de choque, gas pimienta y sistemas de monitoreo para proteger lo que más importa.
+      </p>
+      <div class="hero-stats anim-fade-up delay-2" style="color: #ffffff;">
+        <div class="stat-card"><div class="stat-value" style="color:#ffffff;">100%</div><div class="stat-label" style="color:rgba(255,255,255,0.7);">Efectividad</div></div>
+        <div class="stat-card"><div class="stat-value" style="color:#ffffff;">24/7</div><div class="stat-label" style="color:rgba(255,255,255,0.7);">Seguridad Activa</div></div>
+        <div class="stat-card"><div class="stat-value" style="color:#ffffff;">Top</div><div class="stat-label" style="color:rgba(255,255,255,0.7);">Calidad Táctica</div></div>
+      </div>
+      <div class="hero-cta anim-fade-up delay-3" style="position:relative; z-index:10;">
+        {% if usuario %}
+          <a href="/dashboard" class="btn-hero-primary" style="background:#ffffff; color:#111827;">Ir al Dashboard →</a>
+        {% else %}
+          <a href="/login" class="btn-hero-primary" style="background:#ffffff; color:#111827;">Acceder al Portal →</a>
+        {% endif %}
+        <a href="/tienda" class="btn-hero-ghost" style="border-color:rgba(255,255,255,0.5); color:#ffffff;">Ver Catálogo Completo</a>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- ════════════════════
+       FEATURES
+       ════════════════════ -->
+  <section class="features-section">
+    <div style="text-align:center; margin-bottom:4rem;">
+      <div class="section-tag" style="margin:0 auto 1.5rem;">
+        <div class="section-tag-dot"></div>
+        <span class="section-tag-label">Catálogo Corporativo</span>
+      </div>
+      <h2 class="section-title">
+        Tecnología que <span class="text-gradient-cyan">protege tu entorno</span>
+      </h2>
+    </div>
+    <div class="features-grid">
+      <div class="feature-card anim-on-scroll">
+        <div class="feature-icon-wrap">TASER</div>
+        <h3 class="feature-title">Armas de Choque</h3>
+        <p class="feature-desc">Dispositivos de alto voltaje diseñados para incapacitación temporal inmediata y disuasión efectiva.</p>
+        <a href="/tienda" class="feature-link" style="text-decoration:none; display:inline-block;">Explorar Hardware →</a>
+      </div>
+      <div class="feature-card anim-on-scroll">
+        <div class="feature-icon-wrap">PEPPER</div>
+        <h3 class="feature-title">Aerosoles de Defensa</h3>
+        <p class="feature-desc">Fórmulas tácticas de gas pimienta con alcance extendido para neutralizar amenazas a distancia segura.</p>
+        <a href="/tienda" class="feature-link" style="text-decoration:none; display:inline-block;">Ver Productos →</a>
+      </div>
+      <div class="feature-card anim-on-scroll">
+        <div class="feature-icon-wrap">CCTV</div>
+        <h3 class="feature-title">Sistemas de Monitoreo</h3>
+        <p class="feature-desc">Cámaras ocultas y de seguridad perimetral para vigilar y registrar cualquier intrusión en tiempo real.</p>
+        <a href="/tienda" class="feature-link" style="text-decoration:none; display:inline-block;">Implementar Solución →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <span class="footer-copy">© 2026 Lycaon Security Corp. Todos los derechos reservados. | Equipamiento Táctico y Autodefensa.</span>
+      <div style="display:flex;align-items:center;gap:1.5rem;">
+        <a href="/ayuda" class="btn-ghost" style="font-size:.8125rem;">Manual de Usuario</a>
+        <a href="/tienda" class="btn-ghost" style="font-size:.8125rem;">Tienda Pública</a>
+        <div class="navbar-logo"><span>L</span></div>
+      </div>
+    </div>
+  </footer>
+
+</div>
+
+{% block extra_js %}
+<script>
+/* Remover Spinner después de cargar */
+window.addEventListener('load', function() {
+  const spinner = document.getElementById('page-spinner');
+  if(spinner) {
+    // Retraso extra de 1.5s para asegurar carga de video (simulado)
+    setTimeout(() => {
+      spinner.style.opacity = '0';
+      setTimeout(() => spinner.style.display = 'none', 500);
+    }, 1500);
+  }
+});
+
+/* Navbar sticky on scroll */
+(function () {
+  const nav = document.getElementById('main-navbar');
+  if (!nav) return;
+  window.addEventListener('scroll', function () {
+    if (window.scrollY > 40) {
+      nav.classList.add('scrolled');
+    } else {
+      nav.classList.remove('scrolled');
+    }
+  }, { passive: true });
+})();
+</script>
+{% endblock %}
+
+{% endblock %}

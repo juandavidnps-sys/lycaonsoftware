@@ -1,0 +1,42 @@
+[
+  {
+    "id": "T1",
+    "employee_id": "U2",
+    "employee_name": "Juan David Nps",
+    "title": "Revisar estado de servidores TitanX",
+    "time_window": "08:00 - 10:00",
+    "status": "completed",
+    "priority": "high",
+    "created_at": "2026-09-15T07:00:00"
+  },
+  {
+    "id": "T2",
+    "employee_id": "U3",
+    "employee_name": "Santiago Solano",
+    "title": "Configurar firewall CyberWall Gateway",
+    "time_window": "10:00 - 12:00",
+    "status": "in-progress",
+    "priority": "high",
+    "created_at": "2026-09-15T07:00:00"
+  },
+  {
+    "id": "T3",
+    "employee_id": "U2",
+    "employee_name": "Juan David Nps",
+    "title": "Auditoría de red Quantum Switch",
+    "time_window": "13:00 - 15:00",
+    "status": "pending",
+    "priority": "medium",
+    "created_at": "2026-09-15T07:00:00"
+  },
+  {
+    "id": "T4",
+    "employee_id": "U3",
+    "employee_name": "Santiago Solano",
+    "title": "Actualizar firmware AeroBlade",
+    "time_window": "15:00 - 17:00",
+    "status": "issue",
+    "priority": "critical",
+    "created_at": "2026-09-15T07:00:00"
+  }
+]

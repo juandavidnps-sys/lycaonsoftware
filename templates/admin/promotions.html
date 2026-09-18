@@ -1,0 +1,16 @@
+{% extends "dashboard/layout.html" %}
+{% block dashboard_content %}
+<div class="dashboard-header" style="margin-bottom:2rem;">
+  <h2 class="page-title" style="font-size:2rem; font-weight:800; color:var(--accent-primary);">Gestión de Promociones</h2>
+  <p class="page-desc" style="color:var(--text-secondary);">Administra descuentos y ofertas de temporada.</p>
+</div>
+
+<div class="panel">
+  <div class="empty-state">
+    <div style="font-weight:800; font-size:2rem; color:var(--border-strong); margin-bottom:1rem;">NO HAY OFERTAS</div>
+    <div style="font-size:1rem; font-weight:500;">No se han configurado promociones activas.</div>
+    <br>
+    <button class="btn-primary">Crear Nueva Promoción</button>
+  </div>
+</div>
+{% endblock %}
