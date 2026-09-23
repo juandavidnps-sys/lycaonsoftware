@@ -1,15 +1,3 @@
-"""
-╔══════════════════════════════════════════════════════════════════╗
-║              LYCAON SOFTWARE — Servidor Flask Principal v2          ║
-║   Stack: Python Flask + JSON + HTML/CSS/JS vanilla               ║
-║   Nuevas funciones:                                              ║
-║     - Tienda pública (/tienda)                                   ║
-║     - Admin tienda con crear/editar productos (/admin/tienda)    ║
-║     - Crear usuarios desde admin                                 ║
-║     - Subir foto de perfil                                       ║
-╚══════════════════════════════════════════════════════════════════╝
-"""
-
 import json
 import os
 import uuid
@@ -18,7 +6,7 @@ from functools import wraps
 
 from flask import (
     Flask, render_template, request, session,
-    redirect, url_for, jsonify, send_file
+    redirect, url_for, jsonify, send_file, login_required
 )
 from werkzeug.security import generate_password_hash, check_password_hash
 from werkzeug.utils import secure_filename
