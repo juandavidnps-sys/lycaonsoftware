@@ -6,8 +6,9 @@ from functools import wraps
 
 from flask import (
     Flask, render_template, request, session,
-    redirect, url_for, jsonify, send_file, login_required
+    redirect, url_for, jsonify, send_file, 
 )
+from flask_login import login_required
 from werkzeug.security import generate_password_hash, check_password_hash
 from werkzeug.utils import secure_filename
 
