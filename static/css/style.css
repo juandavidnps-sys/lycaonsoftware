@@ -410,12 +410,13 @@ select.form-input {
 /* ── Login Page ── */
 .login-page {
   min-height: 100vh; display: flex; align-items: center; justify-content: center;
-  background: var(--bg-secondary); padding: 2rem;
+  background: var(--bg-secondary); padding: 2rem; position: relative; overflow: hidden;
 }
 .login-card {
   background: var(--bg-card); border: 1px solid var(--border-normal);
   border-radius: var(--radius-md); padding: 3rem;
   width: 100%; max-width: 420px; box-shadow: var(--shadow-sm);
+  position: relative;
 }
 .login-title { font-size: 1.5rem; margin-bottom: 0.5rem; text-align: center; }
 .login-subtitle { font-size: 0.9rem; color: var(--text-secondary); margin-bottom: 2rem; text-align: center; }
@@ -451,8 +452,8 @@ select.form-input {
 .low-stock, .pending { background: #fef3c7; color: #92400e; border-color: #fde68a; }
 .out-of-stock, .issue, .alert-error { background: #fee2e2; color: #b91c1c; border-color: #fecaca; }
 
-/* ── Utilities / Overrides for old theme ── */
-.ambient-orb, .neon-line-top, .gradient-divider, .border-gradient-animated, .splash-screen { display: none !important; }
+/* ── Utilities / Overrides ── */
+.ambient-orb, .neon-line-top, .gradient-divider, .splash-screen { display: none !important; }
 #splash-screen { display: none !important; }
 .glass-nav { background: rgba(255, 255, 255, 0.95) !important; border-bottom: 1px solid var(--border-normal) !important; }
 .text-gradient-cyan { color: var(--text-primary); }
@@ -487,20 +488,18 @@ select.form-input {
   .dashboard-2col { grid-template-columns: 1fr !important; }
 }
 
-/* Fix inline styles on components that had old dark mode values */
+/* Fix inline styles on components */
 .chart-wrap { height: 280px; position: relative; }
 .chart-wrap canvas { max-width: 100%; }
 .progress-bar-wrap .progress-label span { color: var(--text-primary) !important; }
 .progress-track { background: var(--border-normal); border-radius: 999px; height: 8px; overflow: hidden; }
 .progress-fill { height: 100%; border-radius: 999px; }
 
-/* Textarea matching form-input */
 textarea.form-input {
   resize: vertical;
   min-height: 100px;
 }
 
-/* Sidebar toggle button */
 .sidebar-toggle {
   width: 28px; height: 28px;
   display: flex; align-items: center; justify-content: center;
