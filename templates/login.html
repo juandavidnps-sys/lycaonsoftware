@@ -57,7 +57,7 @@
 
       <!-- Campo Contraseña -->
       <div class="form-group">
-        <span class="form-icon"></span>
+        <span class="form-icon">🔒</span>
         <input
           id="login-password"
           class="form-input"
@@ -79,7 +79,7 @@
 
     <!-- Alternar a registro -->
     <div class="form-toggle" style="position:relative;z-index:1;">
-      <button id="auth-toggle-btn" type="button">
+      <button class="auth-toggle-btn" type="button">
         ¿No tienes cuenta? Solicitar acceso
       </button>
     </div>
@@ -99,7 +99,7 @@
 
     <!-- Encabezado -->
     <div class="login-header" style="position:relative;z-index:1;">
-      <div class="login-icon-wrap mode-register"></div>
+      <div class="login-icon-wrap mode-register">📝</div>
       <h1 class="login-title">Nuevo Cliente</h1>
       <p class="login-subtitle">Registra un nuevo usuario en la red Lycaon Security.</p>
       <div class="security-badge">
@@ -115,7 +115,7 @@
     <form id="register-form" style="position:relative;z-index:1;">
       <!-- Nombre completo -->
       <div class="form-group">
-        <span class="form-icon"></span>
+        <span class="form-icon">👤</span>
         <input
           id="reg-name"
           class="form-input mode-register"
@@ -128,7 +128,7 @@
 
       <!-- Teléfono -->
       <div class="form-group">
-        <span class="form-icon"></span>
+        <span class="form-icon">📱</span>
         <input
           id="reg-phone"
           class="form-input mode-register"
@@ -141,7 +141,7 @@
 
       <!-- Dirección -->
       <div class="form-group">
-        <span class="form-icon"></span>
+        <span class="form-icon">📍</span>
         <input
           id="reg-address"
           class="form-input mode-register"
@@ -167,7 +167,7 @@
 
       <!-- Contraseña -->
       <div class="form-group">
-        <span class="form-icon"></span>
+        <span class="form-icon">🔒</span>
         <input
           id="reg-password"
           class="form-input mode-register"
@@ -190,7 +190,7 @@
 
     <!-- Alternar a login -->
     <div class="form-toggle" style="position:relative;z-index:1;">
-      <button id="auth-toggle-btn" type="button">
+      <button class="auth-toggle-btn" type="button">
         Ya soy cliente. Iniciar sesión
       </button>
     </div>
@@ -199,20 +199,13 @@
 
 </div><!-- /login-page -->
 
-{% block extra_js %}
 <script>
-  /*
-   * Manejo extra del toggle:
-   * Si la URL tiene ?modo=registro, mostrar el formulario de registro directamente.
-   */
   document.addEventListener('DOMContentLoaded', function () {
     const params = new URLSearchParams(window.location.search);
     if (params.get('modo') === 'registro') {
-      document.getElementById('login-card').style.display    = 'none';
+      document.getElementById('login-card').style.display = 'none';
       document.getElementById('register-card').style.display = 'block';
     }
   });
 </script>
-{% endblock %}
-
 {% endblock %}
