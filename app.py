@@ -999,6 +999,17 @@ def api_reviews():
 #  NUEVOS MÓDULOS DE ADMINISTRACIÓN
 # ══════════════════════════════════════════
 
+def admin_required(f):
+    @wraps(f)
+    def decorated_function(*args, **kwargs):
+        user = session.get('user')
+        # Valida si hay un usuario logueado y si su rol es administrador
+        if not user or user.get('role') != 'admin':
+            return abort(403)  # O redirige a una página de acceso denegado
+        return f(*args, **kwargs)
+    return decorated_function
+
+
 @app.route('/admin/promotions')
 @login_required
 @admin_required
@@ -1043,7 +1054,6 @@ def export_users():
         resp.headers['Content-Type'] = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
         return resp
     elif fmt == 'pdf':
-        # Simple HTML to PDF for the report using xhtml2pdf (import deferred or global)
         try:
             from xhtml2pdf import pisa
         except ImportError:
@@ -1099,7 +1109,6 @@ def export_inventory():
     return "Formato no soportado", 400
 
 if __name__ == "__main__":
-
     inicializar_usuarios()
     print("=" * 50)
     print("  LYCAON SOFTWARE v2 -- Flask Server")
