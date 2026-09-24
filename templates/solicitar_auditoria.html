@@ -2,58 +2,73 @@
 {% block title %}Solicitar Auditoría | Lycaon Security{% endblock %}
 
 {% block body %}
-<!-- ── Navbar (Simplificado) ── -->
-<nav class="navbar" id="main-navbar">
-  <a href="/" class="navbar-brand">
-    <div class="navbar-logo"><span>L</span></div>
-    <span class="navbar-name">Lycaon Security</span>
-  </a>
-  <div class="navbar-links">
-    <a href="/tienda" class="btn-ghost">Catálogo</a>
-    <a href="/ayuda" class="btn-ghost">Centro de Ayuda</a>
-    <div class="nav-divider"></div>
-    <a href="/login" class="btn-ghost">Acceso Clientes</a>
-  </div>
-</nav>
+<div class="min-h-screen bg-black relative flex flex-col pt-20">
 
-<div style="min-height: 100vh; display: flex; align-items: center; justify-content: center; background: var(--bg-primary); padding: 6rem 1rem 2rem;">
-  <div class="panel" style="max-width: 600px; width:100%; box-shadow: 0 10px 30px rgba(0,0,0,0.5); border: 1px solid var(--accent-primary);">
-    
-    <div style="text-align:center; margin-bottom: 2rem;">
-      <h2 style="color: var(--accent-primary); font-size: 2rem; font-weight: 800; text-transform: uppercase; letter-spacing: 2px;">Auditoría Corporativa</h2>
-      <p style="color: var(--text-secondary); margin-top:0.5rem;">Solicita una evaluación profesional de vulnerabilidades y pentesting para tu infraestructura.</p>
+  <!-- ── Navbar (Simplificado) ── -->
+  <nav class="fixed top-0 left-0 right-0 z-50 bg-black/90 backdrop-blur-md border-b border-translucent transition-all duration-300" id="main-navbar">
+    <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+      <a href="/" class="flex items-center gap-3 group">
+        <div class="w-10 h-10 bg-gold text-black flex items-center justify-center font-bold text-xl rounded-engineering transition-transform group-hover:scale-105">L</div>
+        <span class="font-black text-xl tracking-wide text-white">LYCAON<span class="text-gold font-medium ml-2">SECURITY</span></span>
+      </a>
+      <div class="hidden md:flex items-center gap-6">
+        <a href="/tienda" class="text-gray-400 hover:text-gold transition-colors font-medium text-sm tracking-widest uppercase">Catálogo</a>
+        <a href="/ayuda" class="text-gray-400 hover:text-gold transition-colors font-medium text-sm tracking-widest uppercase">Centro de Ayuda</a>
+        <div class="w-px h-6 bg-translucent"></div>
+        <a href="/login" class="btn-gold text-xs px-4 py-2">Acceso Clientes</a>
+      </div>
     </div>
+  </nav>
 
-    <form id="auditoria-form">
-      <div class="form-group" style="margin-bottom:1.5rem;">
-        <label style="color: var(--text-primary); font-weight: bold; margin-bottom:0.5rem; display:block;">Nombre de la Empresa</label>
-        <input type="text" id="aud-empresa" class="form-input" required placeholder="Ej. Corporación Acme">
+  <div class="flex-grow flex items-center justify-center p-6 py-12 relative z-10">
+    <div class="absolute inset-0 z-0">
+      <div class="absolute top-1/4 right-1/4 w-[30rem] h-[30rem] bg-gold/5 rounded-full blur-[150px] pointer-events-none"></div>
+    </div>
+    
+    <div class="card-charcoal p-8 md:p-12 max-w-xl w-full shadow-2xl relative animate-fade-in-up">
+      <div class="absolute top-0 left-1/2 -translate-x-1/2 w-48 h-1 bg-gradient-to-r from-transparent via-gold to-transparent"></div>
+      
+      <div class="text-center mb-10">
+        <div class="w-12 h-12 bg-black border border-gold/30 flex items-center justify-center text-gold mx-auto mb-6 rounded-engineering">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
+        </div>
+        <h2 class="text-3xl font-black text-white uppercase tracking-widest mb-2"><span class="text-gold">Auditoría</span> Corporativa</h2>
+        <p class="text-sm text-gray-400">Solicita una evaluación profesional de vulnerabilidades y pentesting para tu infraestructura.</p>
       </div>
-      
-      <div class="form-group" style="margin-bottom:1.5rem;">
-        <label style="color: var(--text-primary); font-weight: bold; margin-bottom:0.5rem; display:block;">Correo Corporativo</label>
-        <input type="email" id="aud-email" class="form-input" required placeholder="contacto@empresa.com">
-      </div>
-      
-      <div class="form-group" style="margin-bottom:1.5rem;">
-        <label style="color: var(--text-primary); font-weight: bold; margin-bottom:0.5rem; display:block;">Servicio Requerido</label>
-        <select id="aud-servicio" class="form-input" required style="width:100%;">
-          <option value="pentesting">Pentesting de Infraestructura</option>
-          <option value="web">Auditoría de Aplicaciones Web</option>
-          <option value="social">Ingeniería Social (Phishing)</option>
-          <option value="integral">Auditoría Integral (Red Team)</option>
-        </select>
-      </div>
-      
-      <div class="form-group" style="margin-bottom:2rem;">
-        <label style="color: var(--text-primary); font-weight: bold; margin-bottom:0.5rem; display:block;">Detalles Adicionales</label>
-        <textarea id="aud-detalles" class="form-input" rows="4" placeholder="Describe brevemente la escala de tu infraestructura y objetivos..."></textarea>
-      </div>
-      
-      <div id="aud-result" style="display:none; padding:1rem; margin-bottom:1rem; border-radius:4px;"></div>
-      
-      <button type="submit" class="btn-primary" id="btn-submit-auditoria" style="width: 100%; font-size: 1.1rem; padding: 1rem; text-transform: uppercase; letter-spacing: 1px;">Confirmar Solicitud</button>
-    </form>
+
+      <form id="auditoria-form" class="space-y-6">
+        <div>
+          <label class="block text-[10px] font-bold text-gray-500 uppercase tracking-widest mb-2">Nombre de la Empresa</label>
+          <input type="text" id="aud-empresa" class="w-full bg-black border border-translucent text-white rounded-engineering py-3 px-4 focus:outline-none focus:border-gold transition-colors placeholder:text-gray-700" required placeholder="Ej. Corporación Acme">
+        </div>
+        
+        <div>
+          <label class="block text-[10px] font-bold text-gray-500 uppercase tracking-widest mb-2">Correo Corporativo</label>
+          <input type="email" id="aud-email" class="w-full bg-black border border-translucent text-white rounded-engineering py-3 px-4 focus:outline-none focus:border-gold transition-colors placeholder:text-gray-700" required placeholder="contacto@empresa.com">
+        </div>
+        
+        <div>
+          <label class="block text-[10px] font-bold text-gray-500 uppercase tracking-widest mb-2">Servicio Requerido</label>
+          <select id="aud-servicio" class="w-full bg-black border border-translucent text-white rounded-engineering py-3 px-4 focus:outline-none focus:border-gold transition-colors" required>
+            <option value="pentesting">Pentesting de Infraestructura</option>
+            <option value="web">Auditoría de Aplicaciones Web</option>
+            <option value="social">Ingeniería Social (Phishing)</option>
+            <option value="integral">Auditoría Integral (Red Team)</option>
+          </select>
+        </div>
+        
+        <div>
+          <label class="block text-[10px] font-bold text-gray-500 uppercase tracking-widest mb-2">Detalles Adicionales</label>
+          <textarea id="aud-detalles" class="w-full bg-black border border-translucent text-white rounded-engineering py-3 px-4 focus:outline-none focus:border-gold transition-colors placeholder:text-gray-700" rows="4" placeholder="Describe brevemente la escala de tu infraestructura y objetivos..."></textarea>
+        </div>
+        
+        <div id="aud-result" class="hidden p-4 rounded-engineering text-sm font-bold"></div>
+        
+        <button type="submit" id="btn-submit-auditoria" class="w-full btn-gold py-4 uppercase tracking-widest text-sm shadow-[0_0_15px_rgba(212,175,55,0.2)] mt-4">
+          Confirmar Solicitud
+        </button>
+      </form>
+    </div>
   </div>
 </div>
 
@@ -70,8 +85,8 @@ document.getElementById('auditoria-form').addEventListener('submit', async funct
   const res = document.getElementById('aud-result');
   
   if(!empresa || !email || !servicio) {
-    res.style.display = 'block';
-    res.className = 'alert-error';
+    res.classList.remove('hidden', 'bg-green-500/10', 'text-green-500', 'border-green-500/30');
+    res.classList.add('bg-red-500/10', 'text-red-500', 'border', 'border-red-500/30');
     res.textContent = 'Por favor, completa todos los campos obligatorios.';
     return;
   }
@@ -88,20 +103,20 @@ document.getElementById('auditoria-form').addEventListener('submit', async funct
     const data = await response.json();
     
     if (data.success) {
-      res.style.display = 'block';
-      res.className = 'alert-success';
+      res.classList.remove('hidden', 'bg-red-500/10', 'text-red-500', 'border-red-500/30');
+      res.classList.add('bg-green-500/10', 'text-green-500', 'border', 'border-green-500/30');
       res.textContent = 'Solicitud registrada con éxito. Un agente de Lycaon Security se contactará en breve. (ID: ' + data.request_id + ')';
       document.getElementById('auditoria-form').reset();
     } else {
-      res.style.display = 'block';
-      res.className = 'alert-error';
+      res.classList.remove('hidden', 'bg-green-500/10', 'text-green-500', 'border-green-500/30');
+      res.classList.add('bg-red-500/10', 'text-red-500', 'border', 'border-red-500/30');
       res.textContent = data.error || 'Ocurrió un error al procesar la solicitud.';
       btn.disabled = false;
       btn.textContent = 'Confirmar Solicitud';
     }
   } catch (err) {
-    res.style.display = 'block';
-    res.className = 'alert-error';
+    res.classList.remove('hidden', 'bg-green-500/10', 'text-green-500', 'border-green-500/30');
+    res.classList.add('bg-red-500/10', 'text-red-500', 'border', 'border-red-500/30');
     res.textContent = 'Error de conexión. Inténtalo nuevamente.';
     btn.disabled = false;
     btn.textContent = 'Confirmar Solicitud';

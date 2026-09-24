@@ -1,153 +1,141 @@
 {% extends "base.html" %}
-{% block title %}Lycaon Security | Equipamiento Táctico y Autodefensa{% endblock %}
-{% block description %}Soluciones corporativas de seguridad personal, autodefensa, cámaras, armas de choque y equipamiento táctico.{% endblock %}
+{% block title %}Lycaon Security | Táctica y Autodefensa{% endblock %}
+{% block description %}Soluciones corporativas de seguridad personal, autodefensa, cámaras, armas de fogueo y cuchillos tácticos.{% endblock %}
 
 {% block body %}
-
-<!-- ── Spinner / Pre-loader ── -->
-<div id="page-spinner" style="position:fixed; top:0; left:0; width:100%; height:100%; background:var(--bg-primary); z-index:9999; display:flex; justify-content:center; align-items:center; transition:opacity 0.5s ease;">
-  <div class="loader-spin" style="font-size: 3rem; color: var(--accent-primary);">⟳</div>
-</div>
-
-<div id="main-page" style="background:var(--bg-primary); min-height:100vh; overflow-x:hidden; position:relative;">
+<div class="relative min-h-screen bg-black overflow-hidden flex flex-col">
 
   <!-- ── Navbar ── -->
-  <nav class="navbar" id="main-navbar">
-    <a href="/" class="navbar-brand">
-      <div class="navbar-logo"><span>L</span></div>
-      <span class="navbar-name">Lycaon Security</span>
-    </a>
-    <div class="navbar-links">
-      <a href="/tienda" class="btn-ghost">Catálogo Táctico</a>
-      <a href="/ayuda" class="btn-ghost text-bold">Centro de Ayuda</a>
-      <div class="nav-divider"></div>
-      {% if usuario %}
-        <a href="/dashboard" class="btn-ghost">Dashboard Central</a>
-      {% else %}
-        <a href="/login" class="btn-ghost">Acceso Clientes</a>
-      {% endif %}
+  <nav class="fixed top-0 w-full z-50 bg-black/90 backdrop-blur-md border-b border-translucent transition-all duration-300" id="main-navbar">
+    <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+      <a href="/" class="flex items-center gap-3 group">
+        <div class="w-10 h-10 bg-gold text-black flex items-center justify-center font-bold text-xl rounded-engineering transition-transform group-hover:scale-105">L</div>
+        <span class="font-black text-xl tracking-wide text-white">LYCAON<span class="text-gold font-medium ml-2">SECURITY</span></span>
+      </a>
+      
+      <div class="hidden md:flex items-center gap-6">
+        <a href="/tienda" class="text-gray-400 hover:text-gold transition-colors font-medium text-sm tracking-widest uppercase">Catálogo Táctico</a>
+        <a href="/ayuda" class="text-gray-400 hover:text-gold transition-colors font-medium text-sm tracking-widest uppercase">Inteligencia</a>
+        <div class="w-px h-6 bg-translucent"></div>
+        {% if usuario %}
+          {% if usuario.role in ['administrador', 'operador'] %}
+            <a href="/dashboard" class="btn-gold">Panel de Control →</a>
+          {% else %}
+            <a href="/dashboard/store" class="btn-gold">Mi Cuenta →</a>
+          {% endif %}
+        {% else %}
+          <a href="/login" class="btn-outline">Acceso Autorizado</a>
+        {% endif %}
+      </div>
     </div>
-    <button class="hamburger-btn" onclick="this.nextElementSibling.classList.toggle('mobile-open');this.classList.toggle('mobile-open')" aria-label="Menú">☰</button>
   </nav>
 
-  <!-- ════════════════════
-       SECCIÓN HERO (Video YouTube Background)
-       ════════════════════ -->
-  <section class="hero" style="position:relative; overflow: hidden; min-height: 100vh; display: flex; flex-direction: column; justify-content: center;">
-    
-    <!-- Video Fondo Local -->
-    <div class="video-bg" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; overflow: hidden; z-index: 0;">
-      {% if video %}
-        <video autoplay loop muted playsinline style="width: 100vw; height: 56.25vw; min-height: 100vh; min-width: 177.77vh; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); object-fit: cover;">
-          <source src="{{ url_for('static', filename=video) }}" type="video/mp4">
-        </video>
-      {% endif %}
-      <!-- Overlay oscuro para dar legibilidad al texto -->
-      <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(3,3,5,0.75);"></div>
-    </div>
-
-    <!-- ── Hero content ── -->
-    <div class="hero-content" style="position:relative; z-index:10; width:100%;">
-      <h1 class="hero-title anim-fade-up" style="color: #ffffff; text-shadow: 0 2px 4px rgba(0,0,0,0.5);">
-        Equipamiento Táctico y<br>Autodefensa<br>
-        <strong style="color: #38bdf8;">Avanzada.</strong>
-      </h1>
-      <p class="hero-subtitle anim-fade-up delay-1" style="color: rgba(255,255,255,0.85); text-shadow: 0 1px 2px rgba(0,0,0,0.5);">
-        Soluciones integrales de hardware disuasivo, armas de choque, gas pimienta y sistemas de monitoreo para proteger lo que más importa.
-      </p>
-      <div class="hero-stats anim-fade-up delay-2" style="color: #ffffff;">
-        <div class="stat-card"><div class="stat-value" style="color:#ffffff;">100%</div><div class="stat-label" style="color:rgba(255,255,255,0.7);">Efectividad</div></div>
-        <div class="stat-card"><div class="stat-value" style="color:#ffffff;">24/7</div><div class="stat-label" style="color:rgba(255,255,255,0.7);">Seguridad Activa</div></div>
-        <div class="stat-card"><div class="stat-value" style="color:#ffffff;">Top</div><div class="stat-label" style="color:rgba(255,255,255,0.7);">Calidad Táctica</div></div>
+  <!-- ── Hero Section ── -->
+  <main class="flex-grow flex flex-col justify-center relative pt-20">
+    <!-- Layout Formal -->
+    <div class="relative z-10 max-w-7xl mx-auto px-6 w-full py-24 text-center md:text-left md:grid md:grid-cols-2 gap-12 items-center">
+      <div class="space-y-8">
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-gold/30 bg-gold/10 text-gold text-xs font-bold tracking-widest uppercase">
+          <span class="w-2 h-2 rounded-full bg-gold animate-pulse"></span>
+          Protocolo de Defensa Activa
+        </div>
+        
+        <h1 class="text-5xl md:text-7xl font-black text-white leading-tight">
+          DOMINIO<br/>
+          <span class="text-transparent bg-clip-text bg-gradient-to-r from-gold to-yellow-600">ABSOLUTO.</span>
+        </h1>
+        
+        <p class="text-lg text-gray-400 max-w-lg leading-relaxed">
+          Equipamiento táctico de nivel militar para defensa personal y barrial. Cámaras perimetrales, hojas de alta resistencia y disuasión balística.
+        </p>
+        
+        <div class="flex flex-col sm:flex-row gap-4 pt-4">
+          <a href="/tienda" class="btn-gold text-center py-4 px-8 text-sm tracking-widest uppercase shadow-[0_0_20px_rgba(212,175,55,0.3)] hover:shadow-[0_0_30px_rgba(212,175,55,0.5)]">
+            Arsenal Táctico
+          </a>
+          {% if not usuario %}
+          <a href="/login?modo=registro" class="btn-outline text-center py-4 px-8 text-sm tracking-widest uppercase">
+            Solicitar Acceso
+          </a>
+          {% endif %}
+        </div>
       </div>
-      <div class="hero-cta anim-fade-up delay-3" style="position:relative; z-index:10;">
-        {% if usuario %}
-          <a href="/dashboard" class="btn-hero-primary" style="background:#ffffff; color:#111827;">Ir al Dashboard →</a>
-        {% else %}
-          <a href="/login" class="btn-hero-primary" style="background:#ffffff; color:#111827;">Acceder al Portal →</a>
-        {% endif %}
-        <a href="/tienda" class="btn-hero-ghost" style="border-color:rgba(255,255,255,0.5); color:#ffffff;">Ver Catálogo Completo</a>
+      
+      <!-- Panel Formal / Representación -->
+      <div class="hidden md:flex justify-end">
+        <div class="w-full max-w-md border border-translucent bg-[#0a0a0c] p-10 flex flex-col items-start space-y-6 shadow-2xl relative">
+          <div class="absolute top-0 left-0 w-1 h-full bg-gold"></div>
+          <div class="w-12 h-12 bg-black border border-translucent flex items-center justify-center text-gold rounded-engineering mb-2">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
+          </div>
+          <div class="text-gold font-mono text-xs uppercase tracking-widest">Nivel de Seguridad Operacional</div>
+          <div class="text-5xl font-black text-white">ÓPTIMO</div>
+          <p class="text-gray-500 text-sm leading-relaxed mt-2">
+            Protocolos de encriptación y despliegue físico activos. Monitoreo constante de infraestructuras críticas corporativas.
+          </p>
+          <div class="text-green-500 font-mono text-xs uppercase tracking-widest flex items-center gap-2 pt-4 border-t border-translucent w-full mt-4">
+            <span class="w-1.5 h-1.5 bg-green-500 rounded-sm"></span>
+            En línea y asegurado
+          </div>
+        </div>
       </div>
     </div>
+  </main>
 
+  <!-- ── Features / Catálogo Resumen ── -->
+  <section class="py-24 border-t border-translucent bg-charcoal/30 relative z-10">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="text-center mb-16">
+        <h2 class="text-3xl md:text-4xl font-black text-white mb-4">ESPECIFICACIONES <span class="text-gold">TÁCTICAS</span></h2>
+        <p class="text-gray-400">Hardware diseñado para neutralizar amenazas sin compromisos.</p>
+      </div>
+      
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <!-- Card 1 -->
+        <div class="card-charcoal p-8 group hover:-translate-y-2 transition-transform duration-300 relative overflow-hidden">
+          <div class="absolute top-0 right-0 p-4 opacity-10 font-black text-6xl text-white pointer-events-none">01</div>
+          <div class="w-12 h-12 rounded-engineering bg-gold/10 border border-gold/30 flex items-center justify-center text-gold mb-6 group-hover:bg-gold group-hover:text-black transition-colors">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path></svg>
+          </div>
+          <h3 class="text-xl font-bold text-white mb-3">Vigilancia Perimetral</h3>
+          <p class="text-gray-400 text-sm leading-relaxed mb-6">Cámaras de alta resolución con visión nocturna térmica y algoritmos de detección de movimiento para defensa barrial activa.</p>
+          <a href="/tienda" class="text-gold text-sm font-bold uppercase tracking-widest hover:text-white transition-colors flex items-center gap-2">Inspeccionar <span class="group-hover:translate-x-1 transition-transform">→</span></a>
+        </div>
+        
+        <!-- Card 2 -->
+        <div class="card-charcoal p-8 group hover:-translate-y-2 transition-transform duration-300 relative overflow-hidden">
+          <div class="absolute top-0 right-0 p-4 opacity-10 font-black text-6xl text-white pointer-events-none">02</div>
+          <div class="w-12 h-12 rounded-engineering bg-cyan/10 border border-cyan/30 flex items-center justify-center text-cyan mb-6 group-hover:bg-cyan group-hover:text-black transition-colors">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+          </div>
+          <h3 class="text-xl font-bold text-white mb-3">Armas de Fogueo</h3>
+          <p class="text-gray-400 text-sm leading-relaxed mb-6">Réplicas 1:1 con capacidad detonadora de alto decibelio. Efecto disuasorio instantáneo sin munición letal.</p>
+          <a href="/tienda" class="text-cyan text-sm font-bold uppercase tracking-widest hover:text-white transition-colors flex items-center gap-2">Inspeccionar <span class="group-hover:translate-x-1 transition-transform">→</span></a>
+        </div>
+
+        <!-- Card 3 -->
+        <div class="card-charcoal p-8 group hover:-translate-y-2 transition-transform duration-300 relative overflow-hidden">
+          <div class="absolute top-0 right-0 p-4 opacity-10 font-black text-6xl text-white pointer-events-none">03</div>
+          <div class="w-12 h-12 rounded-engineering bg-gold/10 border border-gold/30 flex items-center justify-center text-gold mb-6 group-hover:bg-gold group-hover:text-black transition-colors">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z"></path></svg>
+          </div>
+          <h3 class="text-xl font-bold text-white mb-3">Filo Táctico</h3>
+          <p class="text-gray-400 text-sm leading-relaxed mb-6">Cuchillos y puñales de acero de alto carbono. Diseñados para durabilidad extrema y retención de filo en situaciones críticas.</p>
+          <a href="/tienda" class="text-gold text-sm font-bold uppercase tracking-widest hover:text-white transition-colors flex items-center gap-2">Inspeccionar <span class="group-hover:translate-x-1 transition-transform">→</span></a>
+        </div>
+      </div>
+    </div>
   </section>
 
-  <!-- ════════════════════
-       FEATURES
-       ════════════════════ -->
-  <section class="features-section">
-    <div style="text-align:center; margin-bottom:4rem;">
-      <div class="section-tag" style="margin:0 auto 1.5rem;">
-        <div class="section-tag-dot"></div>
-        <span class="section-tag-label">Catálogo Corporativo</span>
-      </div>
-      <h2 class="section-title">
-        Tecnología que <span class="text-gradient-cyan">protege tu entorno</span>
-      </h2>
-    </div>
-    <div class="features-grid">
-      <div class="feature-card anim-on-scroll">
-        <div class="feature-icon-wrap">TASER</div>
-        <h3 class="feature-title">Armas de Choque</h3>
-        <p class="feature-desc">Dispositivos de alto voltaje diseñados para incapacitación temporal inmediata y disuasión efectiva.</p>
-        <a href="/tienda" class="feature-link" style="text-decoration:none; display:inline-block;">Explorar Hardware →</a>
-      </div>
-      <div class="feature-card anim-on-scroll">
-        <div class="feature-icon-wrap">PEPPER</div>
-        <h3 class="feature-title">Aerosoles de Defensa</h3>
-        <p class="feature-desc">Fórmulas tácticas de gas pimienta con alcance extendido para neutralizar amenazas a distancia segura.</p>
-        <a href="/tienda" class="feature-link" style="text-decoration:none; display:inline-block;">Ver Productos →</a>
-      </div>
-      <div class="feature-card anim-on-scroll">
-        <div class="feature-icon-wrap">CCTV</div>
-        <h3 class="feature-title">Sistemas de Monitoreo</h3>
-        <p class="feature-desc">Cámaras ocultas y de seguridad perimetral para vigilar y registrar cualquier intrusión en tiempo real.</p>
-        <a href="/tienda" class="feature-link" style="text-decoration:none; display:inline-block;">Implementar Solución →</a>
-      </div>
-    </div>
-  </section>
-
-  <!-- FOOTER -->
-  <footer class="footer">
-    <div class="footer-inner">
-      <span class="footer-copy">© 2026 Lycaon Security Corp. Todos los derechos reservados. | Equipamiento Táctico y Autodefensa.</span>
-      <div style="display:flex;align-items:center;gap:1.5rem;">
-        <a href="/ayuda" class="btn-ghost" style="font-size:.8125rem;">Manual de Usuario</a>
-        <a href="/tienda" class="btn-ghost" style="font-size:.8125rem;">Tienda Pública</a>
-        <div class="navbar-logo"><span>L</span></div>
+  <!-- ── Footer ── -->
+  <footer class="border-t border-translucent bg-black py-8 relative z-10">
+    <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-gray-500">
+      <div>&copy; 2026 LYCAON SECURITY CORP. TODOS LOS DERECHOS RESERVADOS.</div>
+      <div class="flex gap-6 uppercase tracking-widest text-xs font-bold">
+        <a href="/ayuda" class="hover:text-gold transition-colors">Inteligencia</a>
+        <a href="/tienda" class="hover:text-gold transition-colors">Armería</a>
       </div>
     </div>
   </footer>
-
 </div>
-
-{% block extra_js %}
-<script>
-/* Remover Spinner después de cargar */
-window.addEventListener('load', function() {
-  const spinner = document.getElementById('page-spinner');
-  if(spinner) {
-    // Retraso extra de 1.5s para asegurar carga de video (simulado)
-    setTimeout(() => {
-      spinner.style.opacity = '0';
-      setTimeout(() => spinner.style.display = 'none', 500);
-    }, 1500);
-  }
-});
-
-/* Navbar sticky on scroll */
-(function () {
-  const nav = document.getElementById('main-navbar');
-  if (!nav) return;
-  window.addEventListener('scroll', function () {
-    if (window.scrollY > 40) {
-      nav.classList.add('scrolled');
-    } else {
-      nav.classList.remove('scrolled');
-    }
-  }, { passive: true });
-})();
-</script>
-{% endblock %}
-
 {% endblock %}

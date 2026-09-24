@@ -6,130 +6,120 @@
      PERFIL — Datos del usuario actual
      ════════════════════════════════════ -->
 
-<div style="max-width:700px; margin:0 auto; display:flex; flex-direction:column; gap:1.5rem;">
+<div class="max-w-3xl mx-auto space-y-8 animate-fade-in-up">
 
   <!-- Header -->
-  <div class="panel" style="position:relative;">
-    <div class="panel-body">
-      <h2 style="font-size:1.5rem; font-weight:700; display:flex; align-items:center; gap:.5rem; margin-bottom:.5rem;">
-        Identidad Corporativa
-      </h2>
-      <p style="color:var(--text-secondary); font-size:.9rem;">
-        Información de tu cuenta y privilegios en el sistema Lycaon Security.
-      </p>
-    </div>
+  <div class="card-charcoal p-8 relative overflow-hidden">
+    <div class="absolute inset-0 bg-gradient-to-r from-cyan/10 to-transparent pointer-events-none"></div>
+    <h2 class="text-2xl font-black text-white uppercase tracking-widest flex items-center gap-3 relative z-10">
+      <span class="w-2 h-8 bg-cyan rounded-full inline-block"></span>
+      Identidad Corporativa
+    </h2>
+    <p class="mt-2 text-sm text-gray-400 max-w-2xl relative z-10 font-medium">
+      Credenciales de acceso y privilegios operativos asignados en la intranet de Lycaon Security.
+    </p>
   </div>
 
   <!-- Tarjeta de información principal -->
-  <div class="panel">
-    <div class="panel-body">
+  <div class="card-charcoal p-8">
+    
+    <!-- Avatar grande + datos básicos -->
+    <div class="flex flex-col md:flex-row items-center md:items-start gap-8 pb-8 border-b border-translucent mb-8">
 
-      <!-- Avatar grande + datos básicos -->
-      <div style="display:flex; align-items:center; gap:1.5rem; margin-bottom:2rem; padding-bottom:1.5rem; border-bottom:1px solid var(--border-subtle);">
-
-        <!-- Avatar y Subida de Imagen -->
-        <div style="display:flex; flex-direction:column; align-items:center; gap:.5rem;">
-          <div style="
-            width:72px; height:72px;
-            border-radius:var(--radius-md);
-            background:var(--bg-secondary);
-            border:1px solid var(--border-normal);
-            display:flex; align-items:center; justify-content:center;
-            font-size:1.5rem; font-weight:900; color:var(--text-muted);
-            flex-shrink:0;
-            overflow:hidden;
-            position:relative;
-          ">
-            {% if user_data.avatar %}
-              <img src="{{ url_for('static', filename=user_data.avatar) }}" alt="Avatar" style="width:100%; height:100%; object-fit:cover;" id="profile-img-preview">
-            {% else %}
-              <span id="profile-img-fallback">{{ user_data.name[:2].upper() }}</span>
-              <img src="" alt="Avatar" style="width:100%; height:100%; object-fit:cover; display:none;" id="profile-img-preview">
-            {% endif %}
-          </div>
+      <!-- Avatar y Subida de Imagen -->
+      <div class="flex flex-col items-center gap-4">
+        <div class="w-24 h-24 rounded-engineering bg-black border-2 border-translucent hover:border-cyan transition-colors flex items-center justify-center text-3xl font-black text-gray-700 overflow-hidden relative shadow-[0_0_15px_rgba(0,0,0,0.5)] group">
           
-          <button type="button" onclick="document.getElementById('avatar-upload').click()" style="
-            font-size:.75rem; padding:.25rem .75rem; border-radius:var(--radius-sm);
-            background:var(--bg-secondary); color:var(--text-secondary);
-            border:1px solid var(--border-normal); cursor:pointer; font-weight:600;
-          ">Cambiar Foto</button>
+          {% if user_data.avatar %}
+            <img src="{{ url_for('static', filename=user_data.avatar) }}" alt="Avatar" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" id="profile-img-preview">
+          {% else %}
+            <span id="profile-img-fallback">{{ user_data.name[:2].upper() }}</span>
+            <img src="" alt="Avatar" class="w-full h-full object-cover hidden transition-transform duration-500 group-hover:scale-110" id="profile-img-preview">
+          {% endif %}
           
-          <input type="file" id="avatar-upload" accept="image/png, image/jpeg, image/webp" style="display:none;" onchange="subirAvatar(event)">
-        </div>
-
-        <!-- Nombre y rol -->
-        <div>
-          <div style="font-size:1.5rem; font-weight:800; margin-bottom:.25rem; color:var(--text-primary);">
-            {{ usuario.name }}
-          </div>
-          <div style="
-            display:inline-block;
-            font-size:10px; font-weight:700; text-transform:uppercase;
-            letter-spacing:.15em; padding:.3rem 1rem; border-radius:9999px;
-            {% if usuario.role == 'administrador' %}
-              background:var(--accent-light); color:var(--accent-primary); border:1px solid var(--accent-primary);
-            {% else %}
-              background:var(--bg-secondary); color:var(--text-secondary); border:1px solid var(--border-normal);
-            {% endif %}
-          ">
-            {{ usuario.role }}
+          <!-- Overlay on hover -->
+          <div class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center pointer-events-none">
+            <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
           </div>
         </div>
+        
+        <button type="button" onclick="document.getElementById('avatar-upload').click()" class="px-4 py-1.5 rounded-engineering text-[10px] font-bold uppercase tracking-widest text-gray-400 bg-black border border-translucent hover:bg-cyan/10 hover:border-cyan/50 hover:text-cyan transition-colors">
+          Actualizar Foto
+        </button>
+        
+        <input type="file" id="avatar-upload" accept="image/png, image/jpeg, image/webp" class="hidden" onchange="subirAvatar(event)">
+      </div>
 
-      </div><!-- /avatar row -->
-
-      <!-- Datos del usuario -->
-      <div style="display:grid; grid-template-columns:1fr 1fr; gap:1.25rem;">
-
-        <div style="padding:1.25rem; background:var(--bg-secondary); border-radius:var(--radius-md); border:1px solid var(--border-normal);">
-          <div style="font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:.15em; color:var(--text-muted); margin-bottom:.5rem;">ID de Usuario</div>
-          <div style="font-family:monospace; color:var(--text-secondary);">{{ usuario.id }}</div>
+      <!-- Nombre y rol -->
+      <div class="flex flex-col items-center md:items-start text-center md:text-left mt-2">
+        <h3 class="text-3xl font-black text-white mb-3">{{ usuario.name }}</h3>
+        
+        <div class="px-4 py-1.5 rounded-engineering text-[10px] font-bold uppercase tracking-widest inline-block
+          {% if usuario.role == 'administrador' %}
+            bg-red-500/10 text-red-500 border border-red-500/30
+          {% elif usuario.role == 'trabajador' %}
+            bg-gold/10 text-gold border border-gold/30
+          {% else %}
+            bg-cyan/10 text-cyan border border-cyan/30
+          {% endif %}
+        ">
+          {{ usuario.role }}
         </div>
-
-        <div style="padding:1.25rem; background:var(--bg-secondary); border-radius:var(--radius-md); border:1px solid var(--border-normal);">
-          <div style="font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:.15em; color:var(--text-muted); margin-bottom:.5rem;">Correo Electrónico</div>
-          <div style="color:var(--text-secondary); font-weight:500;">{{ usuario.email }}</div>
-        </div>
-
-        <div style="padding:1.25rem; background:var(--bg-secondary); border-radius:var(--radius-md); border:1px solid var(--border-normal);">
-          <div style="font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:.15em; color:var(--text-muted); margin-bottom:.5rem;">Nivel de Acceso</div>
-          <div style="color:var(--text-secondary); font-weight:500; text-transform:capitalize;">{{ usuario.role }}</div>
-        </div>
-
-        <div style="padding:1.25rem; background:var(--bg-secondary); border-radius:var(--radius-md); border:1px solid var(--border-normal);">
-          <div style="font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:.15em; color:var(--text-muted); margin-bottom:.5rem;">Estado de Cuenta</div>
-          <div style="display:flex; align-items:center; gap:.5rem;">
-            <div style="width:8px;height:8px;border-radius:50%;background:var(--emerald);"></div>
-            <span style="color:var(--emerald); font-weight:700;">Activo y Verificado</span>
-          </div>
-        </div>
-
-      </div><!-- /grid datos -->
+      </div>
 
     </div>
-  </div><!-- /info panel -->
+
+    <!-- Datos del usuario -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+      <div class="p-6 bg-black/40 border border-translucent rounded-engineering hover:border-gray-600 transition-colors">
+        <div class="text-[10px] font-bold uppercase tracking-widest text-gray-500 mb-2">Designación (ID)</div>
+        <div class="font-mono text-gray-300 text-lg">{{ usuario.id }}</div>
+      </div>
+
+      <div class="p-6 bg-black/40 border border-translucent rounded-engineering hover:border-gray-600 transition-colors">
+        <div class="text-[10px] font-bold uppercase tracking-widest text-gray-500 mb-2">Vía de Comunicación</div>
+        <div class="text-white font-medium text-lg truncate">{{ usuario.email }}</div>
+      </div>
+
+      <div class="p-6 bg-black/40 border border-translucent rounded-engineering hover:border-gray-600 transition-colors">
+        <div class="text-[10px] font-bold uppercase tracking-widest text-gray-500 mb-2">Permisos Activos</div>
+        <div class="text-white font-medium text-lg capitalize">{{ usuario.role }}</div>
+      </div>
+
+      <div class="p-6 bg-black/40 border border-translucent rounded-engineering hover:border-gray-600 transition-colors">
+        <div class="text-[10px] font-bold uppercase tracking-widest text-gray-500 mb-2">Estado de Red</div>
+        <div class="flex items-center gap-3 mt-1">
+          <div class="w-3 h-3 rounded-full bg-green-500 shadow-[0_0_10px_#22c55e] animate-pulse"></div>
+          <span class="text-green-500 font-bold tracking-wide">En Línea & Validado</span>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
 
   <!-- Acciones rápidas -->
-  <div class="panel">
-    <div class="panel-body">
-      <h3 class="panel-title" style="margin-bottom:1.5rem;">Gestión de Identidad</h3>
-      <div style="display:flex; gap:1rem; flex-wrap:wrap;">
+  <div class="card-charcoal p-8">
+    <h3 class="text-xs font-bold text-gray-500 uppercase tracking-widest mb-6">Controles Operativos</h3>
+    <div class="flex flex-wrap gap-4">
 
-        <a href="/dashboard/purchases" class="btn-ghost" style="border: 1px solid var(--border-normal);">
-          Historial de Adquisiciones
-        </a>
+      <a href="/dashboard/purchases" class="px-6 py-3 rounded-engineering text-xs font-bold uppercase tracking-widest bg-black border border-translucent text-gray-300 hover:text-white hover:bg-white/5 transition-colors">
+        Mis Adquisiciones
+      </a>
 
-        <a href="/dashboard/store" class="btn-ghost" style="border: 1px solid var(--border-normal);">
-          Catálogo Hardware
-        </a>
+      <a href="/dashboard/store" class="px-6 py-3 rounded-engineering text-xs font-bold uppercase tracking-widest bg-black border border-translucent text-gray-300 hover:text-white hover:bg-white/5 transition-colors">
+        Catálogo Privado
+      </a>
 
-        <a href="/logout" class="btn-ghost" style="border: 1px solid var(--red); color:var(--red);">
-          Cerrar Sesión
-        </a>
+      <a href="/logout" class="px-6 py-3 rounded-engineering text-xs font-bold uppercase tracking-widest bg-red-500/10 border border-red-500/30 text-red-500 hover:bg-red-500/20 hover:border-red-500/50 transition-colors ml-auto sm:ml-0">
+        Cortar Conexión
+      </a>
 
-      </div>
     </div>
   </div>
 
 </div>
+
+<!-- Script from layout.html will handle subirAvatar function if already defined, or it was in base logic. -->
 {% endblock %}

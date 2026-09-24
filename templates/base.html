@@ -12,7 +12,60 @@
   {# ── SEO Meta Tags ── #}
   <title>{% block title %}Lycaon Security{% endblock %} — Control Operativo</title>
   <meta name="description" content="{% block description %}Lycaon Security: gestión de inventario, equipos y operaciones con gravedad ineludible.{% endblock %}" />
-  <meta name="theme-color" content="#030305" />
+  <meta name="theme-color" content="#000000" />
+
+  {# ── Tailwind CSS CDN ── #}
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            black: '#000000',
+            charcoal: {
+              DEFAULT: '#15181e',
+              light: '#1f232b',
+            },
+            gold: {
+              DEFAULT: '#D4AF37',
+              hover: '#B5952F',
+            },
+            cyan: {
+              DEFAULT: '#00F0FF',
+            }
+          },
+          borderColor: {
+            translucent: 'rgba(178, 182, 189, 0.12)',
+          },
+          borderRadius: {
+            'engineering': '8px',
+          },
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+  <style type="text/tailwindcss">
+    @layer base {
+      body {
+        @apply bg-black text-gray-200 font-sans;
+      }
+    }
+    @layer components {
+      .card-charcoal {
+        @apply bg-charcoal border border-translucent rounded-engineering;
+      }
+      .btn-gold {
+        @apply bg-gold text-black font-bold py-2 px-4 rounded-engineering transition-colors hover:bg-gold-hover;
+      }
+      .btn-outline {
+        @apply border border-translucent text-gray-300 py-2 px-4 rounded-engineering transition-colors hover:border-gold hover:text-gold;
+      }
+    }
+  </style>
 
   {# ── CSS Principal ── #}
   <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />

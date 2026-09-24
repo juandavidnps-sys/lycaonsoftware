@@ -1,30 +1,47 @@
 {% extends "dashboard/layout.html" %}
-{% block dashboard_content %}
-<div style="margin-bottom:2rem;">
-  <h2 style="font-size:2rem; font-weight:800; color:var(--accent-primary);">Centro de Sugerencias</h2>
-  <p style="color:var(--text-secondary);">Envía tus reportes de errores o sugerencias para mejorar Lycaon Security.</p>
-</div>
+{% block title %}Centro de Sugerencias{% endblock %}
 
-<div class="panel" style="max-width: 600px;">
-  <form id="suggestion-form">
-    <div class="form-group" style="margin-bottom:1.25rem;">
-      <label style="display:block; margin-bottom:0.5rem; font-weight:bold; color:var(--text-primary);">Tipo</label>
-      <select id="sug-type" class="form-input" required style="width:100%;">
-        <option value="sugerencia">Sugerencia</option>
-        <option value="error">Reporte de Error</option>
-        <option value="reclamo">Reclamo</option>
-      </select>
-    </div>
-    
-    <div class="form-group" style="margin-bottom:1.25rem;">
-      <label style="display:block; margin-bottom:0.5rem; font-weight:bold; color:var(--text-primary);">Mensaje</label>
-      <textarea id="sug-message" class="form-input" required rows="5" placeholder="Describe los detalles aquí..." style="width:100%; resize:vertical;"></textarea>
-    </div>
-    
-    <div id="sug-result" style="margin-bottom:1rem; display:none; padding:1rem; border-radius:4px;"></div>
-    
-    <button type="submit" class="btn-primary" id="sug-btn" style="width:100%;">Enviar Mensaje</button>
-  </form>
+{% block dashboard_content %}
+<div class="max-w-2xl mx-auto space-y-8 animate-fade-in-up">
+
+  <!-- Header -->
+  <div class="card-charcoal p-8 relative overflow-hidden">
+    <div class="absolute inset-0 bg-gradient-to-r from-gold/10 to-transparent pointer-events-none"></div>
+    <h2 class="text-2xl font-black text-white uppercase tracking-widest flex items-center gap-3 relative z-10">
+      <span class="w-2 h-8 bg-gold rounded-full inline-block"></span>
+      Centro de Sugerencias
+    </h2>
+    <p class="mt-2 text-sm text-gray-400 font-medium relative z-10">
+      Envía tus reportes de incidentes, anomalías o sugerencias para optimizar Lycaon Security.
+    </p>
+  </div>
+
+  <!-- Formulario -->
+  <div class="card-charcoal p-8">
+    <form id="suggestion-form" class="space-y-6">
+      
+      <div>
+        <label class="block text-[10px] font-bold text-gray-500 uppercase tracking-widest mb-2">Clasificación del Mensaje</label>
+        <select id="sug-type" class="w-full bg-black border border-translucent text-white rounded-engineering py-3 px-4 focus:outline-none focus:border-gold transition-colors" required>
+          <option value="sugerencia">Propuesta de Mejora (Sugerencia)</option>
+          <option value="error">Fallo Crítico (Reporte de Error)</option>
+          <option value="reclamo">Reclamo / Inconformidad</option>
+        </select>
+      </div>
+      
+      <div>
+        <label class="block text-[10px] font-bold text-gray-500 uppercase tracking-widest mb-2">Contenido de la Transmisión</label>
+        <textarea id="sug-message" class="w-full bg-black border border-translucent text-white rounded-engineering py-3 px-4 focus:outline-none focus:border-gold transition-colors resize-y placeholder:text-gray-600" required rows="6" placeholder="Describe los detalles de la situación con la mayor precisión posible..."></textarea>
+      </div>
+      
+      <div id="sug-result" class="hidden p-4 rounded-engineering text-sm font-bold border border-transparent"></div>
+      
+      <button type="submit" class="w-full py-4 mt-4 bg-gold text-black rounded-engineering text-sm font-bold uppercase tracking-widest transition-all duration-300 hover:bg-[#b08d27] shadow-[0_0_15px_rgba(212,175,55,0.3)]" id="sug-btn">
+        Transmitir Mensaje
+      </button>
+    </form>
+  </div>
+
 </div>
 
 <script>
@@ -38,7 +55,7 @@ document.getElementById('suggestion-form').addEventListener('submit', async func
   if (!message) return;
   
   btn.disabled = true;
-  btn.textContent = 'Enviando...';
+  btn.innerHTML = '<span class="animate-pulse">Transmitiendo...</span>';
   
   try {
     const response = await fetch('/api/suggestions', {
@@ -47,23 +64,24 @@ document.getElementById('suggestion-form').addEventListener('submit', async func
       body: JSON.stringify({ type, message })
     });
     const data = await response.json();
+    
+    res.classList.remove('hidden', 'bg-red-500/10', 'text-red-500', 'border-red-500/30', 'bg-green-500/10', 'text-green-500', 'border-green-500/30');
+    
     if(data.success) {
-      res.style.display = 'block';
-      res.className = 'alert-success';
-      res.textContent = 'Mensaje enviado correctamente. ¡Gracias por tu retroalimentación!';
+      res.classList.add('bg-green-500/10', 'text-green-500', 'border-green-500/30');
+      res.textContent = 'Transmisión confirmada. ¡Gracias por tu reporte!';
       document.getElementById('suggestion-form').reset();
     } else {
-      res.style.display = 'block';
-      res.className = 'alert-error';
-      res.textContent = data.error || 'Error al enviar.';
+      res.classList.add('bg-red-500/10', 'text-red-500', 'border-red-500/30');
+      res.textContent = data.error || 'Error en la transmisión.';
     }
   } catch (err) {
-    res.style.display = 'block';
-    res.className = 'alert-error';
-    res.textContent = 'Error de conexión.';
+    res.classList.remove('hidden');
+    res.classList.add('bg-red-500/10', 'text-red-500', 'border-red-500/30');
+    res.textContent = 'Fallo de conexión cifrada.';
   } finally {
     btn.disabled = false;
-    btn.textContent = 'Enviar Mensaje';
+    btn.textContent = 'Transmitir Mensaje';
   }
 });
 </script>

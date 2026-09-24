@@ -6,86 +6,98 @@
      TIENDA PÚBLICA — Sin login
      ══════════════════════════════════════════════ -->
 
-<div style="background:var(--bg-primary); min-height:100vh; position:relative; padding-top: 5rem;">
+<div class="min-h-screen bg-black relative pt-20">
 
   <!-- Navbar simple para la vista pública -->
-  <nav class="navbar" style="position:fixed; top:0; left:0; right:0; z-index:50;">
-    <a href="/" class="navbar-brand">
-      <div class="navbar-logo"><span>L</span></div>
-      <span class="navbar-name">Lycaon Security <span style="color:var(--text-muted);font-size:.875rem;">Hardware</span></span>
-    </a>
-    <div class="navbar-links">
-      {% if usuario %}
-        <a href="/dashboard" class="btn-ghost">Dashboard Central</a>
-      {% else %}
-        <a href="/login" class="btn-primary">Acceso Clientes</a>
-      {% endif %}
+  <nav class="fixed top-0 left-0 right-0 z-50 bg-black/90 backdrop-blur-md border-b border-translucent transition-all duration-300">
+    <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+      <a href="/" class="flex items-center gap-3 group">
+        <div class="w-10 h-10 bg-gold text-black flex items-center justify-center font-bold text-xl rounded-engineering transition-transform group-hover:scale-105">L</div>
+        <span class="font-black text-xl tracking-wide text-white">LYCAON<span class="text-gold font-medium ml-2">SECURITY</span> <span class="text-gray-500 font-medium text-sm ml-2 hidden sm:inline">HARDWARE</span></span>
+      </a>
+      <div class="flex items-center gap-6">
+        {% if usuario %}
+          <a href="/dashboard" class="text-gray-400 hover:text-gold transition-colors font-medium text-sm tracking-widest uppercase">Dashboard Central</a>
+        {% else %}
+          <a href="/login" class="btn-gold text-xs px-4 py-2">Acceso Clientes</a>
+        {% endif %}
+      </div>
     </div>
   </nav>
 
-  <div class="hero-content" style="max-width:1100px; margin: 0 auto; padding-top:2rem;">
+  <div class="max-w-7xl mx-auto px-6 py-12 animate-fade-in-up">
     <!-- Header -->
-    <div class="panel" style="position:relative; margin-bottom:1.5rem;">
-      <div class="panel-body">
-        <h2 style="font-size:1.5rem; font-weight:700; display:flex; align-items:center; gap:.5rem; margin-bottom:.5rem;">
+    <div class="card-charcoal p-8 relative overflow-hidden mb-8 group">
+      <div class="absolute inset-0 bg-gradient-to-r from-gold/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+      <div class="relative z-10">
+        <h2 class="text-2xl font-black text-white uppercase tracking-widest flex items-center gap-3 mb-2">
+          <span class="w-2 h-8 bg-gold rounded-full inline-block"></span>
           Catálogo de Equipamiento Táctico y Autodefensa
         </h2>
-        <p style="color:var(--text-secondary); font-size:.9rem;">
+        <p class="text-sm text-gray-400 font-medium max-w-2xl">
           Explora nuestra línea de artículos de protección personal. Para adquirir equipos, debes estar registrado en nuestra red.
         </p>
       </div>
     </div>
 
-    <div class="store-filters" style="display:flex; gap:1rem; flex-wrap:wrap;">
-      <button class="filter-btn btn-ghost active" data-categoria="todos" style="border:1px solid var(--border-normal);">Todos</button>
-      <button class="filter-btn btn-ghost" data-categoria="Choque" style="border:1px solid var(--border-normal);">Armas de Choque</button>
-      <button class="filter-btn btn-ghost" data-categoria="Quimico" style="border:1px solid var(--border-normal);">Defensa Química</button>
-      <button class="filter-btn btn-ghost" data-categoria="Monitoreo" style="border:1px solid var(--border-normal);">Monitoreo</button>
-      <button class="filter-btn btn-ghost" data-categoria="Tactico" style="border:1px solid var(--border-normal);">Equipamiento Táctico</button>
+    <div class="flex flex-wrap gap-4 mb-10 store-filters">
+      <button class="filter-btn px-4 py-2 text-xs font-bold uppercase tracking-widest rounded-engineering border border-gold text-gold bg-gold/10 transition-colors active" data-categoria="todos">Todos</button>
+      <button class="filter-btn px-4 py-2 text-xs font-bold uppercase tracking-widest rounded-engineering border border-translucent text-gray-400 bg-black/40 hover:text-white hover:border-gray-500 transition-colors" data-categoria="Choque">Armas de Choque</button>
+      <button class="filter-btn px-4 py-2 text-xs font-bold uppercase tracking-widest rounded-engineering border border-translucent text-gray-400 bg-black/40 hover:text-white hover:border-gray-500 transition-colors" data-categoria="Quimico">Defensa Química</button>
+      <button class="filter-btn px-4 py-2 text-xs font-bold uppercase tracking-widest rounded-engineering border border-translucent text-gray-400 bg-black/40 hover:text-white hover:border-gray-500 transition-colors" data-categoria="Monitoreo">Monitoreo</button>
+      <button class="filter-btn px-4 py-2 text-xs font-bold uppercase tracking-widest rounded-engineering border border-translucent text-gray-400 bg-black/40 hover:text-white hover:border-gray-500 transition-colors" data-categoria="Tactico">Equipamiento Táctico</button>
     </div>
 
     <!-- Grid de Productos -->
-    <div class="products-grid">
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 products-grid">
       {% for producto in productos %}
-      <div class="product-card" data-categoria="{{ producto.category }}" id="pub-product-{{ producto.id }}">
+      <div class="card-charcoal overflow-hidden group flex flex-col product-card" data-categoria="{{ producto.category }}" id="pub-product-{{ producto.id }}">
         
-        <div class="product-img">
+        <div class="aspect-square bg-black border-b border-translucent flex items-center justify-center p-6 relative overflow-hidden">
+          <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent z-10"></div>
           {% if producto.image_url and producto.image_url != '/static/img/placeholder.svg' %}
-            <img src="{{ producto.image_url }}" alt="{{ producto.name }}">
+            <img src="{{ producto.image_url }}" alt="{{ producto.name }}" class="w-full h-full object-contain relative z-20 group-hover:scale-110 transition-transform duration-500">
           {% else %}
-            {% if producto.category == 'Security' %}SEC
-            {% elif producto.category == 'Software' %}SFT
-            {% elif producto.category == 'Hardware' %}HRD
-            {% elif producto.category == 'Network' %}NET
-            {% elif producto.category == 'Service' %}SRV
-            {% else %}GEN{% endif %}
+            <div class="text-6xl font-black text-gray-800 relative z-20 group-hover:scale-110 transition-transform duration-500">
+              {% if producto.category == 'Security' %}SEC
+              {% elif producto.category == 'Software' %}SFT
+              {% elif producto.category == 'Hardware' %}HRD
+              {% elif producto.category == 'Network' %}NET
+              {% elif producto.category == 'Service' %}SRV
+              {% else %}GEN{% endif %}
+            </div>
           {% endif %}
-        </div>
-
-        <div class="product-body">
-          <div class="product-cat">{{ producto.category }}</div>
-          <h3 class="product-name">{{ producto.name }}</h3>
-          <div class="product-price">${{ "%.2f"|format(producto.price) }}</div>
           
-          <div class="product-stock">
-            Stock: <strong>{{ producto.stock }}</strong> unidades &nbsp;
-            <span class="stock-badge {{ producto.status }}">
+          <div class="absolute top-4 right-4 z-20">
+            <span class="inline-flex items-center justify-center px-2 py-1 rounded text-[10px] font-bold uppercase tracking-widest
+              {% if producto.status == 'active' %}bg-green-500/10 text-green-500 border border-green-500/30
+              {% elif producto.status == 'low-stock' %}bg-yellow-500/10 text-yellow-500 border border-yellow-500/30
+              {% else %}bg-red-500/10 text-red-500 border border-red-500/30{% endif %}
+            ">
               {% if producto.status == 'active' %}Disponible
               {% elif producto.status == 'low-stock' %}Poco Stock
               {% else %}Agotado{% endif %}
             </span>
           </div>
+        </div>
 
-          <!-- Si el usuario está logueado, mostrar comprar normal, si no, redirigir a login -->
-          {% if usuario %}
-            <a href="/dashboard/store" class="btn-buy" style="display:inline-block; text-align:center; background:var(--accent-primary); color:white; padding:0.75rem; border-radius:4px; font-weight:bold;">
-              Adquirir Licencia / Equipo
-            </a>
-          {% else %}
-            <a href="/login" class="btn-buy" style="display:inline-block; text-align:center; background:var(--bg-secondary); color:var(--text-primary); border:1px solid var(--border-normal); padding:0.75rem; border-radius:4px; font-weight:bold;">
-              Iniciar sesión para comprar
-            </a>
-          {% endif %}
+        <div class="p-6 flex flex-col flex-1">
+          <div class="text-[10px] font-bold text-gray-500 uppercase tracking-widest mb-2">{{ producto.category }}</div>
+          <h3 class="text-lg font-bold text-white mb-2">{{ producto.name }}</h3>
+          <div class="text-xl font-mono text-gold mb-6">${{ "%.2f"|format(producto.price) }}</div>
+          
+          <div class="mt-auto">
+            <!-- Si el usuario está logueado, mostrar comprar normal, si no, redirigir a login -->
+            {% if usuario %}
+              <a href="/dashboard/store" class="w-full block text-center py-3 bg-gold text-black rounded-engineering text-xs font-bold uppercase tracking-widest transition-all duration-300 hover:bg-yellow-500 shadow-[0_0_15px_rgba(212,175,55,0.3)]">
+                Adquirir Equipo
+              </a>
+            {% else %}
+              <a href="/login" class="w-full block text-center py-3 bg-black/40 border border-translucent text-gray-300 rounded-engineering text-xs font-bold uppercase tracking-widest transition-colors hover:text-white hover:border-gray-500">
+                Iniciar sesión para comprar
+              </a>
+            {% endif %}
+          </div>
         </div>
 
       </div>

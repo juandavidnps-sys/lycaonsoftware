@@ -2,148 +2,212 @@
 {% block title %}Catálogo de Hardware y Licencias{% endblock %}
 
 {% block dashboard_content %}
-<!-- ════════════════════════════════════════
-     TIENDA — Catálogo de equipos
-     ════════════════════════════════════════ -->
+<div class="space-y-8 animate-fade-in-up">
 
-<!-- ── Header ── -->
-<div class="panel" style="position:relative; margin-bottom:1.5rem;">
-  <div class="panel-body">
-    <h2 style="font-size:1.5rem; font-weight:700; display:flex; align-items:center; gap:.5rem; margin-bottom:.5rem;">
-      Catálogo Privado de Ciberseguridad
+  <!-- ── Header ── -->
+  <div class="card-charcoal p-8 relative overflow-hidden">
+    <div class="absolute inset-0 bg-gradient-to-r from-gold/10 to-transparent pointer-events-none"></div>
+    <h2 class="text-2xl font-black text-white uppercase tracking-widest flex items-center gap-3 relative z-10">
+      <span class="w-2 h-8 bg-gold rounded-full inline-block"></span>
+      Catálogo Privado Táctico
     </h2>
-    <p style="color:var(--text-secondary); font-size:.9rem;">
-      Seleccione y adquiera las licencias, hardware o servicios de auditoría que su organización requiere.
+    <p class="mt-2 text-sm text-gray-400 max-w-2xl relative z-10 font-medium">
+      Seleccione y adquiera equipamiento clasificado, licencias de software defensivo o servicios especializados de auditoría y protección perimetral.
     </p>
   </div>
-</div>
 
-<!-- ── Filtros por categoría ── -->
-<div class="store-filters" style="display:flex; gap:1rem; flex-wrap:wrap;">
-  <button class="filter-btn btn-ghost active" data-categoria="todos" style="border:1px solid var(--border-normal);">Todos</button>
-  <button class="filter-btn btn-ghost" data-categoria="Security" style="border:1px solid var(--border-normal);">Seguridad</button>
-  <button class="filter-btn btn-ghost" data-categoria="Software" style="border:1px solid var(--border-normal);">Software</button>
-  <button class="filter-btn btn-ghost" data-categoria="Hardware" style="border:1px solid var(--border-normal);">Hardware</button>
-  <button class="filter-btn btn-ghost" data-categoria="Network" style="border:1px solid var(--border-normal);">Redes</button>
-  <button class="filter-btn btn-ghost" data-categoria="Service" style="border:1px solid var(--border-normal);">Servicios</button>
-</div>
+  <!-- ── Filtros por categoría ── -->
+  <div class="store-filters flex flex-wrap gap-3 pb-4">
+    <button class="filter-btn active px-5 py-2.5 rounded-engineering text-xs font-bold uppercase tracking-widest transition-all duration-300 border border-translucent text-white bg-white/5 hover:bg-gold/10 hover:border-gold/50 hover:text-gold shadow-lg" data-categoria="todos">Todos</button>
+    <button class="filter-btn px-5 py-2.5 rounded-engineering text-xs font-bold uppercase tracking-widest transition-all duration-300 border border-translucent text-gray-400 bg-black/40 hover:bg-cyan/10 hover:border-cyan/50 hover:text-cyan" data-categoria="Security">Seguridad</button>
+    <button class="filter-btn px-5 py-2.5 rounded-engineering text-xs font-bold uppercase tracking-widest transition-all duration-300 border border-translucent text-gray-400 bg-black/40 hover:bg-green-500/10 hover:border-green-500/50 hover:text-green-500" data-categoria="Software">Software</button>
+    <button class="filter-btn px-5 py-2.5 rounded-engineering text-xs font-bold uppercase tracking-widest transition-all duration-300 border border-translucent text-gray-400 bg-black/40 hover:bg-yellow-500/10 hover:border-yellow-500/50 hover:text-yellow-500" data-categoria="Hardware">Hardware</button>
+    <button class="filter-btn px-5 py-2.5 rounded-engineering text-xs font-bold uppercase tracking-widest transition-all duration-300 border border-translucent text-gray-400 bg-black/40 hover:bg-blue-500/10 hover:border-blue-500/50 hover:text-blue-500" data-categoria="Network">Redes</button>
+    <button class="filter-btn px-5 py-2.5 rounded-engineering text-xs font-bold uppercase tracking-widest transition-all duration-300 border border-translucent text-gray-400 bg-black/40 hover:bg-purple-500/10 hover:border-purple-500/50 hover:text-purple-500" data-categoria="Service">Servicios</button>
+  </div>
 
-<!-- ── Grid de Productos ── -->
-<div class="products-grid">
-  {% for producto in productos %}
-  <div class="product-card" data-categoria="{{ producto.category }}" id="product-{{ producto.id }}">
+  <style>
+    /* Estilos extra para los filtros activos controlados por JS (ya que JS hace toggle de .active) */
+    .filter-btn.active {
+      background-color: rgba(212, 175, 55, 0.1) !important;
+      border-color: rgba(212, 175, 55, 0.5) !important;
+      color: #D4AF37 !important;
+      box-shadow: 0 0 15px rgba(212, 175, 55, 0.15) !important;
+    }
+  </style>
 
-    <!-- Imagen / Ícono del producto -->
-    <div class="product-img">
-      {% if producto.image_url and producto.image_url != '/static/img/placeholder.svg' %}
-        <img src="{{ producto.image_url }}" alt="{{ producto.name }}">
-      {% else %}
-        {% if producto.category == 'Security' %}SEC
-        {% elif producto.category == 'Software' %}SFT
-        {% elif producto.category == 'Hardware' %}HRD
-        {% elif producto.category == 'Network' %}NET
-        {% elif producto.category == 'Service' %}SRV
-        {% else %}GEN{% endif %}
-      {% endif %}
-    </div>
-
-    <div class="product-body">
-      <!-- Categoría -->
-      <div class="product-cat">{{ producto.category }}</div>
-
-      <!-- Nombre -->
-      <h3 class="product-name">{{ producto.name }}</h3>
-
-      <!-- Precio -->
-      <div class="product-price">${{ "%.2f"|format(producto.price) }}</div>
-
-      <!-- Stock y estado -->
-      <div class="product-stock">
-        Stock disponible: <strong>{{ producto.stock }}</strong> unidades &nbsp;
-        <span class="stock-badge {{ producto.status }}">
-          {% if producto.status == 'active' %}Activo
-          {% elif producto.status == 'low-stock' %}Poco Stock
-          {% else %}Agotado{% endif %}
-        </span>
+  <!-- ── Grid de Productos ── -->
+  <div class="products-grid grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+    {% for producto in productos %}
+    <div class="product-card card-charcoal group flex flex-col h-full overflow-hidden transition-all duration-300 hover:shadow-[0_0_20px_rgba(212,175,55,0.1)] hover:border-gold/30 hover:-translate-y-1" data-categoria="{{ producto.category }}" id="product-{{ producto.id }}">
+      
+      <!-- Imagen / Ícono del producto -->
+      <div class="h-48 w-full bg-black relative overflow-hidden flex items-center justify-center border-b border-translucent">
+        <div class="absolute inset-0 bg-gradient-to-t from-charcoal to-transparent z-10 opacity-60"></div>
+        {% if producto.image_url and producto.image_url != '/static/img/placeholder.svg' %}
+          <img src="{{ producto.image_url }}" alt="{{ producto.name }}" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+        {% else %}
+          <div class="text-4xl font-black text-gray-800 tracking-widest relative z-0">
+            {% if producto.category == 'Security' %}SEC
+            {% elif producto.category == 'Software' %}SFT
+            {% elif producto.category == 'Hardware' %}HRD
+            {% elif producto.category == 'Network' %}NET
+            {% elif producto.category == 'Service' %}SRV
+            {% else %}GEN{% endif %}
+          </div>
+        {% endif %}
+        
+        <!-- Categoría Badge (Flotante) -->
+        <div class="absolute top-3 right-3 z-20 px-2 py-1 bg-black/80 backdrop-blur-sm border border-gray-700 rounded-engineering text-[10px] font-bold text-gray-300 uppercase tracking-widest shadow-lg">
+          {{ producto.category }}
+        </div>
       </div>
 
-      <!-- Botón de compra -->
-      <button
-        class="btn-buy"
-        {% if producto.stock == 0 %}disabled title="Sin stock"{% endif %}
-        onclick="abrirModalCompra(
-          '{{ producto.id }}',
-          '{{ producto.name }}',
-          {{ producto.price }},
-          {{ producto.stock }}
-        )"
-      >
-        {% if producto.stock == 0 %}
-          Sin Stock
-        {% else %}
-          Adquirir
-        {% endif %}
-      </button>
-    </div>
+      <div class="p-6 flex flex-col flex-1">
+        
+        <!-- Nombre -->
+        <h3 class="text-lg font-bold text-white leading-tight mb-3 line-clamp-2">{{ producto.name }}</h3>
 
-  </div><!-- /product-card -->
-  {% endfor %}
-</div><!-- /products-grid -->
+        <!-- Precio -->
+        <div class="text-2xl font-black text-gold mb-4">${{ "%.2f"|format(producto.price) }}</div>
+
+        <div class="mt-auto">
+          <!-- Stock y estado -->
+          <div class="flex items-center justify-between text-xs font-medium text-gray-400 mb-4 pb-4 border-b border-translucent">
+            <span>Stock: <strong class="text-white">{{ producto.stock }}</strong> u.</span>
+            <span class="px-2 py-1 rounded-engineering text-[10px] font-bold uppercase tracking-widest border 
+              {% if producto.status == 'active' %}bg-green-500/10 text-green-500 border-green-500/30
+              {% elif producto.status == 'low-stock' %}bg-yellow-500/10 text-yellow-500 border-yellow-500/30
+              {% else %}bg-red-500/10 text-red-500 border-red-500/30{% endif %}">
+              {% if producto.status == 'active' %}Operativo
+              {% elif producto.status == 'low-stock' %}Escaso
+              {% else %}Agotado{% endif %}
+            </span>
+          </div>
+
+          <!-- Botón de compra -->
+          <button
+            class="w-full py-3 rounded-engineering text-sm font-bold uppercase tracking-widest transition-all duration-300 {% if producto.stock == 0 %}bg-gray-800 text-gray-500 cursor-not-allowed border border-gray-700{% else %}bg-gold text-black hover:bg-gold/90 shadow-[0_0_15px_rgba(212,175,55,0.3)] hover:shadow-[0_0_25px_rgba(212,175,55,0.5)]{% endif %}"
+            {% if producto.stock == 0 %}disabled title="Sin stock"{% endif %}
+            onclick="abrirModalCompra(
+              '{{ producto.id }}',
+              '{{ producto.name }}',
+              {{ producto.price }},
+              {{ producto.stock }}
+            )"
+          >
+            {% if producto.stock == 0 %}
+              No Disponible
+            {% else %}
+              Adquirir
+            {% endif %}
+          </button>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+
+</div>
 
 
 <!-- ══════════════════════════════════
      MODAL DE COMPRA
-     Se abre al hacer clic en "Comprar"
      ══════════════════════════════════ -->
-<div class="modal-overlay" id="buy-modal">
-  <div class="modal-box">
+<div class="modal-overlay hidden fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm" id="buy-modal">
+  <div class="modal-box w-full max-w-md bg-charcoal border border-gold/30 rounded-engineering shadow-2xl relative transform transition-all duration-300 scale-95 opacity-0">
+    
+    <!-- Glow effect -->
+    <div class="absolute top-0 left-1/2 -translate-x-1/2 w-48 h-1 bg-gradient-to-r from-transparent via-gold to-transparent"></div>
 
-    <!-- Botón cerrar -->
-    <button class="modal-close" onclick="cerrarModal('buy-modal')" title="Cerrar">✕</button>
+    <button class="modal-close absolute top-4 right-4 w-8 h-8 flex items-center justify-center rounded-engineering bg-black border border-translucent text-gray-400 hover:text-white hover:border-gray-500 transition-colors" onclick="cerrarModal('buy-modal')" title="Cerrar">✕</button>
 
-    <h3 class="modal-title" style="margin-bottom:1.5rem; font-weight:800; font-size:1.5rem;">Confirmar Adquisición</h3>
+    <div class="p-8">
+      <h3 class="text-xl font-black text-white uppercase tracking-widest mb-6 flex items-center gap-2">
+        <span class="w-1.5 h-1.5 bg-gold rounded-full inline-block animate-pulse"></span>
+        Autorizar Operación
+      </h3>
 
-    <!-- Información del producto seleccionado -->
-    <div style="padding:1.5rem; background:var(--bg-secondary); border-radius:var(--radius-md); margin-bottom:1.25rem; border:1px solid var(--border-normal);">
-      <div style="font-size:.8125rem; color:var(--text-secondary); margin-bottom:.25rem; font-weight:700; text-transform:uppercase;">Solución / Producto</div>
-      <div style="font-size:1.125rem; font-weight:700;" id="modal-product-name">—</div>
-      <div style="font-size:1.375rem; font-weight:900; color:var(--accent-primary); margin-top:.5rem;" id="modal-product-price">—</div>
+      <div class="bg-black/50 border border-translucent rounded-engineering p-5 mb-6">
+        <div class="text-[10px] font-bold text-gray-500 uppercase tracking-widest mb-2">Activo Seleccionado</div>
+        <div class="text-base font-bold text-white leading-snug mb-3" id="modal-product-name">—</div>
+        <div class="text-xl font-black text-gold" id="modal-product-price">—</div>
+      </div>
+
+      <div class="mb-6">
+        <label class="block text-[10px] font-bold text-gray-500 uppercase tracking-widest mb-2">Volumen de Suministro</label>
+        <input
+          type="number"
+          id="modal-qty"
+          class="w-full bg-black border border-translucent text-white rounded-engineering py-3 px-4 focus:outline-none focus:border-gold transition-colors font-mono text-lg"
+          value="1"
+          min="1"
+        />
+      </div>
+
+      <div class="flex justify-between items-center bg-gold/10 border border-gold/30 rounded-engineering p-5 mb-6">
+        <span class="text-xs font-bold text-gold uppercase tracking-widest">Total Estimado</span>
+        <span class="text-2xl font-black text-gold" id="modal-total">—</span>
+      </div>
+
+      <div id="buy-result" class="mb-4 empty:hidden text-sm text-center"></div>
+
+      <button
+        class="w-full py-3.5 bg-gold text-black rounded-engineering text-sm font-bold uppercase tracking-widest transition-all duration-300 hover:bg-gold/90 shadow-[0_0_15px_rgba(212,175,55,0.3)] hover:shadow-[0_0_25px_rgba(212,175,55,0.5)]"
+        id="confirm-buy-btn"
+        onclick="confirmarCompra()"
+      >
+        Procesar Orden
+      </button>
     </div>
 
-    <!-- Cantidad -->
-    <div style="margin-bottom:1.5rem;">
-      <label style="font-size:.8125rem; color:var(--text-secondary); display:block; margin-bottom:.5rem; font-weight:700; text-transform:uppercase; letter-spacing:.05em;">
-        Cantidad / Nodos
-      </label>
-      <input
-        type="number"
-        id="modal-qty"
-        class="form-input"
-        value="1"
-        min="1"
-      />
-    </div>
+  </div>
+</div>
 
-    <!-- Total calculado -->
-    <div style="display:flex; justify-content:space-between; align-items:center; padding:1.25rem; background:var(--accent-light); border-radius:var(--radius-md); margin-bottom:1.25rem; border:1px solid var(--accent-primary);">
-      <span style="font-size:.875rem; color:var(--accent-primary); font-weight:700;">TOTAL A FACTURAR</span>
-      <span style="font-size:1.5rem; font-weight:900; color:var(--accent-primary);" id="modal-total">—</span>
-    </div>
+<script>
+  // Script rápido para mostrar/ocultar el modal con animación Tailwind
+  function abrirModalCompra(id, name, price, stock) {
+    const modal = document.getElementById('buy-modal');
+    const box = modal.querySelector('.modal-box');
+    modal.classList.remove('hidden');
+    
+    // Animar
+    setTimeout(() => {
+      box.classList.remove('scale-95', 'opacity-0');
+      box.classList.add('scale-100', 'opacity-100');
+    }, 10);
 
-    <!-- Resultado / mensajes -->
-    <div id="buy-result" style="margin-bottom:1rem;"></div>
+    document.getElementById('modal-product-name').innerText = name;
+    document.getElementById('modal-product-price').innerText = `$${price.toFixed(2)}`;
+    document.getElementById('modal-total').innerText = `$${price.toFixed(2)}`;
+    
+    const qtyInput = document.getElementById('modal-qty');
+    qtyInput.value = 1;
+    qtyInput.max = stock;
+    qtyInput.dataset.price = price;
+    qtyInput.dataset.id = id;
 
-    <!-- Botón confirmar -->
-    <button
-      class="btn-primary"
-      id="confirm-buy-btn"
-      onclick="confirmarCompra()"
-      style="width:100%; padding:1rem; font-size:1rem;"
-    >
-      Procesar Orden Seguro
-    </button>
+    // Listener para actualizar total
+    qtyInput.oninput = function() {
+      let val = parseInt(this.value) || 1;
+      if (val > stock) val = stock;
+      if (val < 1) val = 1;
+      this.value = val;
+      const total = val * price;
+      document.getElementById('modal-total').innerText = `$${total.toFixed(2)}`;
+    };
+  }
 
-  </div><!-- /modal-box -->
-</div><!-- /modal-overlay -->
-
+  function cerrarModal(modalId) {
+    const modal = document.getElementById(modalId);
+    const box = modal.querySelector('.modal-box');
+    box.classList.remove('scale-100', 'opacity-100');
+    box.classList.add('scale-95', 'opacity-0');
+    
+    setTimeout(() => {
+      modal.classList.add('hidden');
+      document.getElementById('buy-result').innerHTML = ''; // Limpiar errores
+    }, 300);
+  }
+</script>
 {% endblock %}

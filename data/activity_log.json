@@ -1,5 +1,25 @@
 [
   {
+    "id": "LOG-FEB60325",
+    "user_email": "admin@lycaonsoftware.com",
+    "action": "login",
+    "entity_type": "user",
+    "entity_id": "U1",
+    "ip_address": "127.0.0.1",
+    "details": "{\"result\": \"success\"}",
+    "created_at": "2026-09-24T16:51:58.467626"
+  },
+  {
+    "id": "LOG-63C5D25C",
+    "user_email": "admin@lycaonsoftware.com",
+    "action": "login",
+    "entity_type": "user",
+    "entity_id": "U1",
+    "ip_address": "127.0.0.1",
+    "details": "{\"result\": \"success\"}",
+    "created_at": "2026-09-24T16:20:36.751469"
+  },
+  {
     "id": "LOG-A966FB18",
     "user_email": "admin@lycaonsoftware.com",
     "action": "login",

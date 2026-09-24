@@ -6,206 +6,85 @@
      ACTIVIDAD — Log de auditoría
      ════════════════════════════════════ -->
 
-<style>
-/* Estilos específicos minimalistas para Activity */
-.search-wrap {
-  display: flex;
-  align-items: center;
-  background: var(--bg-secondary);
-  border: 1px solid var(--border-normal);
-  border-radius: var(--radius-md);
-  padding: 0.5rem 1rem;
-  width: 100%;
-  max-width: 400px;
-}
-.search-icon {
-  color: var(--text-muted);
-  font-weight: 800;
-  margin-right: 0.5rem;
-}
-.search-input {
-  border: none;
-  background: transparent;
-  width: 100%;
-  color: var(--text-primary);
-  font-size: 0.9rem;
-  outline: none;
-}
+<div class="space-y-8 animate-fade-in-up">
 
-.log-timeline {
-  display: flex;
-  flex-direction: column;
-}
-.log-item {
-  display: flex;
-  gap: 1.5rem;
-  padding-bottom: 1.5rem;
-}
-.log-item:last-child {
-  padding-bottom: 0;
-}
-
-.log-indicator {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 24px;
-}
-.log-dot {
-  width: 12px;
-  height: 12px;
-  border-radius: 50%;
-  background: var(--border-strong);
-  margin-top: 0.25rem;
-  z-index: 2;
-}
-.log-line {
-  width: 2px;
-  flex: 1;
-  background: var(--border-subtle);
-  margin-top: 0.25rem;
-  z-index: 1;
-}
-
-.log-body {
-  flex: 1;
-}
-.log-card {
-  background: var(--bg-secondary);
-  border: 1px solid var(--border-normal);
-  border-radius: var(--radius-md);
-  padding: 1.25rem;
-}
-.log-action-badge {
-  font-size: 0.75rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  padding: 0.25rem 0.5rem;
-  background: var(--accent-light);
-  color: var(--accent-primary);
-  border-radius: var(--radius-sm);
-  border: 1px solid var(--accent-primary);
-}
-.log-ip {
-  font-family: monospace;
-  font-size: 0.8rem;
-  color: var(--text-muted);
-  margin-left: 0.75rem;
-}
-.log-time {
-  font-size: 0.85rem;
-  color: var(--text-secondary);
-  font-weight: 500;
-}
-.log-desc {
-  font-size: 0.95rem;
-  color: var(--text-primary);
-  margin-top: 0.75rem;
-  line-height: 1.5;
-}
-.log-desc strong {
-  color: var(--accent-primary);
-}
-.log-entity {
-  font-family: monospace;
-  font-size: 0.85rem;
-  background: var(--bg-card);
-  border: 1px solid var(--border-normal);
-  padding: 0.1rem 0.4rem;
-  border-radius: 4px;
-  margin-left: 0.25rem;
-}
-.log-details {
-  background: var(--bg-card);
-  border: 1px dashed var(--border-strong);
-  padding: 1rem;
-  border-radius: var(--radius-sm);
-  font-family: monospace;
-  font-size: 0.85rem;
-  color: var(--text-secondary);
-  margin-top: 1rem;
-  overflow-x: auto;
-}
-
-.empty-state {
-  text-align: center;
-  padding: 4rem 2rem;
-  background: var(--bg-card);
-  border: 1px dashed var(--border-strong);
-  border-radius: var(--radius-md);
-  color: var(--text-secondary);
-}
-</style>
-
-<!-- Header con filtro de búsqueda -->
-<div class="panel" style="position:relative; margin-bottom:1.5rem;">
-  <div class="panel-body" style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:1rem;">
-    <div>
-      <h2 style="font-size:1.5rem; font-weight:700; display:flex; align-items:center; gap:.5rem; margin-bottom:.35rem;">
+  <!-- Header con filtro de búsqueda -->
+  <div class="card-charcoal p-8 relative overflow-hidden flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
+    <div class="absolute inset-0 bg-gradient-to-r from-red-500/10 to-transparent pointer-events-none"></div>
+    
+    <div class="relative z-10">
+      <h2 class="text-2xl font-black text-white uppercase tracking-widest flex items-center gap-3">
+        <span class="w-2 h-8 bg-red-500 rounded-full inline-block"></span>
         Log de Auditoría
       </h2>
-      <p style="color:var(--text-secondary); font-size:.9rem;">
-        Registro inmutable de eventos críticos y seguridad del sistema.
+      <p class="mt-2 text-sm text-gray-400 font-medium max-w-md">
+        Registro inmutable de eventos críticos y seguridad del sistema Lycaon.
       </p>
     </div>
-    <!-- Buscador en tiempo real (filtra el DOM con JS) -->
-    <div class="search-wrap">
-      <span class="search-icon">&gt;</span>
-      <input
-        class="search-input"
-        type="text"
-        id="activity-search"
-        placeholder="Filtrar por acción, identidad, entidad..."
-        value="{{ filtro }}"
-      />
+    
+    <!-- Buscador en tiempo real -->
+    <div class="relative z-10 w-full md:w-auto min-w-[300px]">
+      <div class="flex items-center bg-black/50 border border-translucent rounded-engineering px-4 py-3 focus-within:border-red-500 transition-colors">
+        <span class="text-gray-500 font-bold mr-3">&gt;</span>
+        <input
+          class="bg-transparent border-none outline-none text-white text-sm w-full placeholder:text-gray-600"
+          type="text"
+          id="activity-search"
+          placeholder="Filtrar por acción, identidad, entidad..."
+          value="{{ filtro }}"
+        />
+      </div>
     </div>
   </div>
-</div>
 
-<!-- Timeline de logs -->
-<div class="panel">
-  <div class="panel-body">
+  <!-- Timeline de logs -->
+  <div class="card-charcoal p-8">
 
     {% if logs %}
-    <div class="log-timeline">
+    <div class="flex flex-col">
       {% for log in logs %}
-      <div class="log-item">
+      <div class="flex gap-6 pb-6 last:pb-0 group">
 
         <!-- Indicador del timeline (punto + línea vertical) -->
-        <div class="log-indicator">
-          <div class="log-dot"></div>
+        <div class="flex flex-col items-center w-6 shrink-0 pt-1.5">
+          <div class="w-3 h-3 rounded-full bg-gray-800 border-2 border-gray-600 group-hover:border-red-500 group-hover:shadow-[0_0_10px_rgba(239,68,68,0.5)] transition-colors z-10"></div>
           {% if not loop.last %}
-          <div class="log-line"></div>
+          <div class="w-px h-full bg-translucent my-1 group-hover:bg-red-500/30 transition-colors z-0"></div>
           {% endif %}
         </div>
 
         <!-- Contenido del log -->
-        <div class="log-body">
-          <div class="log-card">
+        <div class="flex-1 min-w-0">
+          <div class="bg-black/40 border border-translucent rounded-engineering p-5 hover:border-gray-700 transition-colors">
 
             <!-- Fila superior: acción, IP, timestamp -->
-            <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:.5rem; flex-wrap:wrap; gap:.5rem;">
-              <div>
-                <span class="log-action-badge">{{ log.action }}</span>
-                <span class="log-ip">{{ log.ip_address }}</span>
+            <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 mb-4">
+              <div class="flex flex-wrap items-center gap-3">
+                <span class="px-3 py-1 rounded-engineering text-[10px] font-bold uppercase tracking-widest bg-red-500/10 text-red-500 border border-red-500/30">
+                  {{ log.action }}
+                </span>
+                <span class="font-mono text-xs text-gray-500">
+                  {{ log.ip_address }}
+                </span>
               </div>
-              <span class="log-time">
+              <span class="text-xs font-mono text-gray-400 font-medium">
                 {{ log.created_at[:16].replace('T',' ') }} UTC
               </span>
             </div>
 
             <!-- Descripción del evento -->
-            <div class="log-desc">
-              Identidad <strong>{{ log.user_email or 'Sistema/Invitado' }}</strong>
+            <div class="text-sm text-gray-300 leading-relaxed">
+              Identidad <strong class="text-white">{{ log.user_email or 'Sistema/Invitado' }}</strong>
               ejecutó acción sobre entidad
-              <strong>{{ log.entity_type }}</strong>
-              <span class="log-entity">{{ log.entity_id }}</span>
+              <strong class="text-white">{{ log.entity_type }}</strong>
+              <span class="font-mono text-xs bg-black border border-translucent px-2 py-0.5 rounded ml-1">{{ log.entity_id }}</span>
             </div>
 
             <!-- Detalles en JSON (si los hay) -->
             {% if log.details %}
-            <pre class="log-details">{{ log.details }}</pre>
+            <div class="mt-4 bg-black border border-dashed border-gray-700 p-4 rounded-engineering overflow-x-auto">
+              <pre class="font-mono text-xs text-gray-400">{{ log.details }}</pre>
+            </div>
             {% endif %}
 
           </div>
@@ -216,10 +95,12 @@
     </div><!-- /log-timeline -->
 
     {% else %}
-    <div class="empty-state">
-      <div style="font-weight:800; font-size:2rem; color:var(--border-strong); margin-bottom:1rem;">N/A</div>
-      <div style="font-size:1rem; font-weight:500;">No se encontraron registros de auditoría</div>
-      {% if filtro %}para el parámetro "<strong>{{ filtro }}</strong>"{% endif %}.
+    <div class="p-16 flex flex-col items-center justify-center text-center">
+      <div class="w-16 h-16 bg-black border border-translucent flex items-center justify-center rounded-engineering mb-6 text-gray-700">
+        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"></path></svg>
+      </div>
+      <div class="text-xl font-bold text-white mb-2">Sin Registros (N/A)</div>
+      <div class="text-sm text-gray-500">No se encontraron registros de auditoría {% if filtro %}para el parámetro "<strong class="text-white">{{ filtro }}</strong>"{% endif %}.</div>
     </div>
     {% endif %}
 

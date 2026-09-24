@@ -1,51 +1,93 @@
 {% extends "dashboard/layout.html" %}
-{% block dashboard_content %}
-<div class="dashboard-header" style="margin-bottom:2rem;">
-  <h2 class="page-title" style="font-size:2rem; font-weight:800; color:var(--accent-primary);">Gestión de Logística</h2>
-  <p class="page-desc" style="color:var(--text-secondary);">Administra transportadoras y métodos de pago del sistema Lycaon Security.</p>
-</div>
+{% block title %}Gestión de Logística{% endblock %}
 
-<div class="panel">
-  <h3 style="margin-bottom: 1rem; color:var(--text-primary);">Métodos de Pago Activos</h3>
-  <table class="data-table">
-    <thead>
-      <tr>
-        <th>ID</th>
-        <th>Nombre</th>
-        <th>Estado</th>
-      </tr>
-    </thead>
-    <tbody>
-      {% for pm in payments %}
-      <tr>
-        <td>{{ pm.id }}</td>
-        <td>{{ pm.name }}</td>
-        <td>{% if pm.active %}Activo{% else %}Inactivo{% endif %}</td>
-      </tr>
-      {% endfor %}
-    </tbody>
-  </table>
-  
-  <hr style="border-color:var(--border-normal); margin:2rem 0;">
-  
-  <h3 style="margin-bottom: 1rem; color:var(--text-primary);">Transportadoras y Envíos</h3>
-  <table class="data-table">
-    <thead>
-      <tr>
-        <th>ID</th>
-        <th>Transportadora</th>
-        <th>Costo</th>
-      </tr>
-    </thead>
-    <tbody>
-      {% for sh in shipping %}
-      <tr>
-        <td>{{ sh.id }}</td>
-        <td>{{ sh.name }}</td>
-        <td>${{ sh.cost }}</td>
-      </tr>
-      {% endfor %}
-    </tbody>
-  </table>
+{% block dashboard_content %}
+<div class="animate-fade-in-up">
+  <div class="mb-10 flex flex-col md:flex-row md:items-center justify-between gap-4">
+    <div>
+      <h2 class="text-3xl font-black text-white uppercase tracking-widest"><span class="text-gold">Logística</span> y Finanzas</h2>
+      <p class="text-gray-400 mt-2">Administra transportadoras y métodos de pago del sistema Lycaon Security.</p>
+    </div>
+  </div>
+
+  <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+    
+    <!-- Métodos de Pago -->
+    <div class="card-charcoal p-8">
+      <div class="flex items-center gap-4 mb-6">
+        <div class="w-10 h-10 bg-black border border-translucent flex items-center justify-center text-green-500 rounded-engineering">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"></path></svg>
+        </div>
+        <h3 class="text-lg font-bold text-white uppercase tracking-widest">Métodos de Pago</h3>
+      </div>
+      
+      <div class="overflow-x-auto">
+        <table class="w-full text-left border-collapse">
+          <thead>
+            <tr class="border-b border-translucent">
+              <th class="py-3 px-4 text-[10px] font-bold text-gray-500 uppercase tracking-widest">ID</th>
+              <th class="py-3 px-4 text-[10px] font-bold text-gray-500 uppercase tracking-widest">Nombre</th>
+              <th class="py-3 px-4 text-[10px] font-bold text-gray-500 uppercase tracking-widest">Estado</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for pm in payments %}
+            <tr class="border-b border-translucent/50 hover:bg-white/5 transition-colors group">
+              <td class="py-4 px-4 text-sm text-gray-500 font-mono">{{ pm.id }}</td>
+              <td class="py-4 px-4 text-sm font-bold text-gray-300 group-hover:text-gold transition-colors">{{ pm.name }}</td>
+              <td class="py-4 px-4">
+                {% if pm.active %}
+                  <span class="px-2 py-1 bg-green-500/10 text-green-500 border border-green-500/30 rounded-engineering text-[10px] font-bold uppercase tracking-widest">Activo</span>
+                {% else %}
+                  <span class="px-2 py-1 bg-red-500/10 text-red-500 border border-red-500/30 rounded-engineering text-[10px] font-bold uppercase tracking-widest">Inactivo</span>
+                {% endif %}
+              </td>
+            </tr>
+            {% else %}
+            <tr>
+              <td colspan="3" class="py-8 text-center text-gray-500 text-sm">No hay métodos de pago configurados.</td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Transportadoras -->
+    <div class="card-charcoal p-8">
+      <div class="flex items-center gap-4 mb-6">
+        <div class="w-10 h-10 bg-black border border-translucent flex items-center justify-center text-cyan rounded-engineering">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16V6a1 1 0 00-1-1H4a1 1 0 00-1 1v10a1 1 0 001 1h1m8-1a1 1 0 01-1 1H9m4-1V8a1 1 0 011-1h2.586a1 1 0 01.707.293l3.414 3.414a1 1 0 01.293.707V16a1 1 0 01-1 1h-1m-6-1a1 1 0 001 1h1M5 17a2 2 0 104 0m-4 0a2 2 0 114 0m6 0a2 2 0 104 0m-4 0a2 2 0 114 0"></path></svg>
+        </div>
+        <h3 class="text-lg font-bold text-white uppercase tracking-widest">Transportadoras</h3>
+      </div>
+      
+      <div class="overflow-x-auto">
+        <table class="w-full text-left border-collapse">
+          <thead>
+            <tr class="border-b border-translucent">
+              <th class="py-3 px-4 text-[10px] font-bold text-gray-500 uppercase tracking-widest">ID</th>
+              <th class="py-3 px-4 text-[10px] font-bold text-gray-500 uppercase tracking-widest">Transportadora</th>
+              <th class="py-3 px-4 text-[10px] font-bold text-gray-500 uppercase tracking-widest text-right">Costo Base</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for sh in shipping %}
+            <tr class="border-b border-translucent/50 hover:bg-white/5 transition-colors group">
+              <td class="py-4 px-4 text-sm text-gray-500 font-mono">{{ sh.id }}</td>
+              <td class="py-4 px-4 text-sm font-bold text-gray-300 group-hover:text-cyan transition-colors">{{ sh.name }}</td>
+              <td class="py-4 px-4 text-sm text-gray-400 font-mono text-right">${{ "%.2f"|format(sh.cost) }}</td>
+            </tr>
+            {% else %}
+            <tr>
+              <td colspan="3" class="py-8 text-center text-gray-500 text-sm">No hay transportadoras configuradas.</td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+  </div>
 </div>
 {% endblock %}

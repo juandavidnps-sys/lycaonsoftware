@@ -108,7 +108,7 @@ def requiere_admin(f):
     def wrapper(*args, **kwargs):
         if "user" not in session:
             return redirect(url_for("pagina_login"))
-        if session["user"].get("role") != "administrador":
+        if session["user"].get("role") not in ["administrador", "operador"]:
             return redirect(url_for("dashboard_general"))
         return f(*args, **kwargs)
     return wrapper
@@ -147,10 +147,16 @@ def pagina_inicio():
     return render_template("index.html", video=video, usuario=session.get("user"))
 
 
-@app.route("/login")
+@app.route("/login", methods=["GET", "POST"])
 def pagina_login():
     if "user" in session:
-        return redirect(url_for("dashboard_general"))
+        # Redirect based on role
+        if session["user"].get("role") == "administrador":
+            return redirect(url_for("dashboard_general"))
+        elif session["user"].get("role") == "operador":
+            return redirect(url_for("dashboard_general"))
+        else:
+            return redirect(url_for("dashboard_tienda"))
     return render_template("login.html")
 
 
@@ -610,7 +616,7 @@ def api_crear_usuario():
         return jsonify({"success": False, "error": "Llena todos los campos."}), 400
     if len(password) < 6:
         return jsonify({"success": False, "error": "Contrasena minimo 6 caracteres."}), 400
-    if rol not in ("administrador", "cliente"):
+    if rol not in ("administrador", "operador", "cliente"):
         return jsonify({"success": False, "error": "Rol invalido."}), 400
 
     usuarios = leer_json("users.json")
@@ -651,7 +657,7 @@ def api_editar_usuario(user_id):
 
     if not nombre or not email or not rol:
         return jsonify({"success": False, "error": "Faltan campos obligatorios."}), 400
-    if rol not in ("administrador", "cliente"):
+    if rol not in ("administrador", "operador", "cliente"):
         return jsonify({"success": False, "error": "Rol invalido."}), 400
 
     usuarios = leer_json("users.json")
@@ -686,7 +692,7 @@ def api_cambiar_rol(user_id):
     datos     = request.get_json()
     nuevo_rol = datos.get("role")
 
-    if nuevo_rol not in ("administrador", "cliente"):
+    if nuevo_rol not in ("administrador", "operador", "cliente"):
         return jsonify({"success": False, "error": "Rol invalido."}), 400
 
     usuarios = leer_json("users.json")

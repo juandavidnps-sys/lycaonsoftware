@@ -2,177 +2,137 @@
 {% block title %}Manual de Usuario | Lycaon Security{% endblock %}
 
 {% block body %}
-<div style="background:var(--bg-primary); min-height:100vh; position:relative; padding-top: 6rem; padding-bottom: 6rem;">
+<div class="min-h-screen bg-black relative pt-20 pb-24">
 
   <!-- Navbar simple -->
-  <nav class="navbar glass-nav" style="position:fixed; top:0; left:0; right:0; z-index:50;">
-    <a href="/" class="navbar-brand">
-      <div class="navbar-logo"><span>L</span></div>
-      <span class="navbar-name">Lycaon Security <span style="color:var(--text-muted);font-size:.875rem;">Docs</span></span>
-    </a>
-    <div class="navbar-links">
-      <a href="/tienda" class="btn-ghost">Tienda Pública</a>
-      {% if usuario %}
-        <a href="/dashboard" class="btn-primary">Ir al Dashboard</a>
-      {% else %}
-        <a href="/login" class="btn-primary">Iniciar Sesión</a>
-      {% endif %}
+  <nav class="fixed top-0 left-0 right-0 z-50 bg-black/90 backdrop-blur-md border-b border-translucent transition-all duration-300">
+    <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+      <a href="/" class="flex items-center gap-3 group">
+        <div class="w-10 h-10 bg-gold text-black flex items-center justify-center font-bold text-xl rounded-engineering transition-transform group-hover:scale-105">L</div>
+        <span class="font-black text-xl tracking-wide text-white">LYCAON<span class="text-gold font-medium ml-2">SECURITY</span> <span class="text-gray-500 font-medium text-sm ml-2 hidden sm:inline">DOCS</span></span>
+      </a>
+      <div class="flex items-center gap-6">
+        <a href="/tienda" class="text-gray-400 hover:text-gold transition-colors font-medium text-sm tracking-widest uppercase">Tienda Pública</a>
+        {% if usuario %}
+          <a href="/dashboard" class="btn-gold text-xs px-4 py-2">Ir al Dashboard</a>
+        {% else %}
+          <a href="/login" class="btn-gold text-xs px-4 py-2">Iniciar Sesión</a>
+        {% endif %}
+      </div>
     </div>
   </nav>
 
-  <div class="hero-content" style="max-width:1200px; margin: 0 auto; display:grid; grid-template-columns: 260px 1fr; gap: 3rem; align-items: start;">
+  <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-4 gap-12 items-start animate-fade-in-up mt-12">
     
     <!-- Índice Lateral -->
-    <aside class="panel" style="position: sticky; top: 7rem;">
-      <div class="panel-body">
-        <h3 style="font-size: 1.1rem; font-weight: 600; margin-bottom: 1.5rem; color: var(--text-primary); border-bottom: 1px solid var(--border-normal); padding-bottom: 0.5rem;">Índice</h3>
-        <ul style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 0.75rem;">
-          <li><a href="#sec-inicio" class="manual-nav-link">Inicio de Sesión</a></li>
-          <li><a href="#sec-tienda-pub" class="manual-nav-link">Tienda Pública</a></li>
-          <li><a href="#sec-dashboard" class="manual-nav-link">Panel de Administración</a></li>
-          <li><a href="#sec-productos" class="manual-nav-link">Creación de Productos</a></li>
-          <li><a href="#sec-usuarios" class="manual-nav-link">Gestión de Usuarios</a></li>
-          <li><a href="#sec-perfil" class="manual-nav-link">Actualización de Perfil</a></li>
+    <aside class="lg:col-span-1 lg:sticky lg:top-32">
+      <div class="card-charcoal p-6">
+        <h3 class="text-xs font-bold text-gray-500 uppercase tracking-widest mb-4 border-b border-translucent pb-4">Índice</h3>
+        <ul class="flex flex-col gap-3">
+          <li><a href="#sec-inicio" class="text-sm font-medium text-gray-400 hover:text-gold hover:translate-x-1 transition-all block">1. Inicio de Sesión</a></li>
+          <li><a href="#sec-tienda-pub" class="text-sm font-medium text-gray-400 hover:text-gold hover:translate-x-1 transition-all block">2. Tienda Pública</a></li>
+          <li><a href="#sec-dashboard" class="text-sm font-medium text-gray-400 hover:text-gold hover:translate-x-1 transition-all block">3. Panel de Administración</a></li>
+          <li><a href="#sec-productos" class="text-sm font-medium text-gray-400 hover:text-gold hover:translate-x-1 transition-all block">4. Creación de Productos</a></li>
+          <li><a href="#sec-usuarios" class="text-sm font-medium text-gray-400 hover:text-gold hover:translate-x-1 transition-all block">5. Gestión de Usuarios</a></li>
+          <li><a href="#sec-perfil" class="text-sm font-medium text-gray-400 hover:text-gold hover:translate-x-1 transition-all block">6. Actualización de Perfil</a></li>
         </ul>
       </div>
     </aside>
 
     <!-- Contenido Principal -->
-    <main class="manual-content">
+    <main class="lg:col-span-3 card-charcoal p-8 md:p-12">
       
       <!-- Título de la página -->
-      <header style="margin-bottom: 4rem; border-bottom: 1px solid var(--border-normal); padding-bottom: 2rem;">
-        <h1 style="font-size: 2.5rem; font-weight: 700; margin-bottom: 1rem; color: var(--text-primary);">Manual de Usuario</h1>
-        <p style="color: var(--text-secondary); font-size: 1.1rem; line-height: 1.6;">
+      <header class="mb-12 border-b border-translucent pb-8">
+        <h1 class="text-4xl font-black text-white uppercase tracking-widest mb-4">Manual de <span class="text-gold">Usuario</span></h1>
+        <p class="text-gray-400 text-lg leading-relaxed max-w-3xl">
           Documentación técnica y operativa para la plataforma Lycaon Security. Este manual proporciona las directrices necesarias para operar los distintos módulos del sistema operativo.
         </p>
       </header>
 
       <!-- 1. Inicio de Sesión -->
-      <section id="sec-inicio" class="manual-section">
-        <h2 class="manual-section-title">1. Inicio de Sesión</h2>
-        <p class="manual-text">
-          El módulo de autenticación garantiza el acceso seguro a la plataforma. Para acceder, diríjase a la ruta <code>/login</code> e ingrese sus credenciales asignadas (correo electrónico y contraseña).
-        </p>
-        <p class="manual-text">
-          En caso de ser un nuevo cliente, puede utilizar la pestaña de registro para crear una cuenta. Esta cuenta tendrá permisos de "Cliente" por defecto hasta que un Administrador asigne un nivel superior.
-        </p>
+      <section id="sec-inicio" class="scroll-mt-32 mb-16">
+        <h2 class="text-xl font-bold text-white uppercase tracking-widest mb-6 flex items-center gap-3"><span class="w-2 h-6 bg-gold rounded-full inline-block"></span> 1. Inicio de Sesión</h2>
+        <div class="space-y-4 text-gray-400 leading-relaxed">
+          <p>
+            El módulo de autenticación garantiza el acceso seguro a la plataforma. Para acceder, diríjase a la ruta <code class="bg-black border border-translucent px-2 py-1 rounded text-cyan font-mono text-sm">/login</code> e ingrese sus credenciales asignadas (correo electrónico y contraseña).
+          </p>
+          <p>
+            En caso de ser un nuevo cliente, puede utilizar la pestaña de registro para crear una cuenta. Esta cuenta tendrá permisos de "Cliente" por defecto hasta que un Administrador asigne un nivel superior.
+          </p>
+        </div>
       </section>
 
       <!-- 2. Tienda Pública -->
-      <section id="sec-tienda-pub" class="manual-section">
-        <h2 class="manual-section-title">2. Tienda Pública</h2>
-        <p class="manual-text">
-          La Tienda Pública, accesible a través de <code>/tienda</code>, funciona como la vitrina de los productos actualmente disponibles en el inventario. Los visitantes pueden consultar el catálogo y el estado del stock (Disponible, Poco Stock, Agotado).
-        </p>
-        <p class="manual-text">
-          Para realizar una compra o gestión de pedidos, es requisito indispensable iniciar sesión en el sistema.
-        </p>
+      <section id="sec-tienda-pub" class="scroll-mt-32 mb-16">
+        <h2 class="text-xl font-bold text-white uppercase tracking-widest mb-6 flex items-center gap-3"><span class="w-2 h-6 bg-gold rounded-full inline-block"></span> 2. Tienda Pública</h2>
+        <div class="space-y-4 text-gray-400 leading-relaxed">
+          <p>
+            La Tienda Pública, accesible a través de <code class="bg-black border border-translucent px-2 py-1 rounded text-cyan font-mono text-sm">/tienda</code>, funciona como la vitrina de los productos actualmente disponibles en el inventario. Los visitantes pueden consultar el catálogo y el estado del stock (Disponible, Poco Stock, Agotado).
+          </p>
+          <p>
+            Para realizar una compra o gestión de pedidos, es requisito indispensable iniciar sesión en el sistema.
+          </p>
+        </div>
       </section>
 
       <!-- 3. Panel de Administración (Dashboard) -->
-      <section id="sec-dashboard" class="manual-section">
-        <h2 class="manual-section-title">3. Panel de Administración (Dashboard)</h2>
-        <p class="manual-text">
-          Una vez autenticado, el usuario es redirigido al Centro de Control. Desde aquí se monitorean las métricas clave de la infraestructura, incluyendo:
-        </p>
-        <ul class="manual-list">
-          <li><strong>Métricas de alto nivel:</strong> Número de clientes activos, tamaño del catálogo, valoración del inventario y tareas pendientes.</li>
-          <li><strong>Salud del Inventario:</strong> Distribución del catálogo por categorías de hardware y estado del stock.</li>
-          <li><strong>Análisis de Ingresos:</strong> Gráfica interactiva del flujo de capital.</li>
-        </ul>
+      <section id="sec-dashboard" class="scroll-mt-32 mb-16">
+        <h2 class="text-xl font-bold text-white uppercase tracking-widest mb-6 flex items-center gap-3"><span class="w-2 h-6 bg-gold rounded-full inline-block"></span> 3. Panel de Administración</h2>
+        <div class="space-y-4 text-gray-400 leading-relaxed">
+          <p>
+            Una vez autenticado, el usuario es redirigido al Centro de Control. Desde aquí se monitorean las métricas clave de la infraestructura, incluyendo:
+          </p>
+          <ul class="list-disc pl-6 space-y-2 mt-4 text-gray-400">
+            <li><strong class="text-gray-300 font-bold">Métricas de alto nivel:</strong> Número de clientes activos, tamaño del catálogo, valoración del inventario y tareas pendientes.</li>
+            <li><strong class="text-gray-300 font-bold">Salud del Inventario:</strong> Distribución del catálogo por categorías de hardware y estado del stock.</li>
+            <li><strong class="text-gray-300 font-bold">Análisis de Ingresos:</strong> Gráfica interactiva del flujo de capital.</li>
+          </ul>
+        </div>
       </section>
 
       <!-- 4. Creación de Productos -->
-      <section id="sec-productos" class="manual-section">
-        <h2 class="manual-section-title">4. Creación de Productos (Admin)</h2>
-        <p class="manual-text">
-          Los usuarios con rol de Administrador tienen acceso a la sección de Gestión de Inventario. Aquí se administra el catálogo visible en la tienda pública.
-        </p>
-        <p class="manual-text">
-          A través del formulario integrado, se pueden registrar nuevos componentes en el sistema proporcionando el nombre del equipo, categoría, precio y cantidad de stock inicial. También es posible retirar productos del sistema utilizando la acción de eliminación en la tabla del catálogo actual.
-        </p>
+      <section id="sec-productos" class="scroll-mt-32 mb-16">
+        <h2 class="text-xl font-bold text-white uppercase tracking-widest mb-6 flex items-center gap-3"><span class="w-2 h-6 bg-gold rounded-full inline-block"></span> 4. Creación de Productos (Admin)</h2>
+        <div class="space-y-4 text-gray-400 leading-relaxed">
+          <p>
+            Los usuarios con rol de Administrador tienen acceso a la sección de Gestión de Inventario. Aquí se administra el catálogo visible en la tienda pública.
+          </p>
+          <p>
+            A través del formulario integrado, se pueden registrar nuevos componentes en el sistema proporcionando el nombre del equipo, categoría, precio y cantidad de stock inicial. También es posible retirar productos del sistema utilizando la acción de eliminación en la tabla del catálogo actual.
+          </p>
+        </div>
       </section>
 
       <!-- 5. Gestión de Usuarios -->
-      <section id="sec-usuarios" class="manual-section">
-        <h2 class="manual-section-title">5. Gestión de Usuarios y Permisos</h2>
-        <p class="manual-text">
-          El módulo de Control de Usuarios permite a la administración operar sobre los perfiles del sistema.
-        </p>
-        <ul class="manual-list">
-          <li><strong>Nuevo Usuario:</strong> Formulario para registrar clientes directamente en la base de datos asignando un rol inicial (Cliente o Administrador).</li>
-          <li><strong>Modificación de Nivel:</strong> Utilizando el selector en la tabla, se puede ascender o degradar el rango de cualquier usuario instantáneamente.</li>
-          <li><strong>Baja de Cliente:</strong> Eliminación de cuentas para revocar el acceso a la infraestructura.</li>
-        </ul>
+      <section id="sec-usuarios" class="scroll-mt-32 mb-16">
+        <h2 class="text-xl font-bold text-white uppercase tracking-widest mb-6 flex items-center gap-3"><span class="w-2 h-6 bg-gold rounded-full inline-block"></span> 5. Gestión de Usuarios y Permisos</h2>
+        <div class="space-y-4 text-gray-400 leading-relaxed">
+          <p>
+            El módulo de Control de Usuarios permite a la administración operar sobre los perfiles del sistema.
+          </p>
+          <ul class="list-disc pl-6 space-y-2 mt-4 text-gray-400">
+            <li><strong class="text-gray-300 font-bold">Nuevo Usuario:</strong> Formulario para registrar clientes directamente en la base de datos asignando un rol inicial (Cliente o Administrador).</li>
+            <li><strong class="text-gray-300 font-bold">Modificación de Nivel:</strong> Utilizando el selector en la tabla, se puede ascender o degradar el rango de cualquier usuario instantáneamente.</li>
+            <li><strong class="text-gray-300 font-bold">Baja de Cliente:</strong> Eliminación de cuentas para revocar el acceso a la infraestructura.</li>
+          </ul>
+        </div>
       </section>
 
       <!-- 6. Actualización de Perfil -->
-      <section id="sec-perfil" class="manual-section">
-        <h2 class="manual-section-title">6. Actualización de Perfil Institucional</h2>
-        <p class="manual-text">
-          Cada cliente puede acceder a la configuración de su cuenta para actualizar sus credenciales visuales.
-        </p>
-        <p class="manual-text">
-          Mediante el botón "Cambiar Foto", el sistema permite la carga segura de archivos gráficos (JPG, PNG, WebP) que sustituirán el avatar por defecto. Estas actualizaciones se aplican en todo el entorno operativo en tiempo real.
-        </p>
+      <section id="sec-perfil" class="scroll-mt-32">
+        <h2 class="text-xl font-bold text-white uppercase tracking-widest mb-6 flex items-center gap-3"><span class="w-2 h-6 bg-gold rounded-full inline-block"></span> 6. Actualización de Perfil Institucional</h2>
+        <div class="space-y-4 text-gray-400 leading-relaxed">
+          <p>
+            Cada cliente puede acceder a la configuración de su cuenta para actualizar sus credenciales visuales.
+          </p>
+          <p>
+            Mediante el botón "Cambiar Foto", el sistema permite la carga segura de archivos gráficos (JPG, PNG, WebP) que sustituirán el avatar por defecto. Estas actualizaciones se aplican en todo el entorno operativo en tiempo real.
+          </p>
+        </div>
       </section>
 
     </main>
   </div>
 </div>
-{% endblock %}
-
-{% block extra_css %}
-<style>
-  /* Estilos específicos del manual adaptados al nuevo diseño minimalista */
-  .manual-nav-link {
-    color: var(--text-secondary);
-    text-decoration: none;
-    font-size: 0.95rem;
-    transition: all 0.2s ease;
-    display: block;
-    padding: 0.4rem 0;
-  }
-  .manual-nav-link:hover {
-    color: var(--text-primary);
-    transform: translateX(4px);
-  }
-  
-  .manual-section {
-    margin-bottom: 5rem;
-    padding-top: 5rem; /* Para que al hacer anclaje no lo tape el navbar */
-    margin-top: -5rem;
-  }
-  
-  .manual-section-title {
-    font-size: 1.75rem;
-    font-weight: 700;
-    margin-bottom: 1.25rem;
-    color: var(--text-primary);
-    display: flex;
-    align-items: center;
-  }
-  
-  .manual-text {
-    font-size: 1.05rem;
-    line-height: 1.7;
-    color: var(--text-secondary);
-    margin-bottom: 1.25rem;
-  }
-  
-  .manual-list {
-    margin-bottom: 2rem;
-    padding-left: 1.5rem;
-    color: var(--text-secondary);
-    font-size: 1.05rem;
-    line-height: 1.7;
-  }
-  .manual-list li {
-    margin-bottom: 0.5rem;
-  }
-  .manual-list li strong {
-    color: var(--text-primary);
-  }
-</style>
 {% endblock %}

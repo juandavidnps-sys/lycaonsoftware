@@ -1,16 +1,24 @@
 {% extends "dashboard/layout.html" %}
-{% block dashboard_content %}
-<div class="dashboard-header" style="margin-bottom:2rem;">
-  <h2 class="page-title" style="font-size:2rem; font-weight:800; color:var(--accent-primary);">Gestión de Promociones</h2>
-  <p class="page-desc" style="color:var(--text-secondary);">Administra descuentos y ofertas de temporada.</p>
-</div>
+{% block title %}Gestión de Promociones{% endblock %}
 
-<div class="panel">
-  <div class="empty-state">
-    <div style="font-weight:800; font-size:2rem; color:var(--border-strong); margin-bottom:1rem;">NO HAY OFERTAS</div>
-    <div style="font-size:1rem; font-weight:500;">No se han configurado promociones activas.</div>
-    <br>
-    <button class="btn-primary">Crear Nueva Promoción</button>
+{% block dashboard_content %}
+<div class="animate-fade-in-up">
+  <div class="mb-10 flex flex-col md:flex-row md:items-center justify-between gap-4">
+    <div>
+      <h2 class="text-3xl font-black text-white uppercase tracking-widest"><span class="text-gold">Gestión</span> de Promociones</h2>
+      <p class="text-gray-400 mt-2">Administra descuentos y ofertas de temporada para el catálogo táctico.</p>
+    </div>
+  </div>
+
+  <div class="card-charcoal p-16 flex flex-col items-center justify-center text-center border-dashed border-2 border-translucent">
+    <div class="w-20 h-20 mb-6 bg-black border border-translucent flex items-center justify-center text-gray-500 rounded-engineering">
+      <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+    </div>
+    <div class="text-2xl font-black text-white tracking-widest uppercase mb-2">NO HAY OFERTAS ACTIVAS</div>
+    <div class="text-gray-400 max-w-md mb-8">Actualmente no se han configurado promociones, códigos de descuento ni ofertas de temporada en el sistema.</div>
+    <button class="btn-gold uppercase tracking-widest text-sm py-3 px-8">
+      Crear Nueva Promoción
+    </button>
   </div>
 </div>
 {% endblock %}
