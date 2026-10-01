@@ -19,14 +19,12 @@
       <div class="absolute top-0 left-1/2 -translate-x-1/2 w-48 h-1 bg-gradient-to-r from-transparent via-gold to-transparent"></div>
       
       <div class="text-center mb-8">
-        <div class="w-12 h-12 bg-black border border-gold/30 flex items-center justify-center text-gold mx-auto mb-6 rounded-engineering">
+        <div class="w-12 h-12 bg-black/60 border border-gold/30 flex items-center justify-center text-gold mx-auto mb-6 rounded-engineering shadow-inner">
           <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>
         </div>
-        <h1 class="text-2xl font-black text-white uppercase tracking-widest mb-2">AUTORIZACIÓN <span class="text-gold">REQUERIDA</span></h1>
-        <p class="text-sm text-gray-400">Ingresa credenciales de nivel táctico.</p>
+        <h1 class="text-2xl font-black text-white uppercase tracking-widest mb-2">INGRESA <span class="text-gold">AL SISTEMA</span></h1>
+        <p class="text-sm text-gray-400">Ingresa tus datos.</p>
         <div class="mt-4 flex items-center justify-center gap-2 text-xs font-mono text-cyan/70 uppercase">
-          <span class="w-1.5 h-1.5 bg-cyan rounded-full animate-pulse"></span>
-          Conexión Encriptada
         </div>
       </div>
 
@@ -35,30 +33,30 @@
       <form id="login-form" class="space-y-6">
         <div>
           <div class="relative">
-            <span class="absolute left-4 top-1/2 -translate-y-1/2 text-gray-500">
+            <span class="absolute left-4 top-1/2 -translate-y-1/2 text-gray-500 pointer-events-none">
               <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
             </span>
-            <input id="login-email" type="email" placeholder="Identificador / Email" required class="w-full bg-black border border-translucent text-white rounded-engineering py-3 pl-12 pr-4 focus:outline-none focus:border-gold transition-colors placeholder:text-gray-600">
+            <input id="login-email" type="email" placeholder="Correo electronico" required class="w-full bg-[#181820] border border-translucent text-white rounded-engineering py-3 pl-12 pr-4 focus:outline-none focus:border-gold transition-colors placeholder:text-gray-500">
           </div>
         </div>
         
         <div>
           <div class="relative">
-            <span class="absolute left-4 top-1/2 -translate-y-1/2 text-gray-500">
+            <span class="absolute left-4 top-1/2 -translate-y-1/2 text-gray-500 pointer-events-none">
               <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>
             </span>
-            <input id="login-password" type="password" placeholder="Código de Acceso" required class="w-full bg-black border border-translucent text-white rounded-engineering py-3 pl-12 pr-4 focus:outline-none focus:border-gold transition-colors placeholder:text-gray-600">
+            <input id="login-password" type="password" placeholder="Contraseña" required class="w-full bg-[#181820] border border-translucent text-white rounded-engineering py-3 pl-12 pr-4 focus:outline-none focus:border-gold transition-colors placeholder:text-gray-500">
           </div>
         </div>
 
         <button type="submit" id="login-btn" class="w-full btn-gold py-3 uppercase tracking-widest text-sm shadow-[0_0_15px_rgba(212,175,55,0.2)]">
-          Desbloquear Sistema →
+          Ingresar →
         </button>
       </form>
 
       <div class="mt-8 border-t border-translucent pt-6 form-toggle text-center">
-        <button type="button" class="text-sm text-gray-500 hover:text-gold transition-colors tracking-wide">
-          ¿No tienes credenciales? Solicitar Alta
+        <button type="button" class="text-sm text-gray-400 hover:text-gold transition-colors tracking-wide">
+          ¿No tienes usuario? crea uno
         </button>
       </div>
     </div>
@@ -68,41 +66,36 @@
       <div class="absolute top-0 left-1/2 -translate-x-1/2 w-48 h-1 bg-gradient-to-r from-transparent via-cyan to-transparent"></div>
       
       <div class="text-center mb-8">
-        <div class="w-12 h-12 bg-black border border-cyan/30 flex items-center justify-center text-cyan mx-auto mb-6 rounded-engineering">
+        <div class="w-12 h-12 bg-black/60 border border-cyan/30 flex items-center justify-center text-cyan mx-auto mb-6 rounded-engineering shadow-inner">
           <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z"></path></svg>
         </div>
-        <h1 class="text-2xl font-black text-white uppercase tracking-widest mb-2">NUEVO <span class="text-cyan">RECLUTA</span></h1>
-        <p class="text-sm text-gray-400">Proceso de alta en red segura Lycaon.</p>
+        <h1 class="text-2xl font-black text-white uppercase tracking-widest mb-2">Crear un nuevo usuario</h1>
+        <p class="text-sm text-gray-400">Proceso de ingreso a Lycaon.</p>
       </div>
 
       <div id="register-error" class="hidden mb-6 p-3 bg-red-900/20 border border-red-500/30 text-red-400 text-sm rounded-engineering text-center"></div>
 
       <form id="register-form" class="space-y-4">
         <div>
-          <input id="reg-name" type="text" placeholder="Nombre en Clave / Completo" required class="w-full bg-black border border-translucent text-white rounded-engineering py-3 px-4 focus:outline-none focus:border-cyan transition-colors placeholder:text-gray-600">
-        </div>
-        
-        <div class="grid grid-cols-2 gap-4">
-          <input id="reg-phone" type="tel" placeholder="Contacto Seguro" required class="w-full bg-black border border-translucent text-white rounded-engineering py-3 px-4 focus:outline-none focus:border-cyan transition-colors placeholder:text-gray-600">
-          <input id="reg-address" type="text" placeholder="Punto de Extracción / Dir" required class="w-full bg-black border border-translucent text-white rounded-engineering py-3 px-4 focus:outline-none focus:border-cyan transition-colors placeholder:text-gray-600">
+          <input id="reg-name" type="text" placeholder="Nombre de usuario" required class="w-full bg-[#181820] border border-translucent text-white rounded-engineering py-3 px-4 focus:outline-none focus:border-cyan transition-colors placeholder:text-gray-500">
         </div>
 
         <div>
-          <input id="reg-email" type="email" placeholder="Email Cifrado / Correo" required class="w-full bg-black border border-translucent text-white rounded-engineering py-3 px-4 focus:outline-none focus:border-cyan transition-colors placeholder:text-gray-600">
+          <input id="reg-email" type="email" placeholder="Correo electronico" required class="w-full bg-[#181820] border border-translucent text-white rounded-engineering py-3 px-4 focus:outline-none focus:border-cyan transition-colors placeholder:text-gray-500">
         </div>
 
         <div>
-          <input id="reg-password" type="password" placeholder="Crear Código (Mín. 6 chars)" minlength="6" required class="w-full bg-black border border-translucent text-white rounded-engineering py-3 px-4 focus:outline-none focus:border-cyan transition-colors placeholder:text-gray-600">
+          <input id="reg-password" type="password" placeholder="Contraseña(Mín. 6 chars)" minlength="6" required class="w-full bg-[#181820] border border-translucent text-white rounded-engineering py-3 px-4 focus:outline-none focus:border-cyan transition-colors placeholder:text-gray-500">
         </div>
 
         <button type="submit" id="register-btn" class="w-full bg-cyan hover:bg-cyan/80 text-black font-bold py-3 uppercase tracking-widest text-sm rounded-engineering transition-colors shadow-[0_0_15px_rgba(0,240,255,0.2)] mt-4">
-          Solicitar Alta en Sistema
+         Ingresar al Sistema
         </button>
       </form>
 
       <div class="mt-8 border-t border-translucent pt-6 form-toggle text-center">
-        <button type="button" class="text-sm text-gray-500 hover:text-cyan transition-colors tracking-wide">
-          Ya poseo autorización. Acceder
+        <button type="button" class="text-sm text-gray-400 hover:text-cyan transition-colors tracking-wide">
+          Ya puedes ingresar. Acceder
         </button>
       </div>
     </div>

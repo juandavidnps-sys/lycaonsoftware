@@ -12,7 +12,7 @@
   {# ── SEO Meta Tags ── #}
   <title>{% block title %}Lycaon Security{% endblock %} — Control Operativo</title>
   <meta name="description" content="{% block description %}Lycaon Security: gestión de inventario, equipos y operaciones con gravedad ineludible.{% endblock %}" />
-  <meta name="theme-color" content="#000000" />
+  <meta name="theme-color" content="#09090B" />
 
   {# ── Tailwind CSS CDN ── #}
   <script src="https://cdn.tailwindcss.com"></script>
@@ -22,27 +22,30 @@
       theme: {
         extend: {
           colors: {
-            black: '#000000',
+            black: '#09090B',
             charcoal: {
-              DEFAULT: '#15181e',
-              light: '#1f232b',
+              DEFAULT: '#121216',
+              light: '#18181F',
+              elevated: '#1E1E26',
             },
             gold: {
               DEFAULT: '#D4AF37',
-              hover: '#B5952F',
+              light: '#F5D77F',
+              hover: '#E5C048',
+              dark: '#996515',
             },
             cyan: {
               DEFAULT: '#00F0FF',
             }
           },
           borderColor: {
-            translucent: 'rgba(178, 182, 189, 0.12)',
+            translucent: 'rgba(212, 175, 55, 0.15)',
           },
           borderRadius: {
-            'engineering': '8px',
+            'engineering': '12px',
           },
           fontFamily: {
-            sans: ['Inter', 'sans-serif'],
+            sans: ['"Plus Jakarta Sans"', 'Inter', 'sans-serif'],
           }
         }
       }
@@ -56,13 +59,13 @@
     }
     @layer components {
       .card-charcoal {
-        @apply bg-charcoal border border-translucent rounded-engineering;
+        @apply bg-charcoal border border-translucent rounded-engineering transition-all duration-300;
       }
       .btn-gold {
-        @apply bg-gold text-black font-bold py-2 px-4 rounded-engineering transition-colors hover:bg-gold-hover;
+        @apply bg-gold text-black font-bold py-2.5 px-5 rounded-engineering transition-all duration-300 hover:bg-gold-light shadow-md hover:shadow-lg hover:-translate-y-0.5 active:translate-y-0;
       }
       .btn-outline {
-        @apply border border-translucent text-gray-300 py-2 px-4 rounded-engineering transition-colors hover:border-gold hover:text-gold;
+        @apply border border-translucent text-gray-300 py-2.5 px-5 rounded-engineering transition-all duration-300 hover:border-gold hover:text-gold hover:bg-gold/5;
       }
     }
   </style>
@@ -82,6 +85,8 @@
 
   {# ── JS Principal (cargado al final para mejor rendimiento) ── #}
   <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+  {# ── JS Complementario SIAM UI/UX Microinteracciones ── #}
+  <script src="{{ url_for('static', filename='js/siam-interactions.js') }}"></script>
 
   {# Bloque para JS adicional por página #}
   {% block extra_js %}{% endblock %}

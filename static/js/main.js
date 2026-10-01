@@ -315,17 +315,63 @@ function mostrarToast(msg, isError) {
       filterBtns.forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
 
-      const categoria = btn.dataset.categoria;
+      const categoria = (btn.dataset.categoria || 'todos').toLowerCase();
+      let visibleCount = 0;
 
       // Mostrar/ocultar productos según la categoría seleccionada
       productCards.forEach(function (card) {
-        if (categoria === 'todos' || card.dataset.categoria === categoria) {
+        const cardCat = (card.dataset.categoria || '').toLowerCase();
+        let matches = (categoria === 'todos' || cardCat === categoria);
+
+        // Alias inteligentes para categorías en español / sinónimos
+        if (!matches) {
+          if (categoria === 'choque' || categoria === 'seguridad') {
+            matches = cardCat === 'hardware' || cardCat.includes('choque') || cardCat.includes('seguridad');
+          } else if (categoria === 'quimico') {
+            matches = cardCat === 'hardware' || cardCat.includes('quimico');
+          } else if (categoria === 'monitoreo') {
+            matches = cardCat === 'hardware' || cardCat === 'security' || cardCat.includes('monitoreo');
+          } else if (categoria === 'seguridad') {
+            matches = cardCat === 'security';
+          } else if (categoria === 'redes') {
+            matches = cardCat === 'network';
+          } else if (categoria === 'servicios') {
+            matches = cardCat === 'service';
+          }
+        }
+
+        if (matches) {
           card.style.display = '';
-          card.style.animation = 'fade-up 0.4s ease forwards';
+          card.style.animation = 'siamFadeInUp 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards';
+          visibleCount++;
         } else {
           card.style.display = 'none';
         }
       });
+
+      // Manejo de estado vacío si la categoría no tiene items
+      const grid = document.querySelector('.products-grid');
+      let emptyMsg = document.getElementById('siam-store-empty-msg');
+      if (visibleCount === 0) {
+        if (!emptyMsg && grid) {
+          emptyMsg = document.createElement('div');
+          emptyMsg.id = 'siam-store-empty-msg';
+          emptyMsg.className = 'col-span-full card-charcoal p-12 text-center my-6 flex flex-col items-center justify-center';
+          emptyMsg.innerHTML = `
+            <div class="w-12 h-12 rounded-full bg-gold/10 border border-gold/30 flex items-center justify-center text-gold mb-4">
+              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4"></path></svg>
+            </div>
+            <div class="text-lg font-bold text-white mb-1">Sin Equipos en esta Categoría</div>
+            <p class="text-sm text-gray-400 mb-4">Actualmente no hay unidades disponibles para el filtro seleccionado.</p>
+            <button class="btn-outline text-xs px-4 py-2" onclick="document.querySelector('.filter-btn[data-categoria=\\'todos\\']').click()">Restablecer Filtros</button>
+          `;
+          grid.appendChild(emptyMsg);
+        } else if (emptyMsg) {
+          emptyMsg.style.display = 'flex';
+        }
+      } else if (emptyMsg) {
+        emptyMsg.style.display = 'none';
+      }
     });
   });
 })();
@@ -616,22 +662,23 @@ function abrirModalEditarUsuario(id, nombre, email, rol) {
       datasets: [{
         label: 'Ingresos',
         data: valores,
-        borderColor: '#38bdf8',
-        borderWidth: 2,
+        borderColor: '#D4AF37',
+        borderWidth: 2.5,
         fill: true,
-        // Degradado bajo la línea
+        // Degradado dorado bajo la línea
         backgroundColor: function (context) {
           const chart = context.chart;
           const { ctx, chartArea } = chart;
-          if (!chartArea) return 'rgba(56,189,248,0.1)';
+          if (!chartArea) return 'rgba(212,175,55,0.1)';
           const gradient = ctx.createLinearGradient(0, chartArea.top, 0, chartArea.bottom);
-          gradient.addColorStop(0, 'rgba(56,189,248,0.25)');
-          gradient.addColorStop(1, 'rgba(56,189,248,0)');
+          gradient.addColorStop(0, 'rgba(212,175,55,0.25)');
+          gradient.addColorStop(1, 'rgba(212,175,55,0)');
           return gradient;
         },
         tension: 0.4,       // Suavizado de la curva
         pointRadius: 0,     // Sin puntos para un look limpio
-        pointHoverRadius: 4
+        pointHoverRadius: 5,
+        pointBackgroundColor: '#F5D77F'
       }]
     },
     options: {
@@ -640,11 +687,11 @@ function abrirModalEditarUsuario(id, nombre, email, rol) {
       plugins: {
         legend: { display: false },
         tooltip: {
-          backgroundColor: 'rgba(0,0,0,0.85)',
-          borderColor: 'rgba(0,0,0,0.1)',
+          backgroundColor: 'rgba(18,18,22,0.95)',
+          borderColor: 'rgba(212,175,55,0.3)',
           borderWidth: 1,
-          titleColor: 'rgba(255,255,255,0.7)',
-          bodyColor: '#38bdf8',
+          titleColor: 'rgba(244,244,245,0.8)',
+          bodyColor: '#F5D77F',
           callbacks: {
             label: ctx => ` $${ctx.parsed.y.toLocaleString('es-ES', { minimumFractionDigits: 2 })}`
           }

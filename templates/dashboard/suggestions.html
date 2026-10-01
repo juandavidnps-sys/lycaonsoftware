@@ -1,5 +1,5 @@
 {% extends "dashboard/layout.html" %}
-{% block title %}Centro de Sugerencias{% endblock %}
+{% block title %}Soporte y sugerencias{% endblock %}
 
 {% block dashboard_content %}
 <div class="max-w-2xl mx-auto space-y-8 animate-fade-in-up">
@@ -9,7 +9,7 @@
     <div class="absolute inset-0 bg-gradient-to-r from-gold/10 to-transparent pointer-events-none"></div>
     <h2 class="text-2xl font-black text-white uppercase tracking-widest flex items-center gap-3 relative z-10">
       <span class="w-2 h-8 bg-gold rounded-full inline-block"></span>
-      Centro de Sugerencias
+      Soporte y sugerencias
     </h2>
     <p class="mt-2 text-sm text-gray-400 font-medium relative z-10">
       Envía tus reportes de incidentes, anomalías o sugerencias para optimizar Lycaon Security.
@@ -37,7 +37,7 @@
       <div id="sug-result" class="hidden p-4 rounded-engineering text-sm font-bold border border-transparent"></div>
       
       <button type="submit" class="w-full py-4 mt-4 bg-gold text-black rounded-engineering text-sm font-bold uppercase tracking-widest transition-all duration-300 hover:bg-[#b08d27] shadow-[0_0_15px_rgba(212,175,55,0.3)]" id="sug-btn">
-        Transmitir Mensaje
+        Enviar solicitud
       </button>
     </form>
   </div>
@@ -81,7 +81,7 @@ document.getElementById('suggestion-form').addEventListener('submit', async func
     res.textContent = 'Fallo de conexión cifrada.';
   } finally {
     btn.disabled = false;
-    btn.textContent = 'Transmitir Mensaje';
+    btn.textContent = 'Enviar solicitud';
   }
 });
 </script>

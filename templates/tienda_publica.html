@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% block title %}Catálogo de Ciberseguridad{% endblock %}
+{% block title %}Catálogo de Seguridad Residencial{% endblock %}
 
 {% block body %}
 <!-- ══════════════════════════════════════════════
@@ -12,14 +12,14 @@
   <nav class="fixed top-0 left-0 right-0 z-50 bg-black/90 backdrop-blur-md border-b border-translucent transition-all duration-300">
     <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
       <a href="/" class="flex items-center gap-3 group">
-        <div class="w-10 h-10 bg-gold text-black flex items-center justify-center font-bold text-xl rounded-engineering transition-transform group-hover:scale-105">L</div>
-        <span class="font-black text-xl tracking-wide text-white">LYCAON<span class="text-gold font-medium ml-2">SECURITY</span> <span class="text-gray-500 font-medium text-sm ml-2 hidden sm:inline">HARDWARE</span></span>
+        <img src="{{ url_for('static', filename='img/logos/sd.png') }}" alt="Lycaon Logo" class="w-10 h-10 transition-transform group-hover:scale-105 object-contain">
+        <span class="font-black text-xl tracking-wide text-white">LYCAON<span class="text-gold font-medium ml-2">SECURITY</span> <span class="text-gray-500 font-medium text-sm ml-2 hidden sm:inline">Tienda</span></span>
       </a>
       <div class="flex items-center gap-6">
         {% if usuario %}
           <a href="/dashboard" class="text-gray-400 hover:text-gold transition-colors font-medium text-sm tracking-widest uppercase">Dashboard Central</a>
         {% else %}
-          <a href="/login" class="btn-gold text-xs px-4 py-2">Acceso Clientes</a>
+          <a href="/login" class="btn-gold text-xs px-4 py-2">iniciar sesion</a>
         {% endif %}
       </div>
     </div>
@@ -32,20 +32,31 @@
       <div class="relative z-10">
         <h2 class="text-2xl font-black text-white uppercase tracking-widest flex items-center gap-3 mb-2">
           <span class="w-2 h-8 bg-gold rounded-full inline-block"></span>
-          Catálogo de Equipamiento Táctico y Autodefensa
+        Catálogo
         </h2>
         <p class="text-sm text-gray-400 font-medium max-w-2xl">
-          Explora nuestra línea de artículos de protección personal. Para adquirir equipos, debes estar registrado en nuestra red.
+          Explora nuestra línea de artículos de protección personal. Para adquirir equipos, debes estar registrado en nuestra web.
         </p>
       </div>
     </div>
 
-    <div class="flex flex-wrap gap-4 mb-10 store-filters">
-      <button class="filter-btn px-4 py-2 text-xs font-bold uppercase tracking-widest rounded-engineering border border-gold text-gold bg-gold/10 transition-colors active" data-categoria="todos">Todos</button>
-      <button class="filter-btn px-4 py-2 text-xs font-bold uppercase tracking-widest rounded-engineering border border-translucent text-gray-400 bg-black/40 hover:text-white hover:border-gray-500 transition-colors" data-categoria="Choque">Armas de Choque</button>
-      <button class="filter-btn px-4 py-2 text-xs font-bold uppercase tracking-widest rounded-engineering border border-translucent text-gray-400 bg-black/40 hover:text-white hover:border-gray-500 transition-colors" data-categoria="Quimico">Defensa Química</button>
-      <button class="filter-btn px-4 py-2 text-xs font-bold uppercase tracking-widest rounded-engineering border border-translucent text-gray-400 bg-black/40 hover:text-white hover:border-gray-500 transition-colors" data-categoria="Monitoreo">Monitoreo</button>
-      <button class="filter-btn px-4 py-2 text-xs font-bold uppercase tracking-widest rounded-engineering border border-translucent text-gray-400 bg-black/40 hover:text-white hover:border-gray-500 transition-colors" data-categoria="Tactico">Equipamiento Táctico</button>
+    <div class="flex flex-wrap gap-3 mb-10 store-filters">
+      <button class="filter-btn px-4 py-2 text-xs font-bold uppercase tracking-widest rounded-engineering border border-gold text-gold bg-gold/10 transition-colors active flex items-center gap-2" data-categoria="todos">
+        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"></path></svg>
+        Todos
+      </button>
+      <button class="filter-btn px-4 py-2 text-xs font-bold uppercase tracking-widest rounded-engineering border border-translucent text-gray-400 bg-black/40 hover:text-white hover:border-gray-500 transition-colors flex items-center gap-2" data-categoria="Hardware">
+        <svg class="w-3.5 h-3.5 text-yellow-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z"></path></svg>
+        Equipos
+      </button>
+      <button class="filter-btn px-4 py-2 text-xs font-bold uppercase tracking-widest rounded-engineering border border-translucent text-gray-400 bg-black/40 hover:text-white hover:border-gray-500 transition-colors flex items-center gap-2" data-categoria="Software">
+        <svg class="w-3.5 h-3.5 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path></svg>
+        Software
+      </button>
+      <button class="filter-btn px-4 py-2 text-xs font-bold uppercase tracking-widest rounded-engineering border border-translucent text-gray-400 bg-black/40 hover:text-white hover:border-gray-500 transition-colors flex items-center gap-2" data-categoria="Service">
+        <svg class="w-3.5 h-3.5 text-purple-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+        Servicios
+      </button>
     </div>
 
     <!-- Grid de Productos -->
@@ -90,7 +101,7 @@
             <!-- Si el usuario está logueado, mostrar comprar normal, si no, redirigir a login -->
             {% if usuario %}
               <a href="/dashboard/store" class="w-full block text-center py-3 bg-gold text-black rounded-engineering text-xs font-bold uppercase tracking-widest transition-all duration-300 hover:bg-yellow-500 shadow-[0_0_15px_rgba(212,175,55,0.3)]">
-                Adquirir Equipo
+                Ver opciones de compra
               </a>
             {% else %}
               <a href="/login" class="w-full block text-center py-3 bg-black/40 border border-translucent text-gray-300 rounded-engineering text-xs font-bold uppercase tracking-widest transition-colors hover:text-white hover:border-gray-500">
