@@ -21,7 +21,7 @@
     <form id="suggestion-form" class="space-y-6">
       
       <div>
-        <label class="block text-[10px] font-bold text-gray-500 uppercase tracking-widest mb-2">Clasificación del Mensaje</label>
+        <label class="block text-xs font-mono font-bold text-zinc-400 uppercase tracking-wider mb-2">Clasificación del Mensaje</label>
         <select id="sug-type" class="w-full bg-black border border-translucent text-white rounded-engineering py-3 px-4 focus:outline-none focus:border-gold transition-colors" required>
           <option value="sugerencia">Propuesta de Mejora (Sugerencia)</option>
           <option value="error">Fallo Crítico (Reporte de Error)</option>
@@ -30,13 +30,13 @@
       </div>
       
       <div>
-        <label class="block text-[10px] font-bold text-gray-500 uppercase tracking-widest mb-2">Contenido de la Transmisión</label>
-        <textarea id="sug-message" class="w-full bg-black border border-translucent text-white rounded-engineering py-3 px-4 focus:outline-none focus:border-gold transition-colors resize-y placeholder:text-gray-600" required rows="6" placeholder="Describe los detalles de la situación con la mayor precisión posible..."></textarea>
+        <label class="block text-xs font-mono font-bold uppercase tracking-wider text-zinc-400 mb-2">Contenido de la Transmisión</label>
+        <textarea id="sug-message" class="w-full bg-neutral-900 border border-neutral-800 text-white rounded-lg py-3 px-4 focus:outline-none focus:border-gold transition-colors resize-y placeholder:text-zinc-400" required rows="6" placeholder="Describe los detalles de la situación con la mayor precisión posible..."></textarea>
       </div>
       
-      <div id="sug-result" class="hidden p-4 rounded-engineering text-sm font-bold border border-transparent"></div>
+      <div id="sug-result" class="hidden p-4 rounded-lg text-sm font-bold border border-transparent"></div>
       
-      <button type="submit" class="w-full py-4 mt-4 bg-gold text-black rounded-engineering text-sm font-bold uppercase tracking-widest transition-all duration-300 hover:bg-[#b08d27] shadow-[0_0_15px_rgba(212,175,55,0.3)]" id="sug-btn">
+      <button type="submit" class="w-full py-4 mt-4 bg-gold text-neutral-950 font-bold rounded-lg text-sm uppercase tracking-wider transition-all duration-300 hover:bg-[#b08d27] shadow-none border border-amber-500/20" id="sug-btn">
         Enviar solicitud
       </button>
     </form>
@@ -55,7 +55,7 @@ document.getElementById('suggestion-form').addEventListener('submit', async func
   if (!message) return;
   
   btn.disabled = true;
-  btn.innerHTML = '<span class="animate-pulse">Transmitiendo...</span>';
+  btn.innerHTML = '<span>Transmitiendo...</span>';
   
   try {
     const response = await fetch('/api/suggestions', {

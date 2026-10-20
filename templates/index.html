@@ -5,20 +5,24 @@
 {% block body %}
 <div class="relative min-h-screen bg-black text-gray-200 overflow-hidden flex flex-col">
 
-  <!-- ── Ambient Glow Background ── -->
-  <div class="absolute inset-0 z-0 pointer-events-none overflow-hidden">
-    <div class="absolute top-20 left-1/2 -translate-x-1/2 w-[800px] h-[500px] bg-gold/5 rounded-full blur-[160px]"></div>
-    <div class="absolute top-1/3 -right-20 w-[450px] h-[450px] bg-gold/4 rounded-full blur-[140px]"></div>
-  </div>
+  <!-- ── Ambient Clean Canvas ── -->
+  <div class="absolute inset-0 z-0 pointer-events-none bg-[#09090B]" aria-hidden="true"></div>
 
   <!-- ── Navbar ── -->
   <nav class="fixed top-0 w-full z-50 bg-[#09090B]/90 backdrop-blur-md border-b border-translucent transition-all duration-300" id="main-navbar">
     <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
       <a href="/" class="flex items-center gap-3 group">
-        <img src="{{ url_for('static', filename='img/logos/sd.png') }}" alt="Lycaon Logo" class="w-10 h-10 transition-transform group-hover:scale-105 object-contain">
+        <img 
+          src="{{ url_for('static', filename='img/logos/sd.png') }}" 
+          alt="Lycaon Logo" 
+          width="40" 
+          height="40" 
+          class="w-10 h-10 transition-transform group-hover:scale-105 object-contain"
+        >
         <span class="font-black text-xl tracking-wide text-white">LYCAON<span class="text-gold font-medium ml-2">SECURITY</span></span>
       </a>
       
+      <!-- Enlaces de Navegación de Escritorio -->
       <div class="hidden md:flex items-center gap-6">
         <a href="/tienda" class="text-gray-400 hover:text-gold transition-colors font-medium text-sm tracking-widest uppercase">Catálogo</a>
         <a href="/ayuda" class="text-gray-400 hover:text-gold transition-colors font-medium text-sm tracking-widest uppercase">Ayuda</a>
@@ -34,35 +38,101 @@
           <a href="/login" class="btn-outline">Iniciar Sesión</a>
         {% endif %}
       </div>
+
+      <!-- Botón Hamburguesa Móvil -->
+      <button 
+        id="landing-menu-toggle" 
+        type="button" 
+        class="md:hidden p-2 rounded-lg bg-charcoal border border-translucent text-gray-400 hover:text-gold focus:outline-none transition-colors" 
+        aria-label="Abrir menú de navegación"
+      >
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+        </svg>
+      </button>
+    </div>
+
+    <!-- Menú Desplegable Móvil -->
+    <div id="landing-mobile-menu" class="hidden md:hidden border-b border-translucent bg-[#09090B]/95 backdrop-blur-xl px-6 py-6 space-y-4">
+      <a href="/tienda" class="block text-gray-300 hover:text-gold font-medium text-sm tracking-widest uppercase py-2">Catálogo</a>
+      <a href="/ayuda" class="block text-gray-300 hover:text-gold font-medium text-sm tracking-widest uppercase py-2">Ayuda</a>
+      <a href="/#nosotros" class="block text-gray-300 hover:text-gold font-medium text-sm tracking-widest uppercase py-2">Nosotros</a>
+      <div class="pt-4 border-t border-translucent">
+        {% if usuario %}
+          {% if usuario.role in ['administrador', 'operador'] %}
+            <a href="/dashboard" class="btn-gold block text-center w-full">Panel de Control →</a>
+          {% else %}
+            <a href="/dashboard/store" class="btn-gold block text-center w-full">Mi Cuenta →</a>
+          {% endif %}
+        {% else %}
+          <div class="flex flex-col gap-3">
+            <a href="/login" class="btn-outline block text-center w-full">Iniciar Sesión</a>
+            <a href="/login?modo=registro" class="btn-gold block text-center w-full">Registrarse</a>
+          </div>
+        {% endif %}
+      </div>
     </div>
   </nav>
 
   <!-- ── Hero Section ── -->
   <main class="flex-grow flex flex-col justify-center relative pt-20">
-    <!-- Layout Formal -->
-    <div class="relative z-10 max-w-7xl mx-auto px-6 w-full py-24 text-center md:text-left md:grid md:grid-cols-2 gap-12 items-center">
-      <div class="space-y-8">
-        
-        <h1 class="text-5xl md:text-7xl font-black text-white leading-tight tracking-tight">
+    <div class="relative z-10 max-w-7xl mx-auto px-6 w-full py-20 lg:py-28 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+      
+      <!-- Columna 1: Presentación y Acciones -->
+      <div class="space-y-8 text-center lg:text-left">
+        <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-charcoal border border-amber-500/20 text-gold text-xs font-mono font-medium tracking-wide">
+          <span class="w-2 h-2 rounded-full bg-gold/90"></span>
+          LYCAON CONTROL SYSTEM v2.4
+        </div>
+
+        <h1 class="text-4xl sm:text-5xl md:text-6xl font-extrabold text-white leading-tight tracking-tight">
           BIENVENIDO A<br/>
-          <span class="text-gold">LYCAON SECURITY.</span>
+          <span class="text-white">LYCAON SECURITY.</span>
         </h1>
         
-        <p class="text-lg text-gray-400 max-w-lg leading-relaxed">
-          Equipamiento de seguridad para defensa personal y para los barrios. Cámaras perimetrales, utensilios de alta resistencia y disuasión balística.
+        <p class="text-lg text-gray-400 max-w-xl leading-relaxed mx-auto lg:mx-0">
+          Equipamiento táctico de seguridad, videovigilancia perimetral y soluciones balísticas no letales para protección patrimonial y comunitaria.
         </p>
         
-        <div class="flex flex-col sm:flex-row gap-4 pt-4 justify-center md:justify-start">
-          <a href="/tienda" class="btn-gold text-center py-4 px-8 text-sm tracking-widest uppercase shadow-[0_0_20px_rgba(212,175,55,0.3)] hover:shadow-[0_0_30px_rgba(212,175,55,0.5)]">
+        <div class="flex flex-col sm:flex-row gap-4 pt-2 justify-center lg:justify-start">
+          <a href="/tienda" class="btn-gold text-center py-4 px-8 text-sm tracking-widest uppercase shadow-none border border-amber-500/20">
             Ver Catálogo
           </a>
           {% if not usuario %}
-          <a href="/login?modo=registro" class="btn-outline text-center py-4 px-8 text-sm tracking-widest uppercase">
+          <a href="/login?modo=registro" class="btn-outline text-center py-4 px-8 text-sm tracking-widest uppercase border-neutral-800 hover:border-gold hover:text-gold">
             Registrarse
           </a>
           {% endif %}
         </div>
       </div>
+
+      <!-- Columna 2: Imagen Táctica de Alta Gama Solicitada -->
+      <div class="relative flex justify-center items-center">
+        <!-- Marco obsidiana limpio sin halos de luz -->
+        <div class="relative group rounded-2xl overflow-hidden border border-neutral-800 bg-charcoal">
+          <img 
+            src="{{ url_for('static', filename='img/hero_security.jpg') }}" 
+            alt="Equipamiento Táctico Lycaon Security" 
+            class="w-full max-w-md lg:max-w-lg object-cover transform transition-transform duration-700 group-hover:scale-105"
+            width="512" 
+            height="512"
+          >
+          <!-- Badge flotante con borde sutil -->
+          <div class="absolute bottom-4 left-4 right-4 p-3.5 rounded-xl bg-black/90 border border-neutral-800 flex items-center justify-between">
+            <div class="flex items-center gap-2.5">
+              <span class="w-2 h-2 rounded-full bg-gold/90"></span>
+              <div>
+                <div class="text-xs font-mono font-bold tracking-wider text-white">HARDWARE AUTORIZADO</div>
+                <div class="text-xs text-zinc-400 font-mono">SERIE APEX-1 · CONTROL PERIMETRAL</div>
+              </div>
+            </div>
+            <span class="px-2.5 py-1 rounded-md bg-charcoal border border-amber-500/20 text-xs font-mono font-bold text-gold uppercase tracking-wider">
+              ONLINE
+            </span>
+          </div>
+        </div>
+      </div>
+
     </div>
   </main>
 
@@ -76,36 +146,45 @@
       
       <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
         <!-- Card 1 -->
-        <div class="card-charcoal p-8 group hover:-translate-y-2 transition-transform duration-300 relative overflow-hidden">
-          <div class="absolute top-0 right-0 p-4 opacity-10 font-black text-6xl text-white pointer-events-none">01</div>
-          <div class="w-12 h-12 rounded-engineering bg-gold/10 border border-gold/30 flex items-center justify-center text-gold mb-6 group-hover:bg-gold group-hover:text-black transition-colors">
-            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path></svg>
+        <div class="card-charcoal p-8 group hover:-translate-y-1 transition-transform duration-300 relative">
+          <div class="flex items-center justify-between pb-3 mb-4 border-b border-neutral-800">
+            <div class="flex items-center gap-2 text-gold text-xs font-mono font-bold uppercase tracking-wider">
+              <svg class="w-4 h-4 text-gold flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path></svg>
+              <span>Vigilancia</span>
+            </div>
+            <span class="text-xs font-mono font-bold text-zinc-300 bg-neutral-900 border border-neutral-800 px-2.5 py-0.5 rounded">01</span>
           </div>
           <h3 class="text-xl font-bold text-white mb-3">Vigilancia para el hogar y la comunidad</h3>
-          <p class="text-gray-400 text-sm leading-relaxed mb-6">Cámaras de alta resolución con algoritmos de detección de movimiento para la seguridad en los barrios.</p>
-          <a href="/tienda" class="text-gold text-sm font-bold uppercase tracking-widest hover:text-white transition-colors flex items-center gap-2">Ver en el catalogo<span class="group-hover:translate-x-1 transition-transform">→</span></a>
+          <p class="text-zinc-400 text-sm leading-relaxed mb-6">Cámaras de alta resolución con algoritmos de detección de movimiento para la seguridad en los barrios.</p>
+          <a href="/tienda" class="text-gold text-sm font-bold uppercase tracking-widest hover:text-white transition-colors flex items-center gap-2">Ver en el catálogo<span class="group-hover:translate-x-1 transition-transform">→</span></a>
         </div>
         
         <!-- Card 2 -->
-        <div class="card-charcoal p-8 group hover:-translate-y-2 transition-transform duration-300 relative overflow-hidden">
-          <div class="absolute top-0 right-0 p-4 opacity-10 font-black text-6xl text-white pointer-events-none">02</div>
-          <div class="w-12 h-12 rounded-engineering bg-cyan/10 border border-cyan/30 flex items-center justify-center text-cyan mb-6 group-hover:bg-cyan group-hover:text-black transition-colors">
-            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+        <div class="card-charcoal p-8 group hover:-translate-y-1 transition-transform duration-300 relative">
+          <div class="flex items-center justify-between pb-3 mb-4 border-b border-neutral-800">
+            <div class="flex items-center gap-2 text-gold text-xs font-mono font-bold uppercase tracking-wider">
+              <svg class="w-4 h-4 text-gold flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+              <span>Protección</span>
+            </div>
+            <span class="text-xs font-mono font-bold text-zinc-300 bg-neutral-900 border border-neutral-800 px-2.5 py-0.5 rounded">02</span>
           </div>
           <h3 class="text-xl font-bold text-white mb-3">Disuasión y protección personal</h3>
-          <p class="text-gray-400 text-sm leading-relaxed mb-6">Réplicas con capacidad detonadora. Efecto disuasorio instantáneo sin munición letal.</p>
-          <a href="/tienda" class="text-cyan text-sm font-bold uppercase tracking-widest hover:text-white transition-colors flex items-center gap-2">Ver en el catalogo<span class="group-hover:translate-x-1 transition-transform">→</span></a>
+          <p class="text-zinc-400 text-sm leading-relaxed mb-6">Réplicas con capacidad detonadora. Efecto disuasorio instantáneo sin munición letal.</p>
+          <a href="/tienda" class="text-gold text-sm font-bold uppercase tracking-widest hover:text-white transition-colors flex items-center gap-2">Ver en el catálogo<span class="group-hover:translate-x-1 transition-transform">→</span></a>
         </div>
 
         <!-- Card 3 -->
-        <div class="card-charcoal p-8 group hover:-translate-y-2 transition-transform duration-300 relative overflow-hidden">
-          <div class="absolute top-0 right-0 p-4 opacity-10 font-black text-6xl text-white pointer-events-none">03</div>
-          <div class="w-12 h-12 rounded-engineering bg-gold/10 border border-gold/30 flex items-center justify-center text-gold mb-6 group-hover:bg-gold group-hover:text-black transition-colors">
-            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z"></path></svg>
+        <div class="card-charcoal p-8 group hover:-translate-y-1 transition-transform duration-300 relative">
+          <div class="flex items-center justify-between pb-3 mb-4 border-b border-neutral-800">
+            <div class="flex items-center gap-2 text-gold text-xs font-mono font-bold uppercase tracking-wider">
+              <svg class="w-4 h-4 text-gold flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z"></path></svg>
+              <span>Equipamiento</span>
+            </div>
+            <span class="text-xs font-mono font-bold text-zinc-300 bg-neutral-900 border border-neutral-800 px-2.5 py-0.5 rounded">03</span>
           </div>
           <h3 class="text-xl font-bold text-white mb-3">Equipamiento de protección</h3>
-          <p class="text-gray-400 text-sm leading-relaxed mb-6">Cuchillos y puñales de acero de alta resistencia. Diseñados para durabilidad extrema y retención de filo en situaciones críticas.</p>
-          <a href="/tienda" class="text-gold text-sm font-bold uppercase tracking-widest hover:text-white transition-colors flex items-center gap-2">Ver en el catalogo<span class="group-hover:translate-x-1 transition-transform">→</span></a>
+          <p class="text-zinc-400 text-sm leading-relaxed mb-6">Cuchillos y puñales de acero de alta resistencia. Diseñados para durabilidad extrema y retención de filo en situaciones críticas.</p>
+          <a href="/tienda" class="text-gold text-sm font-bold uppercase tracking-widest hover:text-white transition-colors flex items-center gap-2">Ver en el catálogo<span class="group-hover:translate-x-1 transition-transform">→</span></a>
         </div>
       </div>
     </div>
@@ -113,11 +192,11 @@
 
   <!-- ── Footer ── -->
   <footer class="border-t border-translucent bg-[#09090B] py-8 relative z-10">
-    <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-gray-500">
+    <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-zinc-400">
       <div>&copy; 2026 LYCAON SECURITY · Proyecto formativo desarrollado por aprendices SENA.</div>
       <div class="flex gap-6 uppercase tracking-widest text-xs font-bold">
-        <a href="/ayuda" class="hover:text-gold transition-colors">Manual de usuario</a>
-        <a href="/tienda" class="hover:text-gold transition-colors">Catálogo</a>
+        <a href="/ayuda" class="text-zinc-300 hover:text-gold transition-colors">Manual de usuario</a>
+        <a href="/tienda" class="text-zinc-300 hover:text-gold transition-colors">Catálogo</a>
       </div>
     </div>
   </footer>

@@ -152,6 +152,19 @@
 
   /* ── 2. TOPBAR CON BREADCRUMBS & BALIZA DE SEGURIDAD TIPO SIAM ── */
   function setupTopbar() {
+    // Enlace del botón móvil de la topbar (sea estática o inyectada)
+    const mobileBtn = document.getElementById('siam-mobile-menu-btn');
+    const sidebar = document.getElementById('sidebar');
+    const backdrop = document.querySelector('.siam-sidebar-backdrop');
+    if (mobileBtn && sidebar && !mobileBtn.dataset.bound) {
+      mobileBtn.dataset.bound = 'true';
+      mobileBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        sidebar.classList.toggle('mobile-open');
+        if (backdrop) backdrop.classList.toggle('active', sidebar.classList.contains('mobile-open'));
+      });
+    }
+
     const mainArea = document.querySelector('main');
     if (!mainArea || document.getElementById('siam-injected-topbar')) return;
 
@@ -414,11 +427,19 @@
   /* ── 6. ACCESIBILIDAD Y TECLA ESCAPE PARA MODALES ── */
   document.addEventListener('keydown', function (e) {
     if (e.key === 'Escape') {
-      const openModal = document.querySelector('.modal-overlay.open, .modal-overlay:not(.hidden)');
-      if (openModal) {
-        openModal.classList.remove('open');
-        openModal.classList.add('hidden');
-        document.body.style.overflow = '';
+      const openModals = document.querySelectorAll('.modal-overlay.open, .modal-overlay:not(.hidden)');
+      openModals.forEach(modal => {
+        if (typeof window.cerrarModal === 'function') {
+          window.cerrarModal(modal.id);
+        } else {
+          modal.classList.remove('open');
+          modal.classList.add('hidden');
+          modal.style.display = 'none';
+          document.body.style.overflow = '';
+        }
+      });
+      if (typeof window.cerrarFacturaModal === 'function') {
+        window.cerrarFacturaModal();
       }
     }
   });

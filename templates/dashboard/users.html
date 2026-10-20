@@ -10,25 +10,23 @@
 <div class="space-y-8 animate-fade-in-up">
 
   <!-- Header -->
-  <div class="card-charcoal p-8 relative overflow-hidden flex flex-col lg:flex-row justify-between items-start lg:items-center gap-6">
-    <div class="absolute inset-0 bg-gradient-to-r from-red-500/10 to-transparent pointer-events-none"></div>
-    
+  <div class="bg-[#121216] border border-neutral-800 rounded-xl p-6 relative overflow-hidden flex flex-col lg:flex-row justify-between items-start lg:items-center gap-6">
     <div class="relative z-10">
-      <h2 class="text-2xl font-black text-white uppercase tracking-widest flex items-center gap-3">
-        <span class="w-2 h-8 bg-red-500 rounded-full inline-block"></span>
+      <h2 class="text-2xl font-black text-white uppercase tracking-wider flex items-center gap-3">
+        <span class="w-1.5 h-6 bg-red-500 rounded-sm inline-block"></span>
         Control de Acceso y Clientes
       </h2>
-      <p class="mt-2 text-sm text-gray-400 font-medium">
+      <p class="mt-2 text-sm text-zinc-400 font-medium">
         Administre los privilegios de los clientes y personal del sistema Lycaon Security.
       </p>
     </div>
 
     <div class="flex flex-wrap gap-4 relative z-10">
-      <a href="/api/export/users" class="px-5 py-2.5 rounded-engineering text-xs font-bold uppercase tracking-widest text-gray-300 bg-black/40 border border-translucent hover:bg-white/5 hover:text-white transition-colors flex items-center gap-2 shadow-lg">
+      <a href="/api/export/users" class="px-4 py-2.5 rounded-lg text-xs font-bold uppercase tracking-wider text-zinc-300 bg-neutral-900 border border-neutral-800 hover:bg-neutral-800 hover:text-white transition-colors flex items-center gap-2">
         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
         Exportar Log (CSV)
       </a>
-      <button class="px-5 py-2.5 rounded-engineering text-xs font-bold uppercase tracking-widest bg-red-600 text-white hover:bg-red-500 shadow-[0_0_15px_rgba(220,38,38,0.3)] transition-all flex items-center gap-2" onclick="abrirModal('new-user-modal')">
+      <button class="px-5 py-2.5 rounded-lg text-xs font-bold uppercase tracking-wider bg-red-600 text-white hover:bg-red-500 border border-red-500/40 transition-colors flex items-center gap-2 shadow-none" onclick="abrirModal('new-user-modal')">
         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg>
         Registrar Personal
       </button>
@@ -36,77 +34,78 @@
   </div>
 
   <!-- Tabla de usuarios -->
-  <div class="card-charcoal overflow-hidden">
+  <div class="bg-[#121216] border border-neutral-800 rounded-xl p-5 md:p-6 overflow-hidden">
     {% if usuarios %}
-    <div class="overflow-x-auto">
+    <div class="w-full flex-1" style="overflow-x: auto;">
       <table class="w-full text-left border-collapse">
         <thead>
-          <tr class="bg-black/50 border-b border-translucent text-[10px] font-bold text-gray-500 uppercase tracking-widest">
-            <th class="p-4 whitespace-nowrap">ID</th>
-            <th class="p-4 whitespace-nowrap">Nombre</th>
-            <th class="p-4 whitespace-nowrap">Email</th>
-            <th class="p-4 whitespace-nowrap">Privilegio</th>
-            <th class="p-4 whitespace-nowrap">Ingreso</th>
-            <th class="p-4 whitespace-nowrap text-right">Acciones</th>
+          <tr class="bg-neutral-950/60 border-b border-neutral-800 text-xs font-mono font-bold text-zinc-400 uppercase tracking-wider">
+            <th class="py-3.5 px-4 whitespace-nowrap">ID</th>
+            <th class="py-3.5 px-4 whitespace-nowrap">Usuario</th>
+            <th class="py-3.5 px-4 whitespace-nowrap">Email</th>
+            <th class="py-3.5 px-4 whitespace-nowrap">Privilegio</th>
+            <th class="py-3.5 px-4 whitespace-nowrap">Ingreso</th>
+            <th class="py-3.5 px-4 whitespace-nowrap text-right">Acciones</th>
           </tr>
         </thead>
-        <tbody class="divide-y divide-translucent">
+        <tbody class="divide-y divide-neutral-800/80">
           {% for u in usuarios %}
-          <tr id="user-row-{{ u.id }}" class="hover:bg-white/5 transition-colors group">
-            <td class="p-4">
-              <span class="font-mono text-xs text-gray-500 group-hover:text-gray-400 transition-colors">
+          <tr id="user-row-{{ u.id }}" class="hover:bg-neutral-900/50 transition-colors group">
+            <td class="py-3.5 px-4">
+              <span class="inline-block px-2 py-0.5 rounded bg-neutral-900 border border-neutral-800 font-mono text-xs font-bold text-zinc-300">
                 {{ u.id }}
               </span>
             </td>
-            <td class="p-4">
+            <td class="py-3.5 px-4">
               <div class="flex items-center gap-3">
-                <div class="w-8 h-8 rounded-engineering bg-black border border-translucent flex items-center justify-center text-xs font-black text-gray-400 overflow-hidden shrink-0 shadow-md">
+                <div class="w-8 h-8 rounded-lg bg-neutral-900 border border-neutral-800 flex items-center justify-center text-xs font-bold text-zinc-300 overflow-hidden shrink-0">
                   {% if u.avatar %}
                     <img src="{{ url_for('static', filename=u.avatar) }}" alt="Avatar" class="w-full h-full object-cover">
                   {% else %}
                     <span>{{ u.name[:2].upper() }}</span>
                   {% endif %}
                 </div>
-                <span class="font-bold text-white">{{ u.name }}</span>
+                <span class="font-bold text-white text-sm">{{ u.name }}</span>
               </div>
             </td>
-            <td class="p-4 text-sm text-gray-400">{{ u.email }}</td>
-            <td class="p-4">
-              <span class="inline-block px-3 py-1 rounded-engineering text-[9px] font-bold uppercase tracking-widest border
+            <td class="py-3.5 px-4 text-sm text-zinc-300 font-mono">{{ u.email }}</td>
+            <td class="py-3.5 px-4">
+              <span class="inline-block px-2.5 py-1 rounded-md text-xs font-mono font-bold uppercase tracking-wider border
                 {% if u.role == 'administrador' %}
-                  bg-red-500/10 text-red-500 border-red-500/30
-                {% elif u.role == 'trabajador' %}
-                  bg-gold/10 text-gold border-gold/30
+                  bg-red-950/40 text-red-400 border-red-500/30
+                {% elif u.role == 'trabajador' or u.role == 'operador' %}
+                  bg-amber-500/10 text-gold border-amber-500/30
                 {% else %}
-                  bg-cyan/10 text-cyan border-cyan/30
+                  bg-neutral-800 text-zinc-300 border-neutral-700
                 {% endif %}
               ">
                 {{ u.role }}
               </span>
             </td>
-            <td class="p-4 text-xs font-mono text-gray-500">
+            <td class="py-3.5 px-4 text-xs font-mono text-zinc-400">
               {{ u.created_at[:10] if u.created_at else '—' }}
             </td>
-            <td class="p-4 text-right">
+            <td class="py-3.5 px-4 text-right">
               {% if u.id != usuario.id %}
               <div class="flex justify-end gap-2">
+                <!-- CRUD: Editar usuario -->
                 <button
                   onclick="abrirModalEditarUsuario('{{ u.id }}', '{{ u.name }}', '{{ u.email }}', '{{ u.role }}')"
-                  class="px-3 py-1.5 rounded-engineering bg-black/40 border border-translucent text-gray-400 hover:text-white hover:bg-white/10 hover:border-gray-500 transition-colors text-xs font-bold uppercase tracking-widest"
+                  class="px-3 py-1.5 rounded-lg bg-neutral-900 border border-neutral-800 text-zinc-300 hover:text-white hover:bg-neutral-800 hover:border-neutral-700 transition-colors text-xs font-bold uppercase tracking-wider"
                   title="Editar Usuario"
                 >
                   Editar
                 </button>
                 <button
                   onclick="eliminarUsuario('{{ u.id }}', '{{ u.name }}')"
-                  class="px-3 py-1.5 rounded-engineering bg-red-500/10 border border-red-500/30 text-red-500 hover:bg-red-500/20 hover:border-red-500/50 transition-colors text-xs font-bold uppercase tracking-widest"
+                  class="px-3 py-1.5 rounded-lg bg-red-950/30 border border-red-500/30 text-red-400 hover:bg-red-900/40 hover:text-red-300 transition-colors text-xs font-bold uppercase tracking-wider"
                   title="Revocar acceso"
                 >
                   Revocar
                 </button>
               </div>
               {% else %}
-                <span class="text-[10px] font-bold text-gray-600 uppercase tracking-widest px-3 py-1.5 bg-black/30 rounded-engineering border border-gray-800/50 inline-block">Cuenta Actual</span>
+                <span class="text-xs font-mono font-bold text-zinc-400 uppercase tracking-wider px-3 py-1.5 bg-neutral-900 rounded-lg border border-neutral-800 inline-block">Cuenta Actual</span>
               {% endif %}
             </td>
           </tr>
@@ -116,11 +115,11 @@
     </div>
     {% else %}
     <div class="p-16 flex flex-col items-center justify-center text-center">
-      <div class="w-16 h-16 bg-black border border-translucent flex items-center justify-center rounded-engineering mb-6 text-gray-700">
+      <div class="w-16 h-16 bg-neutral-900 border border-neutral-800 flex items-center justify-center rounded-xl mb-6 text-zinc-400">
         <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
       </div>
       <div class="text-xl font-bold text-white mb-2">Sin Registros (N/A)</div>
-      <div class="text-sm text-gray-500">No hay registros de personal ni clientes adicionales en el sistema.</div>
+      <div class="text-sm text-zinc-400">No hay registros de personal ni clientes adicionales en el sistema.</div>
     </div>
     {% endif %}
   </div>
@@ -130,14 +129,13 @@
      MODAL NUEVO USUARIO
      ══════════════════════════════════ -->
 <div class="modal-overlay hidden fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm" id="new-user-modal">
-  <div class="modal-box w-full max-w-md bg-charcoal border border-red-500/30 rounded-engineering shadow-2xl relative transform transition-all duration-300 scale-95 opacity-0">
+  <div class="modal-box w-full max-w-md bg-[#121216] border border-neutral-800 rounded-xl shadow-2xl relative transform transition-all duration-300 scale-95 opacity-0">
     
-    <div class="absolute top-0 left-1/2 -translate-x-1/2 w-48 h-1 bg-gradient-to-r from-transparent via-red-500 to-transparent"></div>
-    <button class="modal-close absolute top-4 right-4 w-8 h-8 flex items-center justify-center rounded-engineering bg-black border border-translucent text-gray-400 hover:text-white hover:border-gray-500 transition-colors" onclick="cerrarModal('new-user-modal')" title="Cerrar">✕</button>
+    <button class="modal-close absolute top-4 right-4 w-8 h-8 flex items-center justify-center rounded-lg bg-neutral-900 border border-neutral-800 text-zinc-400 hover:text-white transition-colors" onclick="cerrarModal('new-user-modal')" title="Cerrar">✕</button>
 
     <div class="p-8">
-      <h3 class="text-xl font-black text-white uppercase tracking-widest mb-6 flex items-center gap-2">
-        <span class="w-1.5 h-1.5 bg-red-500 rounded-full inline-block animate-pulse"></span>
+      <h3 class="text-xl font-black text-white uppercase tracking-wider mb-6 flex items-center gap-2">
+        <span class="w-2 h-2 bg-red-500 rounded-full inline-block"></span>
         Registro de Personal
       </h3>
       
@@ -145,30 +143,30 @@
       
       <form id="create-user-form" class="space-y-5">
         <div>
-          <label class="block text-[10px] font-bold text-gray-500 uppercase tracking-widest mb-2">Nombre Completo</label>
-          <input type="text" id="new-user-name" class="w-full bg-black border border-translucent text-white rounded-engineering py-3 px-4 focus:outline-none focus:border-red-500 transition-colors" required>
+          <label class="block text-xs font-mono font-bold text-zinc-400 uppercase tracking-wider mb-2">Nombre Completo</label>
+          <input type="text" id="new-user-name" class="w-full bg-neutral-900 border border-neutral-800 text-white placeholder:text-zinc-400 rounded-lg py-2.5 px-4 focus:outline-none focus:border-red-500 transition-colors text-sm" placeholder="Ej: Agente John Doe" required>
         </div>
         
         <div>
-          <label class="block text-[10px] font-bold text-gray-500 uppercase tracking-widest mb-2">Identidad Corporativa (Email)</label>
-          <input type="email" id="new-user-email" class="w-full bg-black border border-translucent text-white rounded-engineering py-3 px-4 focus:outline-none focus:border-red-500 transition-colors" required>
+          <label class="block text-xs font-mono font-bold text-zinc-400 uppercase tracking-wider mb-2">Identidad Corporativa (Email)</label>
+          <input type="email" id="new-user-email" class="w-full bg-neutral-900 border border-neutral-800 text-white placeholder:text-zinc-400 rounded-lg py-2.5 px-4 focus:outline-none focus:border-red-500 transition-colors text-sm" placeholder="usuario@lycaonsoftware.com" required>
         </div>
         
         <div>
-          <label class="block text-[10px] font-bold text-gray-500 uppercase tracking-widest mb-2">Clave de Acceso (Min. 6 char)</label>
-          <input type="password" id="new-user-password" class="w-full bg-black border border-translucent text-white rounded-engineering py-3 px-4 focus:outline-none focus:border-red-500 transition-colors" required minlength="6">
+          <label class="block text-xs font-mono font-bold text-zinc-400 uppercase tracking-wider mb-2">Clave de Acceso (Min. 6 char)</label>
+          <input type="password" id="new-user-password" class="w-full bg-neutral-900 border border-neutral-800 text-white placeholder:text-zinc-400 rounded-lg py-2.5 px-4 focus:outline-none focus:border-red-500 transition-colors text-sm" placeholder="••••••••" required minlength="6">
         </div>
         
         <div>
-          <label class="block text-[10px] font-bold text-gray-500 uppercase tracking-widest mb-2">Nivel de Privilegio</label>
-          <select id="new-user-role" class="w-full bg-black border border-translucent text-white rounded-engineering py-3 px-4 focus:outline-none focus:border-red-500 transition-colors" required>
+          <label class="block text-xs font-mono font-bold text-zinc-400 uppercase tracking-wider mb-2">Nivel de Privilegio</label>
+          <select id="new-user-role" class="w-full bg-neutral-900 border border-neutral-800 text-white rounded-lg py-2.5 px-4 focus:outline-none focus:border-red-500 transition-colors text-sm" required>
             <option value="cliente">Cliente (Estándar)</option>
             <option value="trabajador">Trabajador (Operador)</option>
             <option value="administrador">Administrador (NOC)</option>
           </select>
         </div>
 
-        <button type="submit" class="w-full py-3.5 mt-2 bg-red-600 text-white rounded-engineering text-sm font-bold uppercase tracking-widest transition-all duration-300 hover:bg-red-500 shadow-[0_0_15px_rgba(220,38,38,0.3)]" id="btn-create-user">
+        <button type="submit" class="w-full py-3 mt-2 bg-red-600 hover:bg-red-500 text-white rounded-lg text-xs font-bold uppercase tracking-wider transition-colors shadow-none border border-red-500/40" id="btn-create-user">
           Generar Identidad
         </button>
       </form>
@@ -180,14 +178,13 @@
      MODAL EDITAR USUARIO
      ══════════════════════════════════ -->
 <div class="modal-overlay hidden fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm" id="edit-user-modal">
-  <div class="modal-box w-full max-w-md bg-charcoal border border-cyan/30 rounded-engineering shadow-2xl relative transform transition-all duration-300 scale-95 opacity-0">
+  <div class="modal-box w-full max-w-md bg-[#121216] border border-neutral-800 rounded-xl shadow-2xl relative transform transition-all duration-300 scale-95 opacity-0">
     
-    <div class="absolute top-0 left-1/2 -translate-x-1/2 w-48 h-1 bg-gradient-to-r from-transparent via-cyan to-transparent"></div>
-    <button class="modal-close absolute top-4 right-4 w-8 h-8 flex items-center justify-center rounded-engineering bg-black border border-translucent text-gray-400 hover:text-white hover:border-gray-500 transition-colors" onclick="cerrarModal('edit-user-modal')" title="Cerrar">✕</button>
+    <button class="modal-close absolute top-4 right-4 w-8 h-8 flex items-center justify-center rounded-lg bg-neutral-900 border border-neutral-800 text-zinc-400 hover:text-white transition-colors" onclick="cerrarModal('edit-user-modal')" title="Cerrar">✕</button>
 
     <div class="p-8">
-      <h3 class="text-xl font-black text-white uppercase tracking-widest mb-6 flex items-center gap-2">
-        <span class="w-1.5 h-1.5 bg-cyan rounded-full inline-block animate-pulse"></span>
+      <h3 class="text-xl font-black text-white uppercase tracking-wider mb-6 flex items-center gap-2">
+        <span class="w-2 h-2 bg-amber-500 rounded-full inline-block"></span>
         Editar Personal
       </h3>
       
@@ -196,30 +193,30 @@
       <form id="edit-user-form" class="space-y-5">
         <input type="hidden" id="edit-user-id">
         <div>
-          <label class="block text-[10px] font-bold text-gray-500 uppercase tracking-widest mb-2">Nombre Completo</label>
-          <input type="text" id="edit-user-name" class="w-full bg-black border border-translucent text-white rounded-engineering py-3 px-4 focus:outline-none focus:border-cyan transition-colors" required>
+          <label class="block text-xs font-mono font-bold text-zinc-400 uppercase tracking-wider mb-2">Nombre Completo</label>
+          <input type="text" id="edit-user-name" class="w-full bg-neutral-900 border border-neutral-800 text-white placeholder:text-zinc-400 rounded-lg py-2.5 px-4 focus:outline-none focus:border-amber-500 transition-colors text-sm" required>
         </div>
         
         <div>
-          <label class="block text-[10px] font-bold text-gray-500 uppercase tracking-widest mb-2">Identidad Corporativa (Email)</label>
-          <input type="email" id="edit-user-email" class="w-full bg-black border border-translucent text-white rounded-engineering py-3 px-4 focus:outline-none focus:border-cyan transition-colors" required>
+          <label class="block text-xs font-mono font-bold text-zinc-400 uppercase tracking-wider mb-2">Identidad Corporativa (Email)</label>
+          <input type="email" id="edit-user-email" class="w-full bg-neutral-900 border border-neutral-800 text-white placeholder:text-zinc-400 rounded-lg py-2.5 px-4 focus:outline-none focus:border-amber-500 transition-colors text-sm" required>
         </div>
         
         <div>
-          <label class="block text-[10px] font-bold text-gray-500 uppercase tracking-widest mb-2">Nueva Clave de Acceso (En blanco = no cambiar)</label>
-          <input type="password" id="edit-user-password" class="w-full bg-black border border-translucent text-white rounded-engineering py-3 px-4 focus:outline-none focus:border-cyan transition-colors" minlength="6">
+          <label class="block text-xs font-mono font-bold text-zinc-400 uppercase tracking-wider mb-2">Nueva Clave de Acceso (En blanco = no cambiar)</label>
+          <input type="password" id="edit-user-password" class="w-full bg-neutral-900 border border-neutral-800 text-white placeholder:text-zinc-400 rounded-lg py-2.5 px-4 focus:outline-none focus:border-amber-500 transition-colors text-sm" minlength="6" placeholder="••••••••">
         </div>
         
         <div>
-          <label class="block text-[10px] font-bold text-gray-500 uppercase tracking-widest mb-2">Nivel de Privilegio</label>
-          <select id="edit-user-role" class="w-full bg-black border border-translucent text-white rounded-engineering py-3 px-4 focus:outline-none focus:border-cyan transition-colors" required>
+          <label class="block text-xs font-mono font-bold text-zinc-400 uppercase tracking-wider mb-2">Nivel de Privilegio</label>
+          <select id="edit-user-role" class="w-full bg-neutral-900 border border-neutral-800 text-white rounded-lg py-2.5 px-4 focus:outline-none focus:border-amber-500 transition-colors text-sm" required>
             <option value="cliente">Cliente (Estándar)</option>
             <option value="trabajador">Trabajador (Operador)</option>
             <option value="administrador">Administrador (NOC)</option>
           </select>
         </div>
 
-        <button type="submit" class="w-full py-3.5 mt-2 bg-cyan text-black rounded-engineering text-sm font-bold uppercase tracking-widest transition-all duration-300 hover:bg-cyan/90 shadow-[0_0_15px_rgba(0,240,255,0.3)]" id="btn-edit-user">
+        <button type="submit" class="w-full py-3 mt-2 bg-amber-500 hover:bg-amber-400 text-neutral-950 font-bold rounded-lg text-xs uppercase tracking-wider transition-colors shadow-none" id="btn-edit-user">
           Guardar Cambios
         </button>
       </form>
@@ -253,10 +250,10 @@
       box.classList.remove('scale-100', 'opacity-100');
       box.classList.add('scale-95', 'opacity-0');
     }
-    
-    setTimeout(() => {
-      modal.classList.add('hidden');
-    }, 300);
+    modal.classList.remove('open');
+    modal.classList.add('hidden');
+    modal.style.display = 'none';
+    document.body.style.overflow = '';
   }
 
   function abrirModalEditarUsuario(id, name, email, role) {

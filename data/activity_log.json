@@ -1,5 +1,985 @@
 [
   {
+    "id": "LOG-5CA214DA",
+    "user_email": "admin@lycaonsoftware.com",
+    "action": "logout",
+    "entity_type": "user",
+    "entity_id": "admin@lycaonsoftware.com",
+    "ip_address": "127.0.0.1",
+    "details": null,
+    "created_at": "2026-10-20T14:30:56.403569"
+  },
+  {
+    "id": "LOG-5CA214DA",
+    "user_email": "admin@lycaonsoftware.com",
+    "action": "logout",
+    "entity_type": "user",
+    "entity_id": "admin@lycaonsoftware.com",
+    "ip_address": "127.0.0.1",
+    "details": null,
+    "created_at": "2026-10-20 14:30:56"
+  },
+  {
+    "id": "LOG-CDCD98CE",
+    "user_email": "bbbbb@xd.com",
+    "action": "order_created",
+    "entity_type": "order",
+    "entity_id": "ORD-22DBE17A",
+    "ip_address": "127.0.0.1",
+    "details": "{\"total\": 4500.0, \"invoice_id\": \"INV-983D6A97\"}",
+    "created_at": "2026-10-20 14:27:51"
+  },
+  {
+    "id": "LOG-CF46747A",
+    "user_email": "bbbbb@xd.com",
+    "action": "profile_updated",
+    "entity_type": "user",
+    "entity_id": "UAE64A1",
+    "ip_address": "127.0.0.1",
+    "details": "{\"name\": \"bbbbb\", \"password_changed\": false}",
+    "created_at": "2026-10-20 14:27:51"
+  },
+  {
+    "id": "LOG-5617E7D0",
+    "user_email": "bbbbb@xd.com",
+    "action": "profile_updated",
+    "entity_type": "user",
+    "entity_id": "UAE64A1",
+    "ip_address": "127.0.0.1",
+    "details": "{\"name\": \"bbbbb\", \"password_changed\": false}",
+    "created_at": "2026-10-20 14:26:12"
+  },
+  {
+    "id": "LOG-F1AA40FB",
+    "user_email": "bbbbb@xd.com",
+    "action": "order_created",
+    "entity_type": "order",
+    "entity_id": "ORD-F73BBB3E",
+    "ip_address": "127.0.0.1",
+    "details": "{\"total\": 4500.0, \"invoice_id\": \"INV-2B43286A\"}",
+    "created_at": "2026-10-20 14:26:12"
+  },
+  {
+    "id": "LOG-0200D3D8",
+    "user_email": "admin@lycaonsoftware.com",
+    "action": "login",
+    "entity_type": "user",
+    "entity_id": "U1",
+    "ip_address": "127.0.0.1",
+    "details": "{\"result\": \"success\"}",
+    "created_at": "2026-10-20 14:23:52"
+  },
+  {
+    "id": "LOG-FECAF76D",
+    "user_email": "jorge.gay@gmail.com",
+    "action": "logout",
+    "entity_type": "user",
+    "entity_id": "jorge.gay@gmail.com",
+    "ip_address": "127.0.0.1",
+    "details": null,
+    "created_at": "2026-10-20 14:23:45"
+  },
+  {
+    "id": "LOG-706DF16A",
+    "user_email": "bbbbb@xd.com",
+    "action": "profile_updated",
+    "entity_type": "user",
+    "entity_id": "UAE64A1",
+    "ip_address": "127.0.0.1",
+    "details": "{\"name\": \"bbbbb Actualizado\", \"password_changed\": false}",
+    "created_at": "2026-10-20 14:09:13"
+  },
+  {
+    "id": "LOG-E4C00658",
+    "user_email": "bbbbb@xd.com",
+    "action": "profile_updated",
+    "entity_type": "user",
+    "entity_id": "UAE64A1",
+    "ip_address": "127.0.0.1",
+    "details": "{\"name\": \"bbbbb\", \"password_changed\": false}",
+    "created_at": "2026-10-20 14:09:13"
+  },
+  {
+    "id": "LOG-79DEC04B",
+    "user_email": "jorge.gay@gmail.com",
+    "action": "register",
+    "entity_type": "user",
+    "entity_id": "UE070F6",
+    "ip_address": "127.0.0.1",
+    "details": null,
+    "created_at": "2026-10-20 14:05:08"
+  },
+  {
+    "id": "LOG-CBCCB4A0",
+    "user_email": "bbbbb@xd.com",
+    "action": "register",
+    "entity_type": "user",
+    "entity_id": "UAE64A1",
+    "ip_address": "127.0.0.1",
+    "details": null,
+    "created_at": "2026-10-20 14:00:22"
+  },
+  {
+    "id": "LOG-87F5FBED",
+    "user_email": "gudsskag@gmail.com",
+    "action": "logout",
+    "entity_type": "user",
+    "entity_id": "gudsskag@gmail.com",
+    "ip_address": "127.0.0.1",
+    "details": null,
+    "created_at": "2026-10-20 13:59:54"
+  },
+  {
+    "id": "LOG-F237986B",
+    "user_email": "gudsskag@gmail.com",
+    "action": "register",
+    "entity_type": "user",
+    "entity_id": "UA60430",
+    "ip_address": "127.0.0.1",
+    "details": null,
+    "created_at": "2026-10-20 13:59:23"
+  },
+  {
+    "id": "LOG-7C4D5F96",
+    "user_email": "admin@lycaonsoftware.com",
+    "action": "logout",
+    "entity_type": "user",
+    "entity_id": "admin@lycaonsoftware.com",
+    "ip_address": "127.0.0.1",
+    "details": null,
+    "created_at": "2026-10-20 13:59:04"
+  },
+  {
+    "id": "LOG-14A8E924",
+    "user_email": "admin@lycaonsoftware.com",
+    "action": "user_edited",
+    "entity_type": "user",
+    "entity_id": "U5",
+    "ip_address": "127.0.0.1",
+    "details": "{\"name\": \"qwertsq\", \"role\": \"cliente\"}",
+    "created_at": "2026-10-20 13:58:16"
+  },
+  {
+    "id": "LOG-68564992",
+    "user_email": "admin@lycaonsoftware.com",
+    "action": "product_updated",
+    "entity_type": "product",
+    "entity_id": "P7",
+    "ip_address": "127.0.0.1",
+    "details": "{\"name_anterior\": \"Cámaras de seguridad perimetral\", \"name_nuevo\": \"Cámaras de seguridad\", \"price_anterior\": 1200.0, \"price_nuevo\": 1200.0, \"stock\": 25, \"category\": \"Hardware\"}",
+    "created_at": "2026-10-20 13:57:45"
+  },
+  {
+    "id": "LOG-9153BC01",
+    "user_email": "admin@lycaonsoftware.com",
+    "action": "product_deleted",
+    "entity_type": "product",
+    "entity_id": "P5",
+    "ip_address": "127.0.0.1",
+    "details": null,
+    "created_at": "2026-10-20 13:49:55"
+  },
+  {
+    "id": "LOG-AE642B5B",
+    "user_email": "admin@lycaonsoftware.com",
+    "action": "login",
+    "entity_type": "user",
+    "entity_id": "U1",
+    "ip_address": "127.0.0.1",
+    "details": "{\"result\": \"success\"}",
+    "created_at": "2026-10-20 13:49:46"
+  },
+  {
+    "id": "LOG-3C375EDA",
+    "user_email": "admin@lycaonsoftware.com",
+    "action": "user_created",
+    "entity_type": "user",
+    "entity_id": "U8B1B49",
+    "ip_address": "127.0.0.1",
+    "details": "{\"name\": \"Agente Ramirez\", \"role\": \"operador\"}",
+    "created_at": "2026-10-20 13:45:46"
+  },
+  {
+    "id": "LOG-7CF2C863",
+    "user_email": "carlos.perez@lycaonsoftware.com",
+    "action": "login",
+    "entity_type": "user",
+    "entity_id": "U4AF5FA",
+    "ip_address": "127.0.0.1",
+    "details": "{\"result\": \"success\"}",
+    "created_at": "2026-10-20 13:45:37"
+  },
+  {
+    "id": "LOG-7B77AB69",
+    "user_email": "carlos.perez@lycaonsoftware.com",
+    "action": "register",
+    "entity_type": "user",
+    "entity_id": "U4AF5FA",
+    "ip_address": "127.0.0.1",
+    "details": null,
+    "created_at": "2026-10-20 13:45:27"
+  },
+  {
+    "id": "LOG-4124718C",
+    "user_email": "admin@lycaonsoftware.com",
+    "action": "login",
+    "entity_type": "user",
+    "entity_id": "U1",
+    "ip_address": "127.0.0.1",
+    "details": "{\"result\": \"success\"}",
+    "created_at": "2026-10-20 11:16:11"
+  },
+  {
+    "id": "LOG-58E118E3",
+    "user_email": "juandavidnps@gmail.com",
+    "action": "logout",
+    "entity_type": "user",
+    "entity_id": "juandavidnps@gmail.com",
+    "ip_address": "127.0.0.1",
+    "details": null,
+    "created_at": "2026-10-20 11:15:59"
+  },
+  {
+    "id": "LOG-86FEB215",
+    "user_email": "juandavidnps@gmail.com",
+    "action": "login",
+    "entity_type": "user",
+    "entity_id": "U2",
+    "ip_address": "127.0.0.1",
+    "details": "{\"result\": \"success\"}",
+    "created_at": "2026-10-20 11:15:42"
+  },
+  {
+    "id": "LOG-029E4D91",
+    "user_email": "admin@lycaonsoftware.com",
+    "action": "logout",
+    "entity_type": "user",
+    "entity_id": "admin@lycaonsoftware.com",
+    "ip_address": "127.0.0.1",
+    "details": null,
+    "created_at": "2026-10-20 11:15:35"
+  },
+  {
+    "id": "LOG-8A7358E8",
+    "user_email": "admin@lycaonsoftware.com",
+    "action": "login",
+    "entity_type": "user",
+    "entity_id": "U1",
+    "ip_address": "127.0.0.1",
+    "details": "{\"result\": \"success\"}",
+    "created_at": "2026-10-20 11:13:12"
+  },
+  {
+    "id": "LOG-583B8769",
+    "user_email": "juandavidnps@gmail.com",
+    "action": "logout",
+    "entity_type": "user",
+    "entity_id": "juandavidnps@gmail.com",
+    "ip_address": "127.0.0.1",
+    "details": null,
+    "created_at": "2026-10-20 11:12:58"
+  },
+  {
+    "id": "LOG-F9635291",
+    "user_email": "juandavidnps@gmail.com",
+    "action": "login",
+    "entity_type": "user",
+    "entity_id": "U2",
+    "ip_address": "127.0.0.1",
+    "details": "{\"result\": \"success\"}",
+    "created_at": "2026-10-20 11:12:36"
+  },
+  {
+    "id": "LOG-28BFBE35",
+    "user_email": "juandavidnps@gmail.com",
+    "action": "logout",
+    "entity_type": "user",
+    "entity_id": "juandavidnps@gmail.com",
+    "ip_address": "127.0.0.1",
+    "details": null,
+    "created_at": "2026-10-20 11:12:23"
+  },
+  {
+    "id": "LOG-226D9AE8",
+    "user_email": "juandavidnps@gmail.com",
+    "action": "login",
+    "entity_type": "user",
+    "entity_id": "U2",
+    "ip_address": "127.0.0.1",
+    "details": "{\"result\": \"success\"}",
+    "created_at": "2026-10-20 11:08:26"
+  },
+  {
+    "id": "LOG-849741AF",
+    "user_email": "juandavidnps@gmail.com",
+    "action": "logout",
+    "entity_type": "user",
+    "entity_id": "juandavidnps@gmail.com",
+    "ip_address": "127.0.0.1",
+    "details": null,
+    "created_at": "2026-10-19 11:11:10"
+  },
+  {
+    "id": "LOG-150B733E",
+    "user_email": "juandavidnps@gmail.com",
+    "action": "login",
+    "entity_type": "user",
+    "entity_id": "U2",
+    "ip_address": "127.0.0.1",
+    "details": "{\"result\": \"success\"}",
+    "created_at": "2026-10-19 10:55:28"
+  },
+  {
+    "id": "LOG-66A055FD",
+    "user_email": "admin@lycaonsoftware.com",
+    "action": "logout",
+    "entity_type": "user",
+    "entity_id": "admin@lycaonsoftware.com",
+    "ip_address": "127.0.0.1",
+    "details": null,
+    "created_at": "2026-10-19 10:55:18"
+  },
+  {
+    "id": "LOG-0F97E3D2",
+    "user_email": "admin@lycaonsoftware.com",
+    "action": "invoice_email_simulated",
+    "entity_type": "invoice",
+    "entity_id": "INV-9E7878A2",
+    "ip_address": "127.0.0.1",
+    "details": null,
+    "created_at": "2026-10-19 10:55:08"
+  },
+  {
+    "id": "LOG-2E36ABC1",
+    "user_email": "admin@lycaonsoftware.com",
+    "action": "cart_checkout",
+    "entity_type": "order",
+    "entity_id": "ORD-4A39F436",
+    "ip_address": "127.0.0.1",
+    "details": "{\"total\": 55.0, \"items_count\": 1, \"invoice_id\": \"INV-9E7878A2\"}",
+    "created_at": "2026-10-19 10:55:08"
+  },
+  {
+    "id": "LOG-0B3829F6",
+    "user_email": "admin@lycaonsoftware.com",
+    "action": "product_updated",
+    "entity_type": "product",
+    "entity_id": "P2",
+    "ip_address": "127.0.0.1",
+    "details": "{\"name_anterior\": \"Licencia CrowdStrike Falcon Endpoint\", \"name_nuevo\": \"Licencia CrowdStrike Falcon Endpoint\", \"price_anterior\": 899.0, \"price_nuevo\": 899.0, \"stock\": 3, \"category\": \"Software\"}",
+    "created_at": "2026-10-19 10:55:03"
+  },
+  {
+    "id": "LOG-99DE8E1A",
+    "user_email": "admin@lycaonsoftware.com",
+    "action": "product_updated",
+    "entity_type": "product",
+    "entity_id": "P3",
+    "ip_address": "127.0.0.1",
+    "details": "{\"name_anterior\": \"YubiKey 5C NFC — Token MFA\", \"name_nuevo\": \"YubiKey 5C NFC — Token MFA\", \"price_anterior\": 55.0, \"price_nuevo\": 55.0, \"stock\": 4, \"category\": \"Hardware\"}",
+    "created_at": "2026-10-19 10:54:57"
+  },
+  {
+    "id": "LOG-2D5834E0",
+    "user_email": "admin@lycaonsoftware.com",
+    "action": "login",
+    "entity_type": "user",
+    "entity_id": "U1",
+    "ip_address": "127.0.0.1",
+    "details": "{\"result\": \"success\"}",
+    "created_at": "2026-10-19 10:54:12"
+  },
+  {
+    "id": "LOG-03792540",
+    "user_email": "admin@lycaonsoftware.com",
+    "action": "product_updated",
+    "entity_type": "product",
+    "entity_id": "P1",
+    "ip_address": "127.0.0.1",
+    "details": "{\"name_anterior\": \"Firewall FortiGate 200F (Editado)\", \"name_nuevo\": \"Firewall FortiGate 200F\", \"price_anterior\": 4510.0, \"price_nuevo\": 4500.0, \"stock\": 7, \"category\": \"Security\"}",
+    "created_at": "2026-10-15 16:12:31"
+  },
+  {
+    "id": "LOG-F39682C0",
+    "user_email": "admin@lycaonsoftware.com",
+    "action": "product_updated",
+    "entity_type": "product",
+    "entity_id": "P1",
+    "ip_address": "127.0.0.1",
+    "details": "{\"name_anterior\": \"Firewall FortiGate 200F\", \"name_nuevo\": \"Firewall FortiGate 200F (Editado)\", \"price_anterior\": 4500.0, \"price_nuevo\": 4510.0, \"stock\": 7, \"category\": \"Security\"}",
+    "created_at": "2026-10-15 16:12:31"
+  },
+  {
+    "id": "LOG-8F5FDA43",
+    "user_email": "juandavidnps@gmail.com",
+    "action": "login",
+    "entity_type": "user",
+    "entity_id": "U2",
+    "ip_address": "127.0.0.1",
+    "details": "{\"result\": \"success\"}",
+    "created_at": "2026-10-15 15:36:11"
+  },
+  {
+    "id": "LOG-AE8E018E",
+    "user_email": "admin@lycaonsoftware.com",
+    "action": "logout",
+    "entity_type": "user",
+    "entity_id": "admin@lycaonsoftware.com",
+    "ip_address": "127.0.0.1",
+    "details": null,
+    "created_at": "2026-10-15 15:36:01"
+  },
+  {
+    "id": "LOG-B08AA1A4",
+    "user_email": "admin@lycaonsoftware.com",
+    "action": "login",
+    "entity_type": "user",
+    "entity_id": "U1",
+    "ip_address": "127.0.0.1",
+    "details": "{\"result\": \"success\"}",
+    "created_at": "2026-10-15 15:35:09"
+  },
+  {
+    "id": "LOG-4923A40C",
+    "user_email": "admin@lycaonsoftware.com",
+    "action": "product_updated",
+    "entity_type": "product",
+    "entity_id": "P1",
+    "ip_address": "127.0.0.1",
+    "details": "{\"name_anterior\": \"Firewall FortiGate 200F\", \"name_nuevo\": \"Firewall FortiGate 200F Enterprise\", \"price_anterior\": 4500.0, \"price_nuevo\": 4600.5}",
+    "created_at": "2026-10-15 15:31:19"
+  },
+  {
+    "id": "LOG-4FD8B2D3",
+    "user_email": "admin@lycaonsoftware.com",
+    "action": "product_updated",
+    "entity_type": "product",
+    "entity_id": "P1",
+    "ip_address": "127.0.0.1",
+    "details": "{\"name_anterior\": \"Firewall FortiGate 200F Enterprise\", \"name_nuevo\": \"Firewall FortiGate 200F\", \"price_anterior\": 4600.5, \"price_nuevo\": 4500.0}",
+    "created_at": "2026-10-15 15:31:19"
+  },
+  {
+    "id": "LOG-58FEDEC3",
+    "user_email": "juandavidnps@gmail.com",
+    "action": "logout",
+    "entity_type": "user",
+    "entity_id": "juandavidnps@gmail.com",
+    "ip_address": "127.0.0.1",
+    "details": null,
+    "created_at": "2026-10-15 15:30:57"
+  },
+  {
+    "id": "LOG-21D5B1FE",
+    "user_email": "juandavidnps@gmail.com",
+    "action": "invoice_email_simulated",
+    "entity_type": "invoice",
+    "entity_id": "INV-3783297B",
+    "ip_address": "127.0.0.1",
+    "details": null,
+    "created_at": "2026-10-15 15:27:55"
+  },
+  {
+    "id": "LOG-1F484056",
+    "user_email": "juandavidnps@gmail.com",
+    "action": "invoice_email_simulated",
+    "entity_type": "invoice",
+    "entity_id": "INV-3783297B",
+    "ip_address": "127.0.0.1",
+    "details": null,
+    "created_at": "2026-10-15 15:27:37"
+  },
+  {
+    "id": "LOG-C74FC28E",
+    "user_email": "juandavidnps@gmail.com",
+    "action": "cart_checkout",
+    "entity_type": "order",
+    "entity_id": "ORD-AA622DAE",
+    "ip_address": "127.0.0.1",
+    "details": "{\"total\": 150.0, \"items_count\": 1, \"invoice_id\": \"INV-3783297B\"}",
+    "created_at": "2026-10-15 15:27:37"
+  },
+  {
+    "id": "LOG-DAD397B0",
+    "user_email": "juandavidnps@gmail.com",
+    "action": "login",
+    "entity_type": "user",
+    "entity_id": "U2",
+    "ip_address": "127.0.0.1",
+    "details": "{\"result\": \"success\"}",
+    "created_at": "2026-10-15 15:26:46"
+  },
+  {
+    "id": "LOG-DBB3A9E0",
+    "user_email": "admin@lycaonsoftware.com",
+    "action": "logout",
+    "entity_type": "user",
+    "entity_id": "admin@lycaonsoftware.com",
+    "ip_address": "127.0.0.1",
+    "details": null,
+    "created_at": "2026-10-15 15:26:23"
+  },
+  {
+    "id": "LOG-6BC7825F",
+    "user_email": "admin@lycaonsoftware.com",
+    "action": "login",
+    "entity_type": "user",
+    "entity_id": "U1",
+    "ip_address": "127.0.0.1",
+    "details": "{\"result\": \"success\"}",
+    "created_at": "2026-10-15 15:26:11"
+  },
+  {
+    "id": "LOG-A4F68068",
+    "user_email": "admin@lycaonsoftware.com",
+    "action": "logout",
+    "entity_type": "user",
+    "entity_id": "admin@lycaonsoftware.com",
+    "ip_address": "127.0.0.1",
+    "details": null,
+    "created_at": "2026-10-15 15:26:00"
+  },
+  {
+    "id": "LOG-32605C73",
+    "user_email": "admin@lycaonsoftware.com",
+    "action": "login",
+    "entity_type": "user",
+    "entity_id": "U1",
+    "ip_address": "127.0.0.1",
+    "details": "{\"result\": \"success\"}",
+    "created_at": "2026-10-15 14:13:10"
+  },
+  {
+    "id": "LOG-DAF78BA6",
+    "user_email": "juandavidnps@gmail.com",
+    "action": "login",
+    "entity_type": "user",
+    "entity_id": "U2",
+    "ip_address": "127.0.0.1",
+    "details": "{\"result\": \"success\"}",
+    "created_at": "2026-10-14 12:33:19"
+  },
+  {
+    "id": "LOG-A8D18820",
+    "user_email": "juandavidnps@gmail.com",
+    "action": "logout",
+    "entity_type": "user",
+    "entity_id": "juandavidnps@gmail.com",
+    "ip_address": "127.0.0.1",
+    "details": null,
+    "created_at": "2026-10-14 12:26:02"
+  },
+  {
+    "id": "LOG-DB3639B6",
+    "user_email": "juandavidnps@gmail.com",
+    "action": "login",
+    "entity_type": "user",
+    "entity_id": "U2",
+    "ip_address": "127.0.0.1",
+    "details": "{\"result\": \"success\"}",
+    "created_at": "2026-10-14 12:06:11"
+  },
+  {
+    "id": "LOG-2488FB92",
+    "user_email": "juandavidnps@gmail.com",
+    "action": "logout",
+    "entity_type": "user",
+    "entity_id": "juandavidnps@gmail.com",
+    "ip_address": "127.0.0.1",
+    "details": null,
+    "created_at": "2026-10-14 12:05:51"
+  },
+  {
+    "id": "LOG-19A6BB9D",
+    "user_email": "juandavidnps@gmail.com",
+    "action": "cart_checkout",
+    "entity_type": "order",
+    "entity_id": "ORD-C5D82BAE",
+    "ip_address": "127.0.0.1",
+    "details": "{\"total\": 4600.0, \"items_count\": 1, \"invoice_id\": \"INV-C654F795\"}",
+    "created_at": "2026-10-14 11:52:15"
+  },
+  {
+    "id": "LOG-EF2953B3",
+    "user_email": "juandavidnps@gmail.com",
+    "action": "invoice_email_simulated",
+    "entity_type": "invoice",
+    "entity_id": "INV-C654F795",
+    "ip_address": "127.0.0.1",
+    "details": null,
+    "created_at": "2026-10-14 11:52:15"
+  },
+  {
+    "id": "LOG-4AA281D2",
+    "user_email": "juandavidnps@gmail.com",
+    "action": "login",
+    "entity_type": "user",
+    "entity_id": "U2",
+    "ip_address": "127.0.0.1",
+    "details": "{\"result\": \"success\"}",
+    "created_at": "2026-10-14 11:51:49"
+  },
+  {
+    "id": "LOG-8DEC6B37",
+    "user_email": "admin@lycaonsoftware.com",
+    "action": "logout",
+    "entity_type": "user",
+    "entity_id": "admin@lycaonsoftware.com",
+    "ip_address": "127.0.0.1",
+    "details": null,
+    "created_at": "2026-10-14 11:51:21"
+  },
+  {
+    "id": "LOG-8286702E",
+    "user_email": "admin@lycaonsoftware.com",
+    "action": "login",
+    "entity_type": "user",
+    "entity_id": "U1",
+    "ip_address": "127.0.0.1",
+    "details": "{\"result\": \"success\"}",
+    "created_at": "2026-10-14 11:51:03"
+  },
+  {
+    "id": "LOG-4E224565",
+    "user_email": "juandavidnps@gmail.com",
+    "action": "logout",
+    "entity_type": "user",
+    "entity_id": "juandavidnps@gmail.com",
+    "ip_address": "127.0.0.1",
+    "details": null,
+    "created_at": "2026-10-14 11:50:31"
+  },
+  {
+    "id": "LOG-0493CC29",
+    "user_email": "juandavidnps@gmail.com",
+    "action": "invoice_email_simulated",
+    "entity_type": "invoice",
+    "entity_id": "INV-66CB5786",
+    "ip_address": "127.0.0.1",
+    "details": null,
+    "created_at": "2026-10-14 11:36:43"
+  },
+  {
+    "id": "LOG-DB3A8087",
+    "user_email": "juandavidnps@gmail.com",
+    "action": "cart_checkout",
+    "entity_type": "order",
+    "entity_id": "ORD-25A79655",
+    "ip_address": "127.0.0.1",
+    "details": "{\"total\": 9000.0, \"items_count\": 1, \"invoice_id\": \"INV-66CB5786\"}",
+    "created_at": "2026-10-14 11:36:43"
+  },
+  {
+    "id": "LOG-B2224CED",
+    "user_email": "juandavidnps@gmail.com",
+    "action": "login",
+    "entity_type": "user",
+    "entity_id": "U2",
+    "ip_address": "127.0.0.1",
+    "details": "{\"result\": \"success\"}",
+    "created_at": "2026-10-14 11:33:02"
+  },
+  {
+    "id": "LOG-AC02FE90",
+    "user_email": "juandavidnps@gmail.com",
+    "action": "invoice_email_simulated",
+    "entity_type": "invoice",
+    "entity_id": "INV-05821C5D",
+    "ip_address": "127.0.0.1",
+    "details": null,
+    "created_at": "2026-10-13 17:04:01"
+  },
+  {
+    "id": "LOG-B16F353D",
+    "user_email": "juandavidnps@gmail.com",
+    "action": "cart_checkout",
+    "entity_type": "order",
+    "entity_id": "ORD-43B039CC",
+    "ip_address": "127.0.0.1",
+    "details": "{\"total\": 6800.0, \"items_count\": 2, \"invoice_id\": \"INV-05821C5D\"}",
+    "created_at": "2026-10-13 17:04:01"
+  },
+  {
+    "id": "LOG-B8901626",
+    "user_email": "juandavidnps@gmail.com",
+    "action": "login",
+    "entity_type": "user",
+    "entity_id": "U2",
+    "ip_address": "127.0.0.1",
+    "details": "{\"result\": \"success\"}",
+    "created_at": "2026-10-13 17:00:02"
+  },
+  {
+    "id": "LOG-5CD99558",
+    "user_email": "admin@lycaonsoftware.com",
+    "action": "logout",
+    "entity_type": "user",
+    "entity_id": "admin@lycaonsoftware.com",
+    "ip_address": "127.0.0.1",
+    "details": null,
+    "created_at": "2026-10-13 16:59:35"
+  },
+  {
+    "id": "LOG-E2A19F0C",
+    "user_email": "admin@lycaonsoftware.com",
+    "action": "cart_checkout",
+    "entity_type": "order",
+    "entity_id": "ORD-CB07CFD3",
+    "ip_address": "127.0.0.1",
+    "details": "{\"total\": 9000.0, \"items_count\": 1, \"invoice_id\": \"INV-CC847F39\"}",
+    "created_at": "2026-10-13 16:44:43"
+  },
+  {
+    "id": "LOG-D0EC5DF2",
+    "user_email": "admin@lycaonsoftware.com",
+    "action": "login",
+    "entity_type": "user",
+    "entity_id": "U1",
+    "ip_address": "127.0.0.1",
+    "details": "{\"result\": \"success\"}",
+    "created_at": "2026-10-13 15:47:22"
+  },
+  {
+    "id": "LOG-823B320A",
+    "user_email": "admin@lycaonsoftware.com",
+    "action": "logout",
+    "entity_type": "user",
+    "entity_id": "admin@lycaonsoftware.com",
+    "ip_address": "127.0.0.1",
+    "details": null,
+    "created_at": "2026-10-13 15:46:58"
+  },
+  {
+    "id": "LOG-3A5024D7",
+    "user_email": "admin@lycaonsoftware.com",
+    "action": "login",
+    "entity_type": "user",
+    "entity_id": "U1",
+    "ip_address": "127.0.0.1",
+    "details": "{\"result\": \"success\"}",
+    "created_at": "2026-10-13 14:36:53"
+  },
+  {
+    "id": "LOG-BF91EF13",
+    "user_email": "juandavidnps@gmail.com",
+    "action": "logout",
+    "entity_type": "user",
+    "entity_id": "juandavidnps@gmail.com",
+    "ip_address": "127.0.0.1",
+    "details": null,
+    "created_at": "2026-10-13 14:30:58"
+  },
+  {
+    "id": "LOG-600D3852",
+    "user_email": "juandavidnps@gmail.com",
+    "action": "login",
+    "entity_type": "user",
+    "entity_id": "U2",
+    "ip_address": "127.0.0.1",
+    "details": "{\"result\": \"success\"}",
+    "created_at": "2026-10-13 14:28:01"
+  },
+  {
+    "id": "LOG-F600DD30",
+    "user_email": "admin@lycaonsoftware.com",
+    "action": "login",
+    "entity_type": "user",
+    "entity_id": "U1",
+    "ip_address": "127.0.0.1",
+    "details": "{\"result\": \"success\"}",
+    "created_at": "2026-10-01 16:49:22"
+  },
+  {
+    "id": "LOG-96DD09CF",
+    "user_email": "admin@lycaonsoftware.com",
+    "action": "login",
+    "entity_type": "user",
+    "entity_id": "U1",
+    "ip_address": "127.0.0.1",
+    "details": "{\"result\": \"success\"}",
+    "created_at": "2026-10-01 16:11:49"
+  },
+  {
+    "id": "LOG-577E5E03",
+    "user_email": "admin@lycaonsoftware.com",
+    "action": "logout",
+    "entity_type": "user",
+    "entity_id": "admin@lycaonsoftware.com",
+    "ip_address": "127.0.0.1",
+    "details": null,
+    "created_at": "2026-10-01 16:07:34"
+  },
+  {
+    "id": "LOG-30FCA57D",
+    "user_email": "admin@lycaonsoftware.com",
+    "action": "login",
+    "entity_type": "user",
+    "entity_id": "U1",
+    "ip_address": "127.0.0.1",
+    "details": "{\"result\": \"success\"}",
+    "created_at": "2026-10-01 16:06:40"
+  },
+  {
+    "id": "LOG-67FB6294",
+    "user_email": "admin@lycaonsoftware.com",
+    "action": "logout",
+    "entity_type": "user",
+    "entity_id": "admin@lycaonsoftware.com",
+    "ip_address": "127.0.0.1",
+    "details": null,
+    "created_at": "2026-10-01 16:01:14"
+  },
+  {
+    "id": "LOG-7B8C42F9",
+    "user_email": "admin@lycaonsoftware.com",
+    "action": "login",
+    "entity_type": "user",
+    "entity_id": "U1",
+    "ip_address": "127.0.0.1",
+    "details": "{\"result\": \"success\"}",
+    "created_at": "2026-10-01 15:59:34"
+  },
+  {
+    "id": "LOG-18174DD4",
+    "user_email": "admin@lycaonsoftware.com",
+    "action": "login",
+    "entity_type": "user",
+    "entity_id": "U1",
+    "ip_address": "127.0.0.1",
+    "details": "{\"result\": \"success\"}",
+    "created_at": "2026-10-01 15:43:56"
+  },
+  {
+    "id": "LOG-5B117144",
+    "user_email": "admin@lycaonsoftware.com",
+    "action": "login",
+    "entity_type": "user",
+    "entity_id": "U1",
+    "ip_address": "127.0.0.1",
+    "details": "{\"result\": \"success\"}",
+    "created_at": "2026-10-01 15:35:00"
+  },
+  {
+    "id": "LOG-30AB8774",
+    "user_email": "admin@lycaonsoftware.com",
+    "action": "login",
+    "entity_type": "user",
+    "entity_id": "U1",
+    "ip_address": "127.0.0.1",
+    "details": "{\"result\": \"success\"}",
+    "created_at": "2026-10-01 15:34:15"
+  },
+  {
+    "id": "LOG-43A109C9",
+    "user_email": "admin@lycaonsoftware.com",
+    "action": "logout",
+    "entity_type": "user",
+    "entity_id": "admin@lycaonsoftware.com",
+    "ip_address": "127.0.0.1",
+    "details": null,
+    "created_at": "2026-10-01 15:05:34"
+  },
+  {
+    "id": "LOG-D078FFA2",
+    "user_email": "admin@lycaonsoftware.com",
+    "action": "login",
+    "entity_type": "user",
+    "entity_id": "U1",
+    "ip_address": "127.0.0.1",
+    "details": "{\"result\": \"success\"}",
+    "created_at": "2026-10-01 14:46:03"
+  },
+  {
+    "id": "LOG-D09224D7",
+    "user_email": "gukag@gmail.com",
+    "action": "logout",
+    "entity_type": "user",
+    "entity_id": "gukag@gmail.com",
+    "ip_address": "127.0.0.1",
+    "details": null,
+    "created_at": "2026-10-01 14:28:08"
+  },
+  {
+    "id": "LOG-9215FB02",
+    "user_email": "gukag@gmail.com",
+    "action": "order_created",
+    "entity_type": "order",
+    "entity_id": "ORD-3C62801C",
+    "ip_address": "127.0.0.1",
+    "details": "{\"product\": \"Auditoría de Penetración (Pentest Completo)\", \"total\": 64000.0}",
+    "created_at": "2026-10-01 14:26:44"
+  },
+  {
+    "id": "LOG-27B85F3F",
+    "user_email": "gukag@gmail.com",
+    "action": "order_created",
+    "entity_type": "order",
+    "entity_id": "ORD-07ED9149",
+    "ip_address": "127.0.0.1",
+    "details": "{\"product\": \"Licencia CrowdStrike Falcon Endpoint\", \"total\": 44950.0}",
+    "created_at": "2026-10-01 14:26:32"
+  },
+  {
+    "id": "LOG-F267E8D4",
+    "user_email": "gukag@gmail.com",
+    "action": "order_created",
+    "entity_type": "order",
+    "entity_id": "ORD-0F108F54",
+    "ip_address": "127.0.0.1",
+    "details": "{\"product\": \"YubiKey 5C NFC — Token MFA\", \"total\": 165.0}",
+    "created_at": "2026-10-01 14:25:54"
+  },
+  {
+    "id": "LOG-09053773",
+    "user_email": "gukag@gmail.com",
+    "action": "register",
+    "entity_type": "user",
+    "entity_id": "U5",
+    "ip_address": "127.0.0.1",
+    "details": null,
+    "created_at": "2026-10-01 14:24:20"
+  },
+  {
+    "id": "LOG-0C636EF3",
+    "user_email": "admin@lycaonsoftware.com",
+    "action": "logout",
+    "entity_type": "user",
+    "entity_id": "admin@lycaonsoftware.com",
+    "ip_address": "127.0.0.1",
+    "details": null,
+    "created_at": "2026-10-01 14:16:50"
+  },
+  {
+    "id": "LOG-9DAE8473",
+    "user_email": "admin@lycaonsoftware.com",
+    "action": "login",
+    "entity_type": "user",
+    "entity_id": "U1",
+    "ip_address": "127.0.0.1",
+    "details": "{\"result\": \"success\"}",
+    "created_at": "2026-10-01 14:14:50"
+  },
+  {
+    "id": "LOG-135DAB32",
+    "user_email": "admin@lycaonsoftware.com",
+    "action": "logout",
+    "entity_type": "user",
+    "entity_id": "admin@lycaonsoftware.com",
+    "ip_address": "127.0.0.1",
+    "details": null,
+    "created_at": "2026-10-01 14:11:47"
+  },
+  {
+    "id": "LOG-4A4C3DA8",
+    "user_email": "admin@lycaonsoftware.com",
+    "action": "login",
+    "entity_type": "user",
+    "entity_id": "U1",
+    "ip_address": "127.0.0.1",
+    "details": "{\"result\": \"success\"}",
+    "created_at": "2026-10-01 14:10:24"
+  },
+  {
     "id": "LOG-FEB60325",
     "user_email": "admin@lycaonsoftware.com",
     "action": "login",
@@ -7,7 +987,7 @@
     "entity_id": "U1",
     "ip_address": "127.0.0.1",
     "details": "{\"result\": \"success\"}",
-    "created_at": "2026-09-24T16:51:58.467626"
+    "created_at": "2026-09-24 16:51:58"
   },
   {
     "id": "LOG-63C5D25C",
@@ -17,7 +997,7 @@
     "entity_id": "U1",
     "ip_address": "127.0.0.1",
     "details": "{\"result\": \"success\"}",
-    "created_at": "2026-09-24T16:20:36.751469"
+    "created_at": "2026-09-24 16:20:36"
   },
   {
     "id": "LOG-A966FB18",
@@ -27,7 +1007,7 @@
     "entity_id": "U1",
     "ip_address": "127.0.0.1",
     "details": "{\"result\": \"success\"}",
-    "created_at": "2026-09-18T14:37:40.523465"
+    "created_at": "2026-09-18 14:37:40"
   },
   {
     "id": "LOG-295484F3",
@@ -37,7 +1017,7 @@
     "entity_id": "admin@lycaonsoftware.com",
     "ip_address": "127.0.0.1",
     "details": null,
-    "created_at": "2026-09-18T14:37:12.215560"
+    "created_at": "2026-09-18 14:37:12"
   },
   {
     "id": "LOG-0627DB71",
@@ -47,7 +1027,7 @@
     "entity_id": "U1",
     "ip_address": "127.0.0.1",
     "details": "{\"result\": \"success\"}",
-    "created_at": "2026-09-18T14:33:29.970743"
+    "created_at": "2026-09-18 14:33:29"
   },
   {
     "id": "LOG-334A70F3",
@@ -57,7 +1037,7 @@
     "entity_id": "U4",
     "ip_address": "127.0.0.1",
     "details": null,
-    "created_at": "2026-09-18T14:19:09.836196"
+    "created_at": "2026-09-18 14:19:09"
   },
   {
     "id": "LOG-B7114DC3",
@@ -67,7 +1047,7 @@
     "entity_id": "U2",
     "ip_address": "127.0.0.1",
     "details": "{\"result\": \"success\"}",
-    "created_at": "2026-09-18T14:18:37.893186"
+    "created_at": "2026-09-18 14:18:37"
   },
   {
     "id": "LOG-C5D9B929",
@@ -77,7 +1057,7 @@
     "entity_id": "U1",
     "ip_address": "127.0.0.1",
     "details": "{\"result\": \"success\"}",
-    "created_at": "2026-09-18T14:07:57.669961"
+    "created_at": "2026-09-18 14:07:57"
   },
   {
     "id": "LOG-0E1E901B",
@@ -87,7 +1067,7 @@
     "entity_id": "AUD-0AC684EE",
     "ip_address": "127.0.0.1",
     "details": "{\"name\": \"Test\", \"company\": \"TestCo\", \"audit_type\": \"pentest\", \"description\": \"Test audit request\"}",
-    "created_at": "2026-09-18T14:07:49.828988"
+    "created_at": "2026-09-18 14:07:49"
   },
   {
     "id": "LOG-3FF4D8B2",
@@ -97,7 +1077,7 @@
     "entity_id": "admin@lycaonsoftware.com",
     "ip_address": "127.0.0.1",
     "details": null,
-    "created_at": "2026-09-17T16:43:13.270397"
+    "created_at": "2026-09-17 16:43:13"
   },
   {
     "id": "LOG-90BB4158",
@@ -107,7 +1087,7 @@
     "entity_id": "U1",
     "ip_address": "127.0.0.1",
     "details": "{\"result\": \"success\"}",
-    "created_at": "2026-09-17T15:15:57.826913"
+    "created_at": "2026-09-17 15:15:57"
   },
   {
     "id": "LOG-A030B903",
@@ -117,7 +1097,7 @@
     "entity_id": "U1",
     "ip_address": "127.0.0.1",
     "details": "{\"result\": \"success\"}",
-    "created_at": "2026-09-15T16:31:59.033898"
+    "created_at": "2026-09-15 16:31:59"
   },
   {
     "id": "LOG-192A426E",
@@ -127,7 +1107,7 @@
     "entity_id": "U1",
     "ip_address": "127.0.0.1",
     "details": "{\"result\": \"success\"}",
-    "created_at": "2026-09-15T16:04:16.217584"
+    "created_at": "2026-09-15 16:04:16"
   },
   {
     "id": "LOG-C3C8A364",
@@ -137,7 +1117,7 @@
     "entity_id": "admin@lycaonsoftware.com",
     "ip_address": "127.0.0.1",
     "details": null,
-    "created_at": "2026-09-15T16:01:38.298457"
+    "created_at": "2026-09-15 16:01:38"
   },
   {
     "id": "LOG-C15E806C",
@@ -147,7 +1127,7 @@
     "entity_id": "U1",
     "ip_address": "127.0.0.1",
     "details": "{\"result\": \"success\"}",
-    "created_at": "2026-09-15T15:44:56.572251"
+    "created_at": "2026-09-15 15:44:56"
   },
   {
     "id": "LOG-A84DA92E",
@@ -157,7 +1137,7 @@
     "entity_id": "admin@lycaonsoftware.com",
     "ip_address": "127.0.0.1",
     "details": null,
-    "created_at": "2026-09-15T15:33:24.624469"
+    "created_at": "2026-09-15 15:33:24"
   },
   {
     "id": "LOG-EA0FA73F",
@@ -167,7 +1147,7 @@
     "entity_id": "U1",
     "ip_address": "127.0.0.1",
     "details": "{\"result\": \"success\"}",
-    "created_at": "2026-09-15T15:30:26.025618"
+    "created_at": "2026-09-15 15:30:26"
   },
   {
     "id": "LOG-1AD4B6F1",
@@ -177,7 +1157,7 @@
     "entity_id": "admin@lycaonsoftware.com",
     "ip_address": "127.0.0.1",
     "details": null,
-    "created_at": "2026-09-15T15:30:06.147732"
+    "created_at": "2026-09-15 15:30:06"
   },
   {
     "id": "LOG-AFEEF2AC",
@@ -187,7 +1167,7 @@
     "entity_id": "U1",
     "ip_address": "127.0.0.1",
     "details": "{\"result\": \"success\"}",
-    "created_at": "2026-09-15T15:18:06.709241"
+    "created_at": "2026-09-15 15:18:06"
   },
   {
     "id": "LOG-6746C67F",
@@ -197,7 +1177,7 @@
     "entity_id": "admin@lycaonsoftware.com",
     "ip_address": "127.0.0.1",
     "details": null,
-    "created_at": "2026-09-15T15:17:49.677039"
+    "created_at": "2026-09-15 15:17:49"
   },
   {
     "id": "LOG-441B3F6A",
@@ -207,7 +1187,7 @@
     "entity_id": "U1",
     "ip_address": "127.0.0.1",
     "details": "{\"result\": \"success\"}",
-    "created_at": "2026-09-15T15:12:09.729347"
+    "created_at": "2026-09-15 15:12:09"
   },
   {
     "id": "LOG-7A33FA1E",
@@ -217,7 +1197,7 @@
     "entity_id": "admin@lycaonsoftware.com",
     "ip_address": "127.0.0.1",
     "details": null,
-    "created_at": "2026-09-15T15:10:20.487189"
+    "created_at": "2026-09-15 15:10:20"
   },
   {
     "id": "LOG-8035E7AD",
@@ -227,7 +1207,7 @@
     "entity_id": "ORD-407A1F4A",
     "ip_address": "127.0.0.1",
     "details": "{\"product\": \"TitanX Compute Node\", \"total\": 4500.0}",
-    "created_at": "2026-09-15T15:10:05.144135"
+    "created_at": "2026-09-15 15:10:05"
   },
   {
     "id": "LOG-1115C4B5",
@@ -237,7 +1217,7 @@
     "entity_id": "U1",
     "ip_address": "127.0.0.1",
     "details": "{\"result\": \"success\"}",
-    "created_at": "2026-09-15T15:09:57.909109"
+    "created_at": "2026-09-15 15:09:57"
   },
   {
     "id": "LOG-E5E38B74",
@@ -247,7 +1227,7 @@
     "entity_id": "admin@lycaonsoftware.com",
     "ip_address": "127.0.0.1",
     "details": null,
-    "created_at": "2026-09-15T15:09:51.147103"
+    "created_at": "2026-09-15 15:09:51"
   },
   {
     "id": "LOG-07DCD6EF",
@@ -257,7 +1237,7 @@
     "entity_id": "U1",
     "ip_address": "127.0.0.1",
     "details": "{\"result\": \"success\"}",
-    "created_at": "2026-09-15T15:08:58.307751"
+    "created_at": "2026-09-15 15:08:58"
   },
   {
     "id": "LOG-EF25F2E2",
@@ -267,7 +1247,7 @@
     "entity_id": "admin@lycaonsoftware.com",
     "ip_address": "127.0.0.1",
     "details": null,
-    "created_at": "2026-09-15T15:06:19.278512"
+    "created_at": "2026-09-15 15:06:19"
   },
   {
     "id": "LOG-15F02ABD",
@@ -277,7 +1257,7 @@
     "entity_id": "U1",
     "ip_address": "127.0.0.1",
     "details": "{\"result\": \"success\"}",
-    "created_at": "2026-09-15T15:01:44.568489"
+    "created_at": "2026-09-15 15:01:44"
   },
   {
     "id": "LOG-001",
@@ -287,7 +1267,7 @@
     "entity_id": "U1",
     "ip_address": "192.168.1.10",
     "details": "{\"method\": \"password\", \"result\": \"success\"}",
-    "created_at": "2026-09-15T08:00:00"
+    "created_at": "2026-09-15 08:00:00"
   },
   {
     "id": "LOG-002",
@@ -297,17 +1277,7 @@
     "entity_id": "ORD-2026-003",
     "ip_address": "192.168.1.25",
     "details": "{\"product\": \"AeroBlade MicroServer\", \"total\": 2400.00}",
-    "created_at": "2026-09-01T09:15:00"
-  },
-  {
-    "id": "LOG-003",
-    "user_email": "santosolano1602@gmail.com",
-    "action": "login",
-    "entity_type": "user",
-    "entity_id": "U3",
-    "ip_address": "192.168.1.30",
-    "details": "{\"method\": \"password\", \"result\": \"success\"}",
-    "created_at": "2026-08-13T14:00:00"
+    "created_at": "2026-09-01 09:15:00"
   },
   {
     "id": "LOG-004",
@@ -317,7 +1287,7 @@
     "entity_id": "P3",
     "ip_address": "192.168.1.10",
     "details": "{\"field\": \"stock\", \"old_value\": 8, \"new_value\": 5}",
-    "created_at": "2026-08-13T20:33:00"
+    "created_at": "2026-08-13 20:33:00"
   },
   {
     "id": "LOG-005",
@@ -327,6 +1297,16 @@
     "entity_id": "ORD-2026-002",
     "ip_address": "192.168.1.30",
     "details": "{\"product\": \"CyberWall Gateway\", \"total\": 4140.00, \"discount\": 460.00}",
-    "created_at": "2026-08-13T14:20:00"
+    "created_at": "2026-08-13 14:20:00"
+  },
+  {
+    "id": "LOG-003",
+    "user_email": "santosolano1602@gmail.com",
+    "action": "login",
+    "entity_type": "user",
+    "entity_id": "U3",
+    "ip_address": "192.168.1.30",
+    "details": "{\"method\": \"password\", \"result\": \"success\"}",
+    "created_at": "2026-08-13 14:00:00"
   }
 ]

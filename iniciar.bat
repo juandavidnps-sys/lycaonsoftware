@@ -21,6 +21,11 @@ if errorlevel 1 (
 echo  Verificando dependencias...
 pip install -r requirements.txt -q
 
+:: Diagnóstico de Base de Datos
+echo.
+echo  Verificando conexion a Base de Datos (XAMPP / Produccion)...
+python database.py
+
 echo.
 echo  Abriendo http://localhost:5000 en el navegador...
 start http://localhost:5000

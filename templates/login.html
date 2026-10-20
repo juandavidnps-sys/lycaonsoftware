@@ -3,111 +3,240 @@
 {% block description %}Inicia sesión o regístrate en Lycaon Security — Control Operativo.{% endblock %}
 
 {% block body %}
-<div class="min-h-screen bg-black flex items-center justify-center p-6 relative overflow-hidden">
-  
-  <!-- ── Fondo Decorativo ── -->
-  <div class="absolute inset-0 z-0">
-    <div class="absolute top-0 right-0 w-[40rem] h-[40rem] bg-gold/5 rounded-full blur-[150px] pointer-events-none"></div>
-    <div class="absolute bottom-0 left-0 w-[30rem] h-[30rem] bg-cyan/5 rounded-full blur-[120px] pointer-events-none"></div>
-  </div>
+<div class="min-h-screen bg-[#09090B] flex flex-col justify-between p-4 sm:p-6 relative overflow-x-hidden">
 
-  <div class="w-full max-w-md relative z-10 perspective-1000">
+  <!-- Micro-brillo dorado sutil en el fondo superior -->
+  <div class="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-5xl h-48 bg-gradient-to-b from-amber-500/5 to-transparent pointer-events-none"></div>
+
+  <!-- ── Barra Superior de Navegación y Salida ── -->
+  <header class="w-full max-w-4xl mx-auto flex items-center justify-between py-2 sm:py-4 relative z-20">
+    <a href="/" class="flex items-center gap-3 group" title="Ir al portal principal de Lycaon Security">
+      <img 
+        src="{{ url_for('static', filename='img/logos/sd.png') }}" 
+        alt="Lycaon Logo" 
+        class="w-8 h-8 object-contain transition-transform group-hover:scale-105"
+      >
+      <div class="text-left">
+        <div class="font-black text-white text-sm sm:text-base tracking-wider uppercase leading-none">LYCAON</div>
+        <div class="text-gold text-[10px] font-mono font-bold tracking-widest uppercase">Security Sys</div>
+      </div>
+    </a>
+
+    <!-- Botones visibles para Salir / Volver al Inicio -->
+    <div class="flex items-center gap-2 sm:gap-3">
+      <a 
+        href="/tienda" 
+        class="hidden sm:inline-flex items-center gap-1.5 px-3.5 py-2 rounded-lg bg-[#121216] border border-neutral-800 text-xs font-mono font-bold uppercase tracking-wider text-zinc-400 hover:text-white hover:border-neutral-700 transition-colors"
+        title="Explorar catálogo público sin iniciar sesión"
+      >
+        <span>Catálogo</span>
+      </a>
+      <a 
+        href="/" 
+        class="inline-flex items-center gap-2 px-3.5 py-2 rounded-lg bg-[#121216] border border-neutral-800 text-xs font-mono font-bold uppercase tracking-wider text-zinc-300 hover:text-gold hover:border-gold/40 transition-colors shadow-sm"
+        title="Regresar a la página principal"
+      >
+        <svg class="w-4 h-4 text-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/>
+        </svg>
+        <span>Volver al Inicio</span>
+      </a>
+    </div>
+  </header>
+
+  <!-- ── Contenedor Central ── -->
+  <div class="w-full max-w-md mx-auto my-auto py-6 relative z-10">
+
+    <!-- ── Selector de Pestañas (Ingreso / Registro) ── -->
+    <div class="flex items-center p-1 bg-[#121216] border border-neutral-800 rounded-xl mb-4">
+      <button 
+        type="button" 
+        id="tab-btn-login"
+        onclick="mostrarLoginTab()"
+        class="flex-1 py-2 rounded-lg text-xs font-mono font-bold uppercase tracking-wider transition-all text-white bg-neutral-900 border border-neutral-700 shadow-sm"
+      >
+        Ingreso
+      </button>
+      <button 
+        type="button" 
+        id="tab-btn-register"
+        onclick="mostrarRegistroTab()"
+        class="flex-1 py-2 rounded-lg text-xs font-mono font-bold uppercase tracking-wider transition-all text-zinc-400 hover:text-zinc-200 border border-transparent"
+      >
+        Crear Usuario
+      </button>
+    </div>
 
     <!-- ── Tarjeta de Login ── -->
-    <div id="login-card" class="card-charcoal p-8 md:p-10 shadow-2xl relative">
-      <!-- Glow effect -->
-      <div class="absolute top-0 left-1/2 -translate-x-1/2 w-48 h-1 bg-gradient-to-r from-transparent via-gold to-transparent"></div>
+    <div id="login-card" class="bg-[#121216] border border-neutral-800 rounded-xl p-6 sm:p-10 shadow-2xl relative">
       
+      <!-- Botón de Salir (✕) en la esquina superior derecha -->
+      <a 
+        href="/" 
+        class="absolute top-4 right-4 w-8 h-8 flex items-center justify-center rounded-lg bg-black/40 border border-neutral-800 text-zinc-400 hover:text-white hover:border-gold/40 transition-colors cursor-pointer" 
+        title="Salir y volver a la página principal"
+        aria-label="Salir y volver a la página principal"
+      >
+        ✕
+      </a>
+
       <div class="text-center mb-8">
-        <div class="w-12 h-12 bg-black/60 border border-gold/30 flex items-center justify-center text-gold mx-auto mb-6 rounded-engineering shadow-inner">
-          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>
-        </div>
-        <h1 class="text-2xl font-black text-white uppercase tracking-widest mb-2">INGRESA <span class="text-gold">AL SISTEMA</span></h1>
-        <p class="text-sm text-gray-400">Ingresa tus datos.</p>
-        <div class="mt-4 flex items-center justify-center gap-2 text-xs font-mono text-cyan/70 uppercase">
-        </div>
+        <h1 class="text-2xl font-bold text-white uppercase tracking-wider mb-2 flex items-center justify-center gap-2.5">
+          <svg class="w-6 h-6 text-gold flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>
+          <span>Ingresa al Sistema</span>
+        </h1>
+        <p class="text-sm text-zinc-400">Control de acceso Lycaon Security</p>
       </div>
 
-      <div id="login-error" class="hidden mb-6 p-3 bg-red-900/20 border border-red-500/30 text-red-400 text-sm rounded-engineering text-center"></div>
+      <div id="login-error" class="hidden mb-6 p-3 bg-red-950/40 border border-red-500/40 text-red-300 text-sm rounded-lg text-center font-medium"></div>
 
-      <form id="login-form" class="space-y-6">
+      <form id="login-form" class="space-y-5">
         <div>
           <div class="relative">
-            <span class="absolute left-4 top-1/2 -translate-y-1/2 text-gray-500 pointer-events-none">
+            <span class="absolute left-4 top-1/2 -translate-y-1/2 text-zinc-400 pointer-events-none">
               <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
             </span>
-            <input id="login-email" type="email" placeholder="Correo electronico" required class="w-full bg-[#181820] border border-translucent text-white rounded-engineering py-3 pl-12 pr-4 focus:outline-none focus:border-gold transition-colors placeholder:text-gray-500">
+            <input id="login-email" type="email" placeholder="Correo electrónico" required class="w-full bg-neutral-900 border border-neutral-800 text-white rounded-lg py-3 pl-12 pr-4 focus:outline-none focus:border-gold transition-colors placeholder:text-zinc-400 text-sm">
           </div>
         </div>
         
         <div>
           <div class="relative">
-            <span class="absolute left-4 top-1/2 -translate-y-1/2 text-gray-500 pointer-events-none">
+            <span class="absolute left-4 top-1/2 -translate-y-1/2 text-zinc-400 pointer-events-none">
               <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>
             </span>
-            <input id="login-password" type="password" placeholder="Contraseña" required class="w-full bg-[#181820] border border-translucent text-white rounded-engineering py-3 pl-12 pr-4 focus:outline-none focus:border-gold transition-colors placeholder:text-gray-500">
+            <input id="login-password" type="password" placeholder="Contraseña" required class="w-full bg-neutral-900 border border-neutral-800 text-white rounded-lg py-3 pl-12 pr-4 focus:outline-none focus:border-gold transition-colors placeholder:text-zinc-400 text-sm">
           </div>
         </div>
 
-        <button type="submit" id="login-btn" class="w-full btn-gold py-3 uppercase tracking-widest text-sm shadow-[0_0_15px_rgba(212,175,55,0.2)]">
+        <button type="submit" id="login-btn" class="w-full btn-gold py-3 uppercase tracking-widest text-sm font-bold shadow-none border border-amber-500/20">
           Ingresar →
         </button>
       </form>
 
-      <div class="mt-8 border-t border-translucent pt-6 form-toggle text-center">
-        <button type="button" class="text-sm text-gray-400 hover:text-gold transition-colors tracking-wide">
-          ¿No tienes usuario? crea uno
+      <div class="mt-8 border-t border-neutral-800 pt-6 form-toggle text-center space-y-3">
+        <button type="button" onclick="mostrarRegistroTab()" class="text-sm text-zinc-300 hover:text-gold transition-colors tracking-wide">
+          ¿No tienes usuario? Crea uno
         </button>
+        <div>
+          <a href="/" class="inline-flex items-center gap-1.5 text-xs text-zinc-500 hover:text-gold transition-colors font-mono tracking-wider">
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/></svg>
+            <span>Volver a la página principal</span>
+          </a>
+        </div>
       </div>
     </div>
 
     <!-- ── Tarjeta de Registro ── -->
-    <div id="register-card" class="hidden card-charcoal p-8 md:p-10 shadow-2xl relative">
-      <div class="absolute top-0 left-1/2 -translate-x-1/2 w-48 h-1 bg-gradient-to-r from-transparent via-cyan to-transparent"></div>
+    <div id="register-card" class="hidden bg-[#121216] border border-neutral-800 rounded-xl p-6 sm:p-10 shadow-2xl relative">
       
+      <!-- Botón de Salir (✕) en la esquina superior derecha -->
+      <a 
+        href="/" 
+        class="absolute top-4 right-4 w-8 h-8 flex items-center justify-center rounded-lg bg-black/40 border border-neutral-800 text-zinc-400 hover:text-white hover:border-gold/40 transition-colors cursor-pointer" 
+        title="Salir y volver a la página principal"
+        aria-label="Salir y volver a la página principal"
+      >
+        ✕
+      </a>
+
       <div class="text-center mb-8">
-        <div class="w-12 h-12 bg-black/60 border border-cyan/30 flex items-center justify-center text-cyan mx-auto mb-6 rounded-engineering shadow-inner">
-          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z"></path></svg>
-        </div>
-        <h1 class="text-2xl font-black text-white uppercase tracking-widest mb-2">Crear un nuevo usuario</h1>
-        <p class="text-sm text-gray-400">Proceso de ingreso a Lycaon.</p>
+        <h1 class="text-2xl font-bold text-white uppercase tracking-wider mb-2 flex items-center justify-center gap-2.5">
+          <svg class="w-6 h-6 text-gold flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z"></path></svg>
+          <span>Crear Nuevo Usuario</span>
+        </h1>
+        <p class="text-sm text-zinc-400">Proceso de acreditación Lycaon</p>
       </div>
 
-      <div id="register-error" class="hidden mb-6 p-3 bg-red-900/20 border border-red-500/30 text-red-400 text-sm rounded-engineering text-center"></div>
+      <div id="register-error" class="hidden mb-6 p-3 bg-red-950/40 border border-red-500/40 text-red-300 text-sm rounded-lg text-center font-medium"></div>
 
       <form id="register-form" class="space-y-4">
         <div>
-          <input id="reg-name" type="text" placeholder="Nombre de usuario" required class="w-full bg-[#181820] border border-translucent text-white rounded-engineering py-3 px-4 focus:outline-none focus:border-cyan transition-colors placeholder:text-gray-500">
+          <input id="reg-name" type="text" placeholder="Nombre completo" required class="w-full bg-neutral-900 border border-neutral-800 text-white rounded-lg py-3 px-4 focus:outline-none focus:border-gold transition-colors placeholder:text-zinc-400 text-sm">
         </div>
 
         <div>
-          <input id="reg-email" type="email" placeholder="Correo electronico" required class="w-full bg-[#181820] border border-translucent text-white rounded-engineering py-3 px-4 focus:outline-none focus:border-cyan transition-colors placeholder:text-gray-500">
+          <input id="reg-email" type="email" placeholder="Correo electrónico" required class="w-full bg-neutral-900 border border-neutral-800 text-white rounded-lg py-3 px-4 focus:outline-none focus:border-gold transition-colors placeholder:text-zinc-400 text-sm">
         </div>
 
         <div>
-          <input id="reg-password" type="password" placeholder="Contraseña(Mín. 6 chars)" minlength="6" required class="w-full bg-[#181820] border border-translucent text-white rounded-engineering py-3 px-4 focus:outline-none focus:border-cyan transition-colors placeholder:text-gray-500">
+          <input id="reg-phone" type="tel" placeholder="Número de teléfono" required class="w-full bg-neutral-900 border border-neutral-800 text-white rounded-lg py-3 px-4 focus:outline-none focus:border-gold transition-colors placeholder:text-zinc-400 text-sm">
         </div>
 
-        <button type="submit" id="register-btn" class="w-full bg-cyan hover:bg-cyan/80 text-black font-bold py-3 uppercase tracking-widest text-sm rounded-engineering transition-colors shadow-[0_0_15px_rgba(0,240,255,0.2)] mt-4">
-         Ingresar al Sistema
+        <div>
+          <input id="reg-address" type="text" placeholder="Dirección de despacho" required class="w-full bg-neutral-900 border border-neutral-800 text-white rounded-lg py-3 px-4 focus:outline-none focus:border-gold transition-colors placeholder:text-zinc-400 text-sm">
+        </div>
+
+        <div>
+          <input id="reg-password" type="password" placeholder="Contraseña (mínimo 6 caracteres)" minlength="6" required class="w-full bg-neutral-900 border border-neutral-800 text-white rounded-lg py-3 px-4 focus:outline-none focus:border-gold transition-colors placeholder:text-zinc-400 text-sm">
+        </div>
+
+        <button type="submit" id="register-btn" class="w-full btn-gold py-3 uppercase tracking-widest text-sm font-bold shadow-none border border-amber-500/20 mt-4">
+          Registrar Usuario →
         </button>
       </form>
 
-      <div class="mt-8 border-t border-translucent pt-6 form-toggle text-center">
-        <button type="button" class="text-sm text-gray-400 hover:text-cyan transition-colors tracking-wide">
-          Ya puedes ingresar. Acceder
+      <div class="mt-8 border-t border-neutral-800 pt-6 form-toggle text-center space-y-3">
+        <button type="button" onclick="mostrarLoginTab()" class="text-sm text-zinc-300 hover:text-gold transition-colors tracking-wide">
+          ¿Ya tienes usuario? Acceder al sistema
         </button>
+        <div>
+          <a href="/" class="inline-flex items-center gap-1.5 text-xs text-zinc-500 hover:text-gold transition-colors font-mono tracking-wider">
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/></svg>
+            <span>Volver a la página principal</span>
+          </a>
+        </div>
       </div>
     </div>
   </div>
+
+  <!-- ── Footer Discreto ── -->
+  <footer class="w-full max-w-4xl mx-auto py-3 text-center text-xs text-zinc-600 font-mono">
+    © 2026 Lycaon Software — Seguridad Perimetral y Control Operativo
+  </footer>
 </div>
 
 <script>
+  function mostrarLoginTab() {
+    const loginCard = document.getElementById('login-card');
+    const registerCard = document.getElementById('register-card');
+    const tabLogin = document.getElementById('tab-btn-login');
+    const tabRegister = document.getElementById('tab-btn-register');
+    
+    if (loginCard && registerCard) {
+      loginCard.style.display = 'block';
+      registerCard.classList.add('hidden');
+      registerCard.style.display = 'none';
+    }
+    if (tabLogin && tabRegister) {
+      tabLogin.className = 'flex-1 py-2 rounded-lg text-xs font-mono font-bold uppercase tracking-wider transition-all text-white bg-neutral-900 border border-neutral-700 shadow-sm';
+      tabRegister.className = 'flex-1 py-2 rounded-lg text-xs font-mono font-bold uppercase tracking-wider transition-all text-zinc-400 hover:text-zinc-200 border border-transparent';
+    }
+  }
+
+  function mostrarRegistroTab() {
+    const loginCard = document.getElementById('login-card');
+    const registerCard = document.getElementById('register-card');
+    const tabLogin = document.getElementById('tab-btn-login');
+    const tabRegister = document.getElementById('tab-btn-register');
+    
+    if (loginCard && registerCard) {
+      loginCard.style.display = 'none';
+      registerCard.classList.remove('hidden');
+      registerCard.style.display = 'block';
+    }
+    if (tabLogin && tabRegister) {
+      tabRegister.className = 'flex-1 py-2 rounded-lg text-xs font-mono font-bold uppercase tracking-wider transition-all text-white bg-neutral-900 border border-neutral-700 shadow-sm';
+      tabLogin.className = 'flex-1 py-2 rounded-lg text-xs font-mono font-bold uppercase tracking-wider transition-all text-zinc-400 hover:text-zinc-200 border border-transparent';
+    }
+  }
+
   document.addEventListener('DOMContentLoaded', function () {
     const params = new URLSearchParams(window.location.search);
     if (params.get('modo') === 'registro') {
-      document.getElementById('login-card').classList.add('hidden');
-      document.getElementById('register-card').classList.remove('hidden');
+      mostrarRegistroTab();
+    } else {
+      mostrarLoginTab();
     }
   });
 </script>

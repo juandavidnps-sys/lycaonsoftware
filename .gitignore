@@ -17,3 +17,13 @@ venv.bak/
 
 # MacOS
 .DS_Store
+
+# Agent & tooling metadata
+.agent/
+.gemini/
+.impeccable/
+test_*.html
+scratch/
+repo.zip
+repo_extracted/
+mingit/

@@ -13,11 +13,11 @@
     <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
       <a href="/" class="flex items-center gap-3 group">
         <img src="{{ url_for('static', filename='img/logos/sd.png') }}" alt="Lycaon Logo" class="w-10 h-10 transition-transform group-hover:scale-105 object-contain">
-        <span class="font-black text-xl tracking-wide text-white">LYCAON<span class="text-gold font-medium ml-2">SECURITY</span> <span class="text-gray-500 font-medium text-sm ml-2 hidden sm:inline">Tienda</span></span>
+        <span class="font-black text-xl tracking-wide text-white">LYCAON<span class="text-gold font-medium ml-2">SECURITY</span> <span class="text-zinc-400 font-mono text-xs uppercase tracking-wider ml-2 hidden sm:inline border border-neutral-800 bg-neutral-900/60 px-2 py-0.5 rounded">Tienda</span></span>
       </a>
       <div class="flex items-center gap-6">
         {% if usuario %}
-          <a href="/dashboard" class="text-gray-400 hover:text-gold transition-colors font-medium text-sm tracking-widest uppercase">Dashboard Central</a>
+          <a href="/dashboard" class="text-zinc-300 hover:text-gold transition-colors font-medium text-sm tracking-widest uppercase">Dashboard Central</a>
         {% else %}
           <a href="/login" class="btn-gold text-xs px-4 py-2">iniciar sesion</a>
         {% endif %}
@@ -28,13 +28,12 @@
   <div class="max-w-7xl mx-auto px-6 py-12 animate-fade-in-up">
     <!-- Header -->
     <div class="card-charcoal p-8 relative overflow-hidden mb-8 group">
-      <div class="absolute inset-0 bg-gradient-to-r from-gold/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
       <div class="relative z-10">
         <h2 class="text-2xl font-black text-white uppercase tracking-widest flex items-center gap-3 mb-2">
           <span class="w-2 h-8 bg-gold rounded-full inline-block"></span>
         Catálogo
         </h2>
-        <p class="text-sm text-gray-400 font-medium max-w-2xl">
+        <p class="text-sm text-zinc-300 font-medium max-w-2xl">
           Explora nuestra línea de artículos de protección personal. Para adquirir equipos, debes estar registrado en nuestra web.
         </p>
       </div>
@@ -45,15 +44,15 @@
         <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"></path></svg>
         Todos
       </button>
-      <button class="filter-btn px-4 py-2 text-xs font-bold uppercase tracking-widest rounded-engineering border border-translucent text-gray-400 bg-black/40 hover:text-white hover:border-gray-500 transition-colors flex items-center gap-2" data-categoria="Hardware">
+      <button class="filter-btn px-4 py-2 text-xs font-bold uppercase tracking-widest rounded-engineering border border-neutral-800 text-zinc-300 bg-black/40 hover:text-white hover:border-neutral-700 transition-colors flex items-center gap-2" data-categoria="Hardware">
         <svg class="w-3.5 h-3.5 text-yellow-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z"></path></svg>
         Equipos
       </button>
-      <button class="filter-btn px-4 py-2 text-xs font-bold uppercase tracking-widest rounded-engineering border border-translucent text-gray-400 bg-black/40 hover:text-white hover:border-gray-500 transition-colors flex items-center gap-2" data-categoria="Software">
+      <button class="filter-btn px-4 py-2 text-xs font-bold uppercase tracking-widest rounded-engineering border border-neutral-800 text-zinc-300 bg-black/40 hover:text-white hover:border-neutral-700 transition-colors flex items-center gap-2" data-categoria="Software">
         <svg class="w-3.5 h-3.5 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path></svg>
         Software
       </button>
-      <button class="filter-btn px-4 py-2 text-xs font-bold uppercase tracking-widest rounded-engineering border border-translucent text-gray-400 bg-black/40 hover:text-white hover:border-gray-500 transition-colors flex items-center gap-2" data-categoria="Service">
+      <button class="filter-btn px-4 py-2 text-xs font-bold uppercase tracking-widest rounded-engineering border border-neutral-800 text-zinc-300 bg-black/40 hover:text-white hover:border-neutral-700 transition-colors flex items-center gap-2" data-categoria="Service">
         <svg class="w-3.5 h-3.5 text-purple-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
         Servicios
       </button>
@@ -64,10 +63,10 @@
       {% for producto in productos %}
       <div class="card-charcoal overflow-hidden group flex flex-col product-card" data-categoria="{{ producto.category }}" id="pub-product-{{ producto.id }}">
         
-        <div class="aspect-square bg-black border-b border-translucent flex items-center justify-center p-6 relative overflow-hidden">
+        <div class="aspect-square bg-black border-b border-neutral-800 flex items-center justify-center p-6 relative overflow-hidden">
           <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent z-10"></div>
           {% if producto.image_url and producto.image_url != '/static/img/placeholder.svg' %}
-            <img src="{{ producto.image_url }}" alt="{{ producto.name }}" class="w-full h-full object-contain relative z-20 group-hover:scale-110 transition-transform duration-500">
+            <img src="{{ producto.image_url }}" alt="{{ producto.name }}" class="w-full h-full object-cover relative z-20 group-hover:scale-105 transition-transform duration-500" loading="lazy" onerror="this.onerror=null; this.src='/static/img/placeholder.svg';">
           {% else %}
             <div class="text-6xl font-black text-gray-800 relative z-20 group-hover:scale-110 transition-transform duration-500">
               {% if producto.category == 'Security' %}SEC
@@ -80,10 +79,10 @@
           {% endif %}
           
           <div class="absolute top-4 right-4 z-20">
-            <span class="inline-flex items-center justify-center px-2 py-1 rounded text-[10px] font-bold uppercase tracking-widest
-              {% if producto.status == 'active' %}bg-green-500/10 text-green-500 border border-green-500/30
-              {% elif producto.status == 'low-stock' %}bg-yellow-500/10 text-yellow-500 border border-yellow-500/30
-              {% else %}bg-red-500/10 text-red-500 border border-red-500/30{% endif %}
+            <span class="inline-flex items-center justify-center px-2.5 py-1 rounded text-xs font-mono font-bold uppercase tracking-wider
+              {% if producto.status == 'active' %}bg-emerald-950/40 text-emerald-400 border border-emerald-500/30
+              {% elif producto.status == 'low-stock' %}bg-amber-950/40 text-amber-400 border border-amber-500/30
+              {% else %}bg-rose-950/40 text-rose-400 border border-rose-500/30{% endif %}
             ">
               {% if producto.status == 'active' %}Disponible
               {% elif producto.status == 'low-stock' %}Poco Stock
@@ -93,18 +92,18 @@
         </div>
 
         <div class="p-6 flex flex-col flex-1">
-          <div class="text-[10px] font-bold text-gray-500 uppercase tracking-widest mb-2">{{ producto.category }}</div>
+          <div class="text-xs font-mono font-bold text-zinc-400 uppercase tracking-wider mb-2">{{ producto.category }}</div>
           <h3 class="text-lg font-bold text-white mb-2">{{ producto.name }}</h3>
           <div class="text-xl font-mono text-gold mb-6">${{ "%.2f"|format(producto.price) }}</div>
           
           <div class="mt-auto">
             <!-- Si el usuario está logueado, mostrar comprar normal, si no, redirigir a login -->
             {% if usuario %}
-              <a href="/dashboard/store" class="w-full block text-center py-3 bg-gold text-black rounded-engineering text-xs font-bold uppercase tracking-widest transition-all duration-300 hover:bg-yellow-500 shadow-[0_0_15px_rgba(212,175,55,0.3)]">
+              <a href="/dashboard/store" class="w-full block text-center py-3 bg-gold text-black rounded-engineering text-xs font-bold uppercase tracking-widest transition-all duration-300 hover:bg-gold-light border border-amber-500/20">
                 Ver opciones de compra
               </a>
             {% else %}
-              <a href="/login" class="w-full block text-center py-3 bg-black/40 border border-translucent text-gray-300 rounded-engineering text-xs font-bold uppercase tracking-widest transition-colors hover:text-white hover:border-gray-500">
+              <a href="/login" class="w-full block text-center py-3 bg-black/40 border border-neutral-800 text-zinc-300 rounded-engineering text-xs font-bold uppercase tracking-widest transition-colors hover:text-white hover:border-neutral-700">
                 Iniciar sesión para comprar
               </a>
             {% endif %}
@@ -117,4 +116,34 @@
     
   </div>
 </div>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const filterBtns = document.querySelectorAll('.store-filters .filter-btn');
+  const cards = document.querySelectorAll('.products-grid .product-card');
+
+  filterBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const cat = btn.dataset.categoria;
+
+      filterBtns.forEach(b => {
+        b.classList.remove('border-gold', 'text-gold', 'bg-gold/10');
+        b.classList.add('border-translucent', 'text-gray-400', 'bg-black/40');
+      });
+      btn.classList.remove('border-translucent', 'text-gray-400', 'bg-black/40');
+      btn.classList.add('border-gold', 'text-gold', 'bg-gold/10');
+
+      cards.forEach(card => {
+        const cardCat = card.dataset.categoria;
+        if (cat === 'todos' || cardCat.toLowerCase() === cat.toLowerCase()) {
+          card.style.display = '';
+          card.classList.add('animate-fade-in-up');
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    });
+  });
+});
+</script>
 {% endblock %}

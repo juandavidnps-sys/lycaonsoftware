@@ -1,7 +1,436 @@
 {% extends "dashboard/layout.html" %}
-{% block title %}Dashboard Central{% endblock %}
+
+{% block title %}
+  {% if usuario.role == 'cliente' %}Portal del Cliente — Lycaon Software{% else %}Dashboard Central — Control Operativo{% endif %}
+{% endblock %}
+
+{% block vendor_js %}
+{% if usuario.role in ['administrador', 'operador'] %}
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+{% endif %}
+{% endblock %}
 
 {% block dashboard_content %}
+
+{% if usuario.role == 'cliente' %}
+<!-- ══════════════════════════════════════════════════════════════════════════════
+     PORTAL DEL CLIENTE — VISTA CORPORATIVA TÁCTICA
+     ══════════════════════════════════════════════════════════════════════════════ -->
+<div class="space-y-8 animate-fade-in-up">
+
+  <!-- ── 1. FRAME PRINCIPAL DEL PORTAL (HERO CARD) ── -->
+  <div class="card-charcoal p-6 lg:p-8 relative overflow-hidden border border-neutral-800 bg-[#121216] rounded-xl shadow-xl">
+    
+    <!-- Micro-borde superior con brillo metálico sutil -->
+    <div class="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-amber-500/40 to-transparent"></div>
+
+    <!-- ── Top Mini-Barra del Portal ── -->
+    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-5 mb-6 border-b border-neutral-800">
+      
+      <!-- Logo de Lobo Dorado + Marca + Badges -->
+      <div class="flex flex-wrap items-center gap-3">
+        <div class="flex items-center gap-2.5">
+          <img 
+            src="{{ url_for('static', filename='img/logos/sd.png') }}" 
+            alt="Lycaon Logo" 
+            class="w-7 h-7 object-contain drop-shadow"
+          >
+          <span class="font-black text-white text-base tracking-wide">Lycaon Software</span>
+        </div>
+        <div class="flex items-center gap-2">
+          <span class="px-2.5 py-0.5 rounded text-xs font-mono font-bold uppercase tracking-wider bg-neutral-900 border border-neutral-800 text-zinc-300">
+            Panel de Cliente
+          </span>
+          <span class="px-2.5 py-0.5 rounded text-xs font-mono font-bold uppercase tracking-wider bg-amber-500/10 border border-amber-500/30 text-gold">
+            Portal Interno
+          </span>
+        </div>
+      </div>
+
+      <!-- Stack de Avatares del Equipo & Indicador Online -->
+      <div class="flex items-center gap-3 self-end sm:self-auto">
+        <div class="flex -space-x-1.5 overflow-hidden">
+          <div class="inline-flex h-7 w-7 rounded-full ring-2 ring-[#121216] bg-neutral-800 text-xs font-mono font-bold text-white items-center justify-center border border-neutral-700" title="Soporte VIP">SP</div>
+          <div class="inline-flex h-7 w-7 rounded-full ring-2 ring-[#121216] bg-neutral-800 text-xs font-mono font-bold text-white items-center justify-center border border-neutral-700" title="Ingeniería NOC">EN</div>
+          <div class="inline-flex h-7 w-7 rounded-full ring-2 ring-[#121216] bg-neutral-800 text-xs font-mono font-bold text-white items-center justify-center border border-neutral-700" title="Auditoría">AU</div>
+          <div class="inline-flex h-7 w-7 rounded-full ring-2 ring-[#121216] bg-amber-500/20 text-xs font-mono font-bold text-amber-300 items-center justify-center border border-amber-500/40" title="{{ usuario.name }}">{{ (usuario.name|default('CL'))[:2]|upper }}</div>
+        </div>
+        <div class="flex items-center gap-1.5 pl-2 border-l border-neutral-800">
+          <span class="w-2.5 h-2.5 rounded-full bg-emerald-400"></span>
+          <span class="text-xs font-mono font-bold text-emerald-400 uppercase tracking-wider hidden md:inline">En Línea</span>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ── Cuerpo del Hero (Contenido Ejecutivo + Ilustración Vectorial) ── -->
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+      
+      <!-- Columna Izquierda: Textos y CTAs (60%) -->
+      <div class="lg:col-span-7 space-y-4">
+
+        <!-- Tag de Estado Institucional -->
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-md bg-neutral-900 border border-neutral-800 text-zinc-300 text-xs font-mono tracking-wider">
+          <span class="w-1.5 h-1.5 rounded-full bg-gold"></span>
+          <span class="font-bold text-white tracking-wider uppercase">PORTAL PRIVADO</span>
+          <span class="text-zinc-500 font-normal">|</span>
+          <span class="text-zinc-400">SESIÓN AUDITADA</span>
+        </div>
+
+        <!-- Título Institucional Sobrio -->
+        <h1 class="text-3xl sm:text-4xl lg:text-5xl font-black uppercase tracking-tight text-white leading-[1.08]">
+          BIENVENIDO A <span class="text-gold">LYCAON SOFTWARE</span>
+        </h1>
+
+        <!-- Subtítulo -->
+        <h2 class="text-base sm:text-lg font-medium text-zinc-300">
+          Hola de nuevo, <span class="text-white font-bold">{{ usuario.name }}</span>
+        </h2>
+
+        <!-- Descripción -->
+        <p class="text-xs sm:text-sm text-zinc-400 max-w-xl leading-relaxed">
+          Plataforma de acceso exclusivo para gestión de equipamiento perimetral, supervisión de órdenes de adquisición y emisión inmediata de comprobantes fiscales autenticados.
+        </p>
+
+        <!-- Botones de Acción -->
+        <div class="pt-2 flex flex-wrap items-center gap-3">
+          
+          <a 
+            href="/dashboard/store" 
+            class="btn-gold py-2.5 px-5 text-xs font-mono font-bold uppercase tracking-wider flex items-center gap-2 shadow-none border border-amber-500/20"
+          >
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/></svg>
+            <span>Explorar Tienda</span>
+          </a>
+
+          <a 
+            href="/dashboard/purchases" 
+            class="px-4 py-2.5 rounded-lg text-xs font-mono font-bold uppercase tracking-wider bg-neutral-900 border border-neutral-800 text-zinc-300 hover:text-white hover:bg-neutral-800 transition-colors flex items-center gap-2"
+          >
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/></svg>
+            <span>Mis Operaciones</span>
+          </a>
+
+          <a 
+            href="/ayuda" 
+            class="px-4 py-2.5 rounded-lg text-xs font-mono font-bold uppercase tracking-wider bg-neutral-900 border border-neutral-800 text-zinc-300 hover:text-white hover:bg-neutral-800 transition-colors flex items-center gap-2"
+          >
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/></svg>
+            <span>Comunidad y Soporte</span>
+          </a>
+
+          <a 
+            href="/ayuda" 
+            class="px-4 py-2.5 rounded-lg text-xs font-mono font-bold uppercase tracking-wider bg-neutral-900 border border-neutral-800 text-zinc-300 hover:text-white hover:bg-neutral-800 transition-colors flex items-center gap-2"
+          >
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+            <span>Documentación</span>
+          </a>
+
+        </div>
+
+      </div>
+
+      <!-- Columna Derecha: Imagen Táctica de Alta Definición -->
+      <div class="lg:col-span-5 flex items-center justify-center relative">
+        <div class="w-full rounded-xl overflow-hidden border border-neutral-800 bg-neutral-900 shadow-2xl relative aspect-[4/3] group">
+          <img src="{{ url_for('static', filename='img/hero_security.jpg') }}" alt="Centro de Operaciones Tácticas" class="w-full h-full object-cover brightness-90 group-hover:scale-105 transition-transform duration-700">
+          <div class="absolute inset-0 bg-gradient-to-t from-[#09090B] via-transparent to-transparent opacity-80"></div>
+          <div class="absolute bottom-3 left-3 right-3 flex items-center justify-between text-xs font-mono text-zinc-400 bg-black/60 backdrop-blur-md px-3 py-1.5 rounded-lg border border-neutral-800">
+            <span class="text-white font-bold flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span> TELEMETRÍA ACTIVA</span>
+            <span>NOC PERIMETRAL</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- ── 2. SECCIONES COMPLEMENTARIAS DEL CLIENTE ── -->
+  <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+
+    <!-- Card 1: Equipamiento Destacado / Carrusel Bootstrap -->
+    <div class="card-charcoal p-6 border border-neutral-800 bg-[#121216] rounded-xl flex flex-col justify-between shadow-xl">
+      <div>
+        <div class="flex items-center justify-between pb-3 mb-4 border-b border-neutral-800">
+          <div class="flex items-center gap-2">
+            <span class="w-2 h-2 rounded-full bg-gold animate-pulse"></span>
+            <h3 class="text-xs font-bold text-white uppercase tracking-wider font-mono">Equipos Destacados</h3>
+            <span class="hidden sm:inline-block px-2 py-0.5 rounded text-[10px] font-mono font-bold bg-gold/10 text-gold border border-gold/30">CARRUSEL</span>
+          </div>
+          <a href="/dashboard/store" class="text-xs text-gold hover:text-amber-300 transition-colors font-mono font-bold flex items-center gap-1">
+            <span>Ver Tienda</span>
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+          </a>
+        </div>
+        <p class="text-xs text-zinc-400 mb-4">Hardware perimetral y soluciones criptográficas de alta disponibilidad.</p>
+
+        <!-- Carrusel Bootstrap de Equipos Destacados -->
+        <div id="carouselEquiposDestacados" class="carousel slide relative" data-bs-ride="carousel" data-bs-interval="4500">
+          <!-- Indicadores -->
+          <div class="carousel-indicators">
+            {% for prod in productos_destacados %}
+            <button 
+              type="button" 
+              data-bs-target="#carouselEquiposDestacados" 
+              data-bs-slide-to="{{ loop.index0 }}" 
+              class="{% if loop.first %}active{% endif %}" 
+              aria-current="{% if loop.first %}true{% else %}false{% endif %}" 
+              aria-label="Slide {{ loop.index }}"
+            ></button>
+            {% endfor %}
+          </div>
+
+          <!-- Diapositivas (Items) -->
+          <div class="carousel-inner rounded-xl overflow-hidden border border-neutral-800 bg-[#0A0D15]">
+            {% for prod in productos_destacados %}
+            <div class="carousel-item {% if loop.first %}active{% endif %}">
+              <div class="relative group">
+                <!-- Imagen del Producto -->
+                <div class="h-44 sm:h-52 w-full bg-black relative overflow-hidden flex items-center justify-center">
+                  <img 
+                    src="{{ prod.image_url }}" 
+                    alt="{{ prod.name }}" 
+                    class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                    loading="lazy"
+                    onerror="this.onerror=null; this.src='/static/img/placeholder.svg';"
+                  >
+                  <!-- Gradientes de contraste superior e inferior -->
+                  <div class="absolute inset-0 bg-gradient-to-t from-[#121216] via-[#121216]/40 to-transparent"></div>
+                  <div class="absolute inset-0 bg-gradient-to-r from-black/60 via-transparent to-transparent"></div>
+
+                  <!-- Badges superiores -->
+                  <div class="absolute top-3 left-3 z-10 flex items-center gap-2">
+                    <span class="px-2.5 py-1 rounded-md text-[10px] font-mono font-bold uppercase tracking-wider bg-black/85 backdrop-blur-md border border-white/20 text-white">
+                      {{ prod.category }}
+                    </span>
+                    <span class="px-2 py-0.5 rounded-md text-[10px] font-mono font-bold uppercase tracking-wider bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">
+                      Stock: {{ prod.stock }} u.
+                    </span>
+                  </div>
+                </div>
+
+                <!-- Información del Producto (Pie de slide) -->
+                <div class="p-4 bg-[#121216] border-t border-neutral-800">
+                  <div class="flex items-start justify-between gap-3 mb-2">
+                    <div class="min-w-0 flex-1">
+                      <h4 class="text-sm font-bold text-white truncate group-hover:text-gold transition-colors" title="{{ prod.name }}">
+                        {{ prod.name }}
+                      </h4>
+                      <div class="text-xs font-mono text-zinc-400 mt-0.5 flex items-center gap-1.5">
+                        <span>Ref:</span>
+                        <strong class="text-zinc-200">{{ prod.id }}</strong>
+                        <span class="text-zinc-600">·</span>
+                        <span class="text-emerald-400 font-bold">Despacho Inmediato</span>
+                      </div>
+                    </div>
+                    <div class="text-right flex-shrink-0">
+                      <div class="text-base font-mono font-black text-gold">
+                        ${{ "%.2f"|format(prod.price) }}
+                      </div>
+                      <div class="text-[10px] font-mono text-zinc-500">USD</div>
+                    </div>
+                  </div>
+
+                  <!-- Fila de acción directa -->
+                  <div class="mt-3 pt-3 border-t border-neutral-800/70 flex items-center justify-between gap-3">
+                    <span class="text-[11px] font-mono text-zinc-400 flex items-center gap-1">
+                      <svg class="w-3.5 h-3.5 text-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+                      Garantía Oficial
+                    </span>
+                    <a 
+                      href="/dashboard/store" 
+                      class="px-3.5 py-1.5 rounded-lg bg-gold text-black hover:bg-gold-light transition-all text-xs font-mono font-bold uppercase tracking-wider flex items-center gap-1.5 shadow-md hover:shadow-gold/20"
+                    >
+                      <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/></svg>
+                      <span>Comprar</span>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            {% endfor %}
+          </div>
+
+          <!-- Controles de Navegación (Flechas Prev / Next) -->
+          <button 
+            class="carousel-control-prev" 
+            type="button" 
+            data-bs-target="#carouselEquiposDestacados" 
+            data-bs-slide="prev" 
+            aria-label="Equipo anterior"
+          >
+            <span class="carousel-nav-btn shadow-xl" aria-hidden="true">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 19l-7-7 7-7"/></svg>
+            </span>
+            <span class="visually-hidden">Anterior</span>
+          </button>
+          <button 
+            class="carousel-control-next" 
+            type="button" 
+            data-bs-target="#carouselEquiposDestacados" 
+            data-bs-slide="next" 
+            aria-label="Siguiente equipo"
+          >
+            <span class="carousel-nav-btn shadow-xl" aria-hidden="true">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"/></svg>
+            </span>
+            <span class="visually-hidden">Siguiente</span>
+          </button>
+        </div>
+      </div>
+
+      <div class="pt-4 mt-4 border-t border-neutral-800 flex items-center justify-between text-xs font-mono text-zinc-400">
+        <span>Catálogo: <strong class="text-white">{{ productos_destacados|length }} modelos destacados</strong></span>
+        <a href="/dashboard/store" class="text-gold hover:text-amber-300 font-bold transition-colors inline-flex items-center gap-1">
+          <span>Abrir catálogo completo</span>
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+        </a>
+      </div>
+    </div>
+
+    <!-- Card 2: Mis Operaciones Recientes -->
+    <div class="card-charcoal p-6 border border-neutral-800 bg-[#121216] rounded-xl flex flex-col justify-between shadow-xl">
+      <div>
+        <div class="flex items-center justify-between pb-3 mb-4 border-b border-neutral-800">
+          <div class="flex items-center gap-2">
+            <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+            <h3 class="text-xs font-bold text-white uppercase tracking-wider font-mono">Mis Adquisiciones</h3>
+          </div>
+          <a href="/dashboard/purchases" class="text-xs text-gold hover:text-amber-300 transition-colors font-mono font-bold flex items-center gap-1">
+            <span>Historial</span>
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+          </a>
+        </div>
+        <p class="text-xs text-zinc-400 mb-4">Comprobantes y órdenes vinculadas a tu cuenta comercial.</p>
+
+        {% if mis_pedidos and mis_pedidos|length > 0 %}
+        <div class="divide-y divide-neutral-800/80">
+          {% for ord in mis_pedidos[:3] %}
+          <div class="py-3 px-1 flex items-center justify-between gap-3 group">
+            <div class="flex items-center gap-3 min-w-0 flex-1">
+              <div class="w-8 h-8 rounded-lg bg-neutral-900 border border-neutral-800 flex items-center justify-center flex-shrink-0 text-emerald-400 group-hover:border-emerald-500/40 transition-colors">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+              </div>
+              <div class="min-w-0 flex-1">
+                <div class="text-xs font-bold text-white truncate group-hover:text-emerald-400 transition-colors">{{ ord.product_name }}</div>
+                <div class="text-xs font-mono text-zinc-400 mt-0.5"><strong class="text-emerald-400 font-bold">${{ "%.2f"|format(ord.total) }}</strong> USD <span class="text-zinc-600">·</span> <span class="text-zinc-400">{{ ord.id }}</span></div>
+              </div>
+            </div>
+            <a 
+              href="/dashboard/purchases" 
+              class="px-3 py-1.5 rounded-lg bg-neutral-900 border border-neutral-800 text-zinc-300 hover:text-white hover:bg-neutral-800 transition-colors text-xs font-mono font-bold uppercase tracking-wider whitespace-nowrap"
+              title="Ver Orden"
+            >
+              Ver Factura
+            </a>
+          </div>
+          {% endfor %}
+        </div>
+        {% else %}
+        <div class="py-6 px-4 text-center space-y-2 border border-neutral-800/60 rounded-lg bg-neutral-950/40">
+          <div class="text-xs font-mono text-zinc-300">Sin adquisiciones registradas aún.</div>
+          <p class="text-xs text-zinc-400">Explora el catálogo y adquiere tu primer equipamiento perimetral.</p>
+          <a href="/dashboard/store" class="inline-block mt-2 text-xs text-gold font-bold hover:underline font-mono">
+            Ir a la tienda →
+          </a>
+        </div>
+        {% endif %}
+      </div>
+
+      <div class="pt-4 mt-4 border-t border-neutral-800 flex items-center justify-between text-xs font-mono text-zinc-400">
+        <span>Total operaciones: <strong class="text-white">{{ mis_pedidos|length }}</strong></span>
+        <a href="/dashboard/purchases" class="text-gold hover:text-amber-300 font-bold transition-colors inline-flex items-center gap-1">
+          <span>Ver todas</span>
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+        </a>
+      </div>
+    </div>
+
+    <!-- Card 3: Estado del Enlace & Seguridad -->
+    <div class="card-charcoal p-6 border border-neutral-800 bg-[#121216] rounded-xl flex flex-col justify-between shadow-xl">
+      <div>
+        <div class="flex items-center justify-between pb-3 mb-4 border-b border-neutral-800">
+          <div class="flex items-center gap-2">
+            <span class="w-2 h-2 rounded-full bg-gold"></span>
+            <h3 class="text-xs font-bold text-white uppercase tracking-wider font-mono">Seguridad y Enlace</h3>
+          </div>
+          <span class="px-2 py-0.5 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-xs font-mono text-emerald-400 font-bold flex items-center gap-1.5">
+            <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
+            ACTIVO
+          </span>
+        </div>
+        <p class="text-xs text-zinc-400 mb-4">Protocolos criptográficos garantizados en tus operaciones.</p>
+
+        <!-- HUD Telemetría Grid -->
+        <div class="space-y-0">
+          <div class="grid grid-cols-2 divide-x divide-neutral-800 border-b border-neutral-800 pb-3 mb-3">
+            <div class="pr-3">
+              <div class="flex items-center justify-between text-xs font-mono text-zinc-400 uppercase tracking-wider mb-1">
+                <span>Cifrado</span>
+                <svg class="w-3.5 h-3.5 text-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
+              </div>
+              <div class="text-sm font-mono font-black text-white">AES-256</div>
+              <div class="text-xs font-mono text-zinc-500 mt-0.5">Túnel GCM Activo</div>
+            </div>
+
+            <div class="pl-3">
+              <div class="flex items-center justify-between text-xs font-mono text-zinc-400 uppercase tracking-wider mb-1">
+                <span>Latencia NOC</span>
+                <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
+              </div>
+              <div class="text-sm font-mono font-black text-emerald-400">2 ms</div>
+              <div class="text-xs font-mono text-zinc-500 mt-0.5">Enlace Perimetral</div>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-2 divide-x divide-neutral-800 pb-3">
+            <div class="pr-3">
+              <div class="flex items-center justify-between text-xs font-mono text-zinc-400 uppercase tracking-wider mb-1">
+                <span>Disponibilidad</span>
+                <svg class="w-3.5 h-3.5 text-zinc-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+              </div>
+              <div class="text-sm font-mono font-black text-white">99.9%</div>
+              <div class="text-xs font-mono text-zinc-500 mt-0.5">SLA Garantizado</div>
+            </div>
+
+            <div class="pl-3">
+              <div class="flex items-center justify-between text-xs font-mono text-zinc-400 uppercase tracking-wider mb-1">
+                <span>Soporte</span>
+                <svg class="w-3.5 h-3.5 text-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192l-3.536 3.536M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-5 0a4 4 0 11-8 0 4 4 0 018 0z"/></svg>
+              </div>
+              <div class="text-sm font-mono font-black text-gold">24/7 VIP</div>
+              <div class="text-xs font-mono text-zinc-500 mt-0.5">Canal SOC Directo</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="mt-3 pt-3 border-t border-neutral-800/80 flex items-center justify-between text-xs font-mono">
+          <div class="flex items-center gap-2 text-zinc-400">
+            <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
+            <span>Sesión TLS v1.3</span>
+          </div>
+          <span class="text-zinc-400 font-bold">SHA-384 OK</span>
+        </div>
+      </div>
+
+      <div class="pt-4 mt-4 border-t border-neutral-800 flex items-center justify-between text-xs font-mono text-zinc-400">
+        <a href="/dashboard/profile" class="hover:text-white transition-colors">Mis Credenciales →</a>
+        <a href="/ayuda" class="text-gold hover:text-amber-300 font-bold transition-colors inline-flex items-center gap-1">
+          <span>Manual de Usuario</span>
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+        </a>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+{% else %}
+<!-- ══════════════════════════════════════════════════════════════════════════════
+     VISTA ADMINISTRADOR / OPERADOR (TELEMETRÍA, KPIS, DISTRIBUCIÓN Y REVENUE)
+     ══════════════════════════════════════════════════════════════════════════════ -->
 <div class="space-y-6 animate-fade-in-up">
 
   <!-- ════════════════
@@ -10,183 +439,279 @@
   <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
 
     <!-- KPI 1: Total Clientes -->
-    <div class="card-charcoal p-6 relative overflow-hidden group">
-      <div class="absolute inset-0 bg-gradient-to-br from-cyan/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+    <div class="card-charcoal p-6 border border-neutral-800 bg-[#121216] rounded-xl shadow-xl flex flex-col justify-between">
       <div class="flex items-start justify-between">
         <div>
-          <div class="text-xs font-bold text-gray-500 uppercase tracking-widest mb-1">clientes totales</div>
+          <div class="text-xs font-mono font-bold text-zinc-400 uppercase tracking-wider mb-1">Clientes Totales</div>
           <div class="text-3xl font-black text-white">{{ metricas.total_clientes }}</div>
         </div>
-        <div class="p-3 bg-cyan/10 text-cyan rounded-engineering">
+        <div class="p-3 bg-neutral-900 text-gold border border-neutral-800 rounded-lg">
           <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
         </div>
       </div>
-      <div class="mt-4 text-xs text-gray-400">Usuarios activos en sistema</div>
+      <div class="mt-4 text-xs font-mono text-zinc-400">Usuarios activos en sistema</div>
     </div>
 
     <!-- KPI 2: Equipos en Catálogo -->
-    <div class="card-charcoal p-6 relative overflow-hidden group">
-      <div class="absolute inset-0 bg-gradient-to-br from-gold/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+    <div class="card-charcoal p-6 border border-neutral-800 bg-[#121216] rounded-xl shadow-xl flex flex-col justify-between">
       <div class="flex items-start justify-between">
         <div>
-          <div class="text-xs font-bold text-gray-500 uppercase tracking-widest mb-1">Equipos en Catálogo</div>
+          <div class="text-xs font-mono font-bold text-zinc-400 uppercase tracking-wider mb-1">Equipos en Catálogo</div>
           <div class="text-3xl font-black text-white">{{ metricas.catalogo_size }}</div>
         </div>
-        <div class="p-3 bg-gold/10 text-gold rounded-engineering">
+        <div class="p-3 bg-neutral-900 text-gold border border-neutral-800 rounded-lg">
           <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"></path></svg>
         </div>
       </div>
-      <div class="mt-4 text-xs text-gray-400">Modelos registrados</div>
+      <div class="mt-4 text-xs font-mono text-zinc-400">Modelos registrados</div>
     </div>
 
     <!-- KPI 3: Valor de Inventario (Solo Admin) -->
     {% if usuario.role == 'administrador' %}
-    <div class="card-charcoal p-6 relative overflow-hidden group">
-      <div class="absolute inset-0 bg-gradient-to-br from-green-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+    <div class="card-charcoal p-6 border border-neutral-800 bg-[#121216] rounded-xl shadow-xl flex flex-col justify-between">
       <div class="flex items-start justify-between">
         <div>
-          <div class="text-xs font-bold text-gray-500 uppercase tracking-widest mb-1">Valor de Inventario</div>
+          <div class="text-xs font-mono font-bold text-zinc-400 uppercase tracking-wider mb-1">Valor de Inventario</div>
           <div class="text-3xl font-black text-white">{{ metricas.valor_inventario }}</div>
         </div>
-        <div class="p-3 bg-green-500/10 text-green-500 rounded-engineering">
+        <div class="p-3 bg-neutral-900 text-emerald-400 border border-neutral-800 rounded-lg">
           <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
         </div>
       </div>
-      <div class="mt-4 text-xs text-gray-400">Capital total</div>
+      <div class="mt-4 text-xs font-mono text-zinc-400">Capital total</div>
     </div>
     {% endif %}
 
     <!-- KPI 4: Tareas Pendientes -->
-    <div class="card-charcoal p-6 relative overflow-hidden group">
-      <div class="absolute inset-0 bg-gradient-to-br from-red-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+    <div class="card-charcoal p-6 border border-neutral-800 bg-[#121216] rounded-xl shadow-xl flex flex-col justify-between">
       <div class="flex items-start justify-between">
         <div>
-          <div class="text-xs font-bold text-gray-500 uppercase tracking-widest mb-1">Tareas Pendientes</div>
+          <div class="text-xs font-mono font-bold text-zinc-400 uppercase tracking-wider mb-1">Tareas Pendientes</div>
           <div class="text-3xl font-black text-white">{{ metricas.tareas_pendientes }}</div>
         </div>
-        <div class="p-3 bg-red-500/10 text-red-500 rounded-engineering">
+        <div class="p-3 bg-neutral-900 text-gold border border-neutral-800 rounded-lg">
           <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
         </div>
       </div>
-      <div class="mt-4 text-xs text-gray-400">Acciones requeridas hoy</div>
+      <div class="mt-4 text-xs font-mono text-zinc-400">Acciones requeridas hoy</div>
     </div>
 
   </div>
 
-  <!-- ════════════════════════
-       GRÁFICA DE INGRESOS (Solo Admin)
-       ════════════════════════ -->
-  {% if usuario.role == 'administrador' %}
-  <div class="card-charcoal p-6">
-    <div class="flex justify-between items-center mb-6">
-      <h3 class="text-lg font-bold text-white tracking-wide">Flujo de Capital — Últimos 14 Días</h3>
-      <span class="text-sm font-medium text-gray-400">Total: <strong id="revenue-total" class="text-gold font-bold">Calculando...</strong></span>
-    </div>
-    <div class="w-full h-[300px] relative">
-      <canvas id="revenue-chart" data-ingresos='{{ ingresos | tojson }}'></canvas>
-    </div>
-  </div>
-  {% endif %}
 
   <!-- ══════════════════════════════════════
-       LAYOUT CENTRAL:
-       - Distribución de Inventario
+       DISTRIBUCIÓN Y GESTIÓN DE INVENTARIO
        ══════════════════════════════════════ -->
-  <div class="grid grid-cols-1 gap-6 max-w-3xl mx-auto">
+  <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 w-full">
 
-    <!-- ════════════════════════
-         INVENTARIO & SALUD
-         ════════════════════════ -->
-    <div class="card-charcoal p-6 flex flex-col">
-      <h3 class="text-lg font-bold text-white tracking-wide mb-6">Distribución de Categorías</h3>
-
-      {# Calcular el total de productos para el porcentaje #}
-      {% set total = categorias.values() | sum %}
-
-      {% set cats = [
-        ('Seguridad',     'Security', 'bg-cyan', 'text-cyan'),
-        ('Software',      'Software', 'bg-green-500', 'text-green-500'),
-        ('Hardware',      'Hardware', 'bg-yellow-500', 'text-yellow-500'),
-        ('Redes',         'Network',  'bg-gold', 'text-gold'),
-        ('Servicios',     'Service',  'bg-gray-500', 'text-gray-500'),
-      ] %}
-
-      <div class="space-y-4 mb-8">
-        {% for label, key, bgClass, textClass in cats %}
-        {% set count = categorias.get(key, 0) %}
-        {% set pct = ((count / total) * 100) | round if total > 0 else 0 %}
-        <div>
-          <div class="flex justify-between text-xs font-bold text-gray-400 uppercase tracking-widest mb-1.5">
-            <span>{{ label }}</span>
-            <span>{{ count }} u.</span>
+    <!-- ── Panel 1: Distribución de Categorías ── -->
+    <div class="card-charcoal p-6 flex flex-col justify-between border border-neutral-800 bg-[#121216] rounded-xl shadow-xl">
+      <div>
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-6 pb-4 border-b border-neutral-800">
+          <div>
+            <div class="flex items-center gap-2">
+              <h3 class="text-lg font-bold text-white tracking-wide">Distribución de Categorías</h3>
+              <span class="inline-flex items-center justify-center w-5 h-5 text-gold" title="Sincronizado">
+                <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path>
+                </svg>
+              </span>
+            </div>
+            <p class="text-xs text-zinc-400 mt-0.5">Control de inventario y segmentación de catálogo</p>
           </div>
-          <div class="h-1.5 bg-black rounded-full overflow-hidden border border-gray-800">
-            <div class="{{ bgClass }} h-full rounded-full transition-all duration-1000 shadow-[0_0_10px_currentColor] opacity-80" style="width: {{ pct }}%;"></div>
+
+          <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-gold/15 border border-amber-500/30 text-xs font-mono font-bold text-gold uppercase tracking-wider">
+            <span class="w-1.5 h-1.5 rounded-full bg-gold"></span>
+            EN TIEMPO REAL
           </div>
         </div>
-        {% endfor %}
-      </div>
 
-      <div class="border-t border-translucent pt-6 mt-auto">
-        <h3 class="text-sm font-bold text-white tracking-wide mb-4">Estado del Stock</h3>
-        {% set health_items = [
-          ('Operativo',     'active',        'bg-green-500', 'text-green-500'),
-          ('Alerta Baja', 'low-stock',     'bg-yellow-500', 'text-yellow-500'),
-          ('Crítico/Cero',    'out-of-stock',  'bg-red-500', 'text-red-500'),
+        {% set total = categorias.values() | sum %}
+
+        {% set cats = [
+          ('Seguridad',     'Security', 'from-amber-600 to-amber-400', 'text-amber-300', 'bg-amber-500/20', 'M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z'),
+          ('Software',      'Software', 'from-amber-600 via-amber-400 to-yellow-200', 'text-amber-300', 'bg-amber-400/20', 'M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4'),
+          ('Hardware',      'Hardware', 'from-yellow-700 via-gold to-amber-300',      'text-gold',       'bg-gold/20',     'M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z'),
+          ('Redes',         'Network',  'from-zinc-500 via-zinc-200 to-white',        'text-zinc-200',   'bg-white/20',    'M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9'),
+          ('Servicios',     'Service',  'from-amber-600 to-amber-400',                'text-amber-300',  'bg-amber-500/20', 'M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z'),
         ] %}
-        <div class="space-y-3">
-          {% for label, key, bgClass, textClass in health_items %}
-          {% set count = salud.get(key, 0) %}
+
+        <div class="divide-y divide-neutral-800 mb-6">
+          {% for label, key, gradientClass, textClass, bgPillClass, iconPath in cats %}
+          {% set count = categorias.get(key, 0) %}
           {% set pct = ((count / total) * 100) | round if total > 0 else 0 %}
-          <div>
-            <div class="flex justify-between text-[10px] font-bold uppercase tracking-widest mb-1">
-              <span class="text-gray-500">{{ label }}</span>
-              <span class="{{ textClass }}">{{ count }} u.</span>
+          <div class="py-3 px-1">
+            <div class="flex items-center justify-between mb-2">
+              <a href="/dashboard/store?categoria={{ key }}" class="flex items-center gap-3 group">
+                <span class="w-7 h-7 rounded-lg {{ bgPillClass }} border border-neutral-700 flex items-center justify-center flex-shrink-0 text-gold">
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="{{ iconPath }}" /></svg>
+                </span>
+                <span class="text-xs font-bold text-white uppercase tracking-wider group-hover:text-gold transition-colors">{{ label }}</span>
+              </a>
+
+              <div class="flex items-center gap-3">
+                <span class="px-2.5 py-0.5 rounded text-xs font-mono font-bold text-gold bg-neutral-900 border border-neutral-800">
+                  {{ pct }}%
+                </span>
+                <span class="text-xs font-mono font-bold text-white min-w-[2.5rem] text-right">{{ count }} u.</span>
+              </div>
             </div>
-            <div class="h-1 bg-black rounded-full overflow-hidden border border-gray-800">
-              <div class="{{ bgClass }} h-full rounded-full opacity-80" style="width: {{ pct }}%;"></div>
+
+            <div class="h-1.5 bg-neutral-900 rounded-full overflow-hidden border border-neutral-800">
+              <div class="bg-gradient-to-r {{ gradientClass }} h-full rounded-full" style="width: {{ pct }}%;"></div>
             </div>
           </div>
           {% endfor %}
         </div>
       </div>
+
+      <div class="pt-4 border-t border-neutral-800 flex flex-col sm:flex-row items-center justify-between gap-3">
+        <span class="text-xs text-zinc-400">Total en catálogo: <strong class="text-white font-mono">{{ total }} unidades</strong></span>
+        <a href="/dashboard/store" class="btn-gold text-xs font-mono uppercase tracking-wider flex items-center gap-2 py-2.5 px-5 shadow-none border border-amber-500/20">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" /></svg>
+          Catálogo de Compras →
+        </a>
+      </div>
     </div>
+
+    <!-- ── Panel 2: Estado del Stock & Adquisición ── -->
+    <div class="card-charcoal p-6 flex flex-col justify-between border border-neutral-800 bg-[#121216] rounded-xl shadow-xl">
+      <div>
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-6 pb-4 border-b border-neutral-800">
+          <div>
+            <h3 class="text-lg font-bold text-white tracking-wide">Estado del Stock</h3>
+            <p class="text-xs text-zinc-400 mt-0.5">Control de disponibilidad y criticidad de abastecimiento</p>
+          </div>
+          
+          <div class="flex items-center gap-2">
+            <a href="/dashboard/purchases" class="text-xs font-mono text-zinc-400 hover:text-gold transition-colors font-medium flex items-center gap-1">
+              Mis Operaciones →
+            </a>
+          </div>
+        </div>
+
+        {% set health_items = [
+          ('Operativo',     'active',        'from-emerald-600 to-emerald-400', 'text-emerald-400', 'border-emerald-500/40', 'bg-emerald-500/10', 'En disponibilidad total para adquisición inmediata'),
+          ('Alerta Baja',   'low-stock',     'from-amber-600 to-amber-400',     'text-amber-400',   'border-amber-500/40',   'bg-amber-500/10',   'Stock reducido, requiere pedido de reabastecimiento'),
+          ('Crítico / Cero','out-of-stock',  'from-rose-600 to-rose-400',       'text-rose-400',    'border-rose-500/40',    'bg-rose-500/10',    'Sin existencias disponibles en almacén local'),
+        ] %}
+
+        <div class="divide-y divide-neutral-800 mb-6">
+          {% for label, key, gradientClass, textClass, borderClass, bgPillClass, desc in health_items %}
+          {% set count = salud.get(key, 0) %}
+          {% set pct = ((count / total) * 100) | round if total > 0 else 0 %}
+          <div class="py-3 px-1">
+            <div class="flex items-center justify-between mb-1.5">
+              <div class="flex items-center gap-2">
+                <span class="w-2.5 h-2.5 rounded-full {% if key == 'active' %}bg-emerald-400{% elif key == 'low-stock' %}bg-amber-400{% else %}bg-rose-400{% endif %}"></span>
+                <span class="text-xs font-mono font-bold text-white uppercase tracking-wider">{{ label }}</span>
+              </div>
+              <div class="flex items-center gap-3">
+                <span class="px-2.5 py-0.5 rounded text-xs font-mono font-bold text-zinc-300 bg-neutral-900 border border-neutral-800">
+                  {{ pct }}%
+                </span>
+                <span class="text-xs font-mono font-bold text-white min-w-[2.5rem] text-right">{{ count }} u.</span>
+              </div>
+            </div>
+            
+            <p class="text-xs text-zinc-400 font-mono mb-2">{{ desc }}</p>
+
+            <div class="h-1.5 bg-neutral-900 rounded-full overflow-hidden border border-neutral-800">
+              <div class="bg-gradient-to-r {{ gradientClass }} h-full rounded-full" style="width: {{ pct }}%;"></div>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+
+      <div class="pt-4 border-t border-neutral-800 flex flex-col sm:flex-row items-center justify-between gap-3">
+        <span class="text-xs text-zinc-400">Disponibilidad neta: <strong class="text-emerald-400 font-mono">{{ ((salud.active / total) * 100)|round if total > 0 else 0 }}%</strong></span>
+        <a href="/dashboard/store" class="btn-gold text-xs font-mono uppercase tracking-wider flex items-center gap-2 py-2.5 px-5 shadow-none border border-amber-500/20">
+          Adquirir Equipos →
+        </a>
+      </div>
+    </div>
+
   </div>
 
+
+  <!-- ══════════════════════════════════
+       GRÁFICO DE FACTURACIÓN (Solo Admin)
+       ══════════════════════════════════ -->
+  {% if usuario.role == 'administrador' %}
+  <div class="card-charcoal p-6 border border-neutral-800 bg-[#121216] rounded-xl shadow-xl">
+    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6 pb-4 border-b border-neutral-800">
+      <div>
+        <h3 class="text-lg font-bold text-white tracking-wide">Ingresos y Facturación</h3>
+        <p class="text-xs text-zinc-400 mt-0.5">Comportamiento financiero y liquidaciones en tiempo real</p>
+      </div>
+      <div class="flex items-center gap-3">
+        <span class="text-xs font-mono text-zinc-400">Total acumulado: <strong id="revenue-total" class="text-gold font-bold text-sm">Calculando...</strong></span>
+      </div>
+    </div>
+    <div class="w-full h-[280px] relative">
+      <canvas id="revenue-chart" data-ingresos='{{ ingresos | tojson }}'></canvas>
+    </div>
+  </div>
+  {% endif %}
+
   <!-- ══════════════════════════
-       SALUD DEL SISTEMA
+       SALUD DEL SISTEMA / ESTADO DE RED
        ══════════════════════════ -->
-  <div class="card-charcoal p-6">
-    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
-      <h3 class="text-lg font-bold text-white tracking-wide">Estado de Red</h3>
-      <div class="flex items-center gap-2 px-3 py-1.5 bg-green-500/10 border border-green-500/20 rounded-engineering">
-        <span class="w-2 h-2 rounded-full bg-green-500 animate-pulse shadow-[0_0_8px_#22c55e]"></span>
-        <span class="text-xs font-bold text-green-500 uppercase tracking-widest">En Línea / Seguro</span>
+  <div class="card-charcoal p-6 border border-neutral-800 bg-[#121216] rounded-xl shadow-xl">
+
+    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6 pb-4 border-b border-neutral-800">
+      <div>
+        <h3 class="text-lg font-bold text-white tracking-wide flex items-center gap-2">
+          Estado de Red y Conectividad
+          <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
+        </h3>
+        <p class="text-xs text-zinc-400 mt-0.5">Monitoreo perimetral y telemetría de enlace en tiempo real</p>
+      </div>
+
+      <div class="flex items-center gap-2 px-3 py-1.5 bg-neutral-900 border border-neutral-800 rounded-lg">
+        <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+        <span class="text-xs font-mono font-bold text-emerald-400 uppercase tracking-widest">En Línea · Seguro</span>
       </div>
     </div>
 
     <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-      <div class="p-4 bg-black/40 border border-translucent rounded-engineering">
-        <div class="text-[10px] font-bold text-gray-500 uppercase tracking-widest mb-2">Latencia NOC</div>
-        <div class="text-2xl font-black text-white">2<span class="text-sm font-bold text-gray-500 ml-1">ms</span></div>
+      <div class="py-2.5 px-3 border-b md:border-b-0 md:border-r border-neutral-800">
+        <div class="text-xs font-mono font-bold text-zinc-400 uppercase tracking-widest mb-1 flex items-center justify-between">
+          Latencia NOC
+          <span class="w-1.5 h-1.5 rounded-full bg-gold"></span>
+        </div>
+        <div class="text-2xl font-mono font-black text-white">2<span class="text-xs font-mono font-bold text-zinc-400 ml-1">ms</span></div>
       </div>
-      <div class="p-4 bg-black/40 border border-translucent rounded-engineering">
-        <div class="text-[10px] font-bold text-gray-500 uppercase tracking-widest mb-2">Disponibilidad</div>
-        <div class="text-2xl font-black text-white">99.9<span class="text-sm font-bold text-gray-500 ml-1">%</span></div>
+
+      <div class="py-2.5 px-3 border-b md:border-b-0 md:border-r border-neutral-800">
+        <div class="text-xs font-mono font-bold text-zinc-400 uppercase tracking-widest mb-1 flex items-center justify-between">
+          Disponibilidad
+          <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
+        </div>
+        <div class="text-2xl font-mono font-black text-white">99.9<span class="text-xs font-mono font-bold text-zinc-400 ml-1">%</span></div>
       </div>
-      <div class="p-4 bg-black/40 border border-translucent rounded-engineering">
-        <div class="text-[10px] font-bold text-gray-500 uppercase tracking-widest mb-2">Auditorías 24H</div>
-        <div class="text-2xl font-black text-white">{{ ingresos | length + 10 }}</div>
+
+      <div class="py-2.5 px-3 border-b md:border-b-0 md:border-r border-neutral-800">
+        <div class="text-xs font-mono font-bold text-zinc-400 uppercase tracking-widest mb-1 flex items-center justify-between">
+          Auditorías 24H
+          <span class="w-1.5 h-1.5 rounded-full bg-gold"></span>
+        </div>
+        <div class="text-2xl font-mono font-black text-white">{{ ingresos | length + 10 }}</div>
       </div>
-      <div class="p-4 bg-black/40 border border-translucent rounded-engineering">
-        <div class="text-[10px] font-bold text-gray-500 uppercase tracking-widest mb-2">Vulnerabilidades</div>
-        <div class="text-2xl font-black text-green-500">0</div>
+
+      <div class="py-2.5 px-3">
+        <div class="text-xs font-mono font-bold text-zinc-400 uppercase tracking-widest mb-1 flex items-center justify-between">
+          Vulnerabilidades
+          <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
+        </div>
+        <div class="text-2xl font-mono font-black text-emerald-400">0</div>
       </div>
     </div>
 
-    <div class="mt-6 flex flex-wrap gap-2">
+    <div class="mt-6 pt-4 border-t border-neutral-800 flex flex-wrap gap-2">
       {% for tag in ['Cluster Activo', 'Firewall Edge: OK', 'Cifrado P2P: Activo', 'DDoS Protection: Normal'] %}
-      <span class="px-2.5 py-1 bg-black text-gray-400 text-[10px] font-bold uppercase tracking-widest border border-gray-800 rounded-engineering">
+      <span class="px-3 py-1 bg-neutral-900 text-zinc-300 text-xs font-mono font-bold uppercase tracking-wider border border-neutral-800 rounded-lg">
         {{ tag }}
       </span>
       {% endfor %}
@@ -194,4 +719,6 @@
   </div>
 
 </div>
+{% endif %}
+
 {% endblock %}
